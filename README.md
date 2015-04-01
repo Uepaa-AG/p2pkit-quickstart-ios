@@ -30,7 +30,6 @@ Implement `PPKControllerDelegate` protocol to start desired discovery- and messa
 
 ```objc
 -(void)PPKControllerInitialized {
-	[PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
 	[PPKController startP2PDiscovery];
 	[PPKController startGeoDiscovery];
 	[PPKController startOnlineMessaging];
