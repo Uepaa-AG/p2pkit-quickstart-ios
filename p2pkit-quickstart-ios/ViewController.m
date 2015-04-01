@@ -145,7 +145,9 @@
 #pragma mark - Helpers
 
 -(void)logKey:(NSString*)key value:(NSString*)value {
-    self.logTextView.text = [NSString stringWithFormat:@"%@: %@\n%@", key, value, self.logTextView.text];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.logTextView.text = [NSString stringWithFormat:@"%@: %@\n%@", key, value, self.logTextView.text];
+    });
 }
 
 -(void)send:(NSString*)message to:(NSString*)peerID {
