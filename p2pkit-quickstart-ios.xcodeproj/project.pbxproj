@@ -1,0 +1,470 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D2AA9A0B1ACC2F3D008C165A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A0A1ACC2F3D008C165A /* main.m */; };
+		D2AA9A0E1ACC2F3D008C165A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A0D1ACC2F3D008C165A /* AppDelegate.m */; };
+		D2AA9A111ACC2F3D008C165A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A101ACC2F3D008C165A /* ViewController.m */; };
+		D2AA9A141ACC2F3D008C165A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2AA9A121ACC2F3D008C165A /* Main.storyboard */; };
+		D2AA9A161ACC2F3D008C165A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2AA9A151ACC2F3D008C165A /* Images.xcassets */; };
+		D2AA9A191ACC2F3D008C165A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2AA9A171ACC2F3D008C165A /* LaunchScreen.xib */; };
+		D2AA9A251ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A241ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m */; };
+		D2AA9A321ACC30B5008C165A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A311ACC30B5008C165A /* CoreBluetooth.framework */; };
+		D2AA9A341ACC30BC008C165A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A331ACC30BC008C165A /* CoreLocation.framework */; };
+		D2AA9A361ACC30C8008C165A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A351ACC30C8008C165A /* libicucore.dylib */; };
+		D2AA9A381ACC30CE008C165A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A371ACC30CE008C165A /* CFNetwork.framework */; };
+		D2AA9A3A1ACC30D5008C165A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A391ACC30D5008C165A /* Security.framework */; };
+		D2AA9A3C1ACC30DE008C165A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A3B1ACC30DE008C165A /* Foundation.framework */; };
+		D2AA9A3E1ACC30F5008C165A /* P2PKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A3D1ACC30F5008C165A /* P2PKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D2AA9A1F1ACC2F3D008C165A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D2AA99FD1ACC2F3D008C165A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AA9A041ACC2F3D008C165A;
+			remoteInfo = "p2pkit-quickstart-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D2AA9A051ACC2F3D008C165A /* p2pkit-quickstart-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "p2pkit-quickstart-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AA9A091ACC2F3D008C165A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2AA9A0A1ACC2F3D008C165A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D2AA9A0C1ACC2F3D008C165A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		D2AA9A0D1ACC2F3D008C165A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		D2AA9A0F1ACC2F3D008C165A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		D2AA9A101ACC2F3D008C165A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D2AA9A131ACC2F3D008C165A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D2AA9A151ACC2F3D008C165A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		D2AA9A181ACC2F3D008C165A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		D2AA9A1E1ACC2F3D008C165A /* p2pkit-quickstart-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "p2pkit-quickstart-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D2AA9A231ACC2F3D008C165A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D2AA9A241ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = p2pkit_quickstart_iosTests.m; sourceTree = "<group>"; };
+		D2AA9A311ACC30B5008C165A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		D2AA9A331ACC30BC008C165A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		D2AA9A351ACC30C8008C165A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		D2AA9A371ACC30CE008C165A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		D2AA9A391ACC30D5008C165A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		D2AA9A3B1ACC30DE008C165A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D2AA9A3D1ACC30F5008C165A /* P2PKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = P2PKit.framework; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D2AA9A021ACC2F3D008C165A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AA9A3C1ACC30DE008C165A /* Foundation.framework in Frameworks */,
+				D2AA9A3A1ACC30D5008C165A /* Security.framework in Frameworks */,
+				D2AA9A381ACC30CE008C165A /* CFNetwork.framework in Frameworks */,
+				D2AA9A3E1ACC30F5008C165A /* P2PKit.framework in Frameworks */,
+				D2AA9A361ACC30C8008C165A /* libicucore.dylib in Frameworks */,
+				D2AA9A341ACC30BC008C165A /* CoreLocation.framework in Frameworks */,
+				D2AA9A321ACC30B5008C165A /* CoreBluetooth.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AA9A1B1ACC2F3D008C165A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D2AA99FC1ACC2F3D008C165A = {
+			isa = PBXGroup;
+			children = (
+				D2AA9A3D1ACC30F5008C165A /* P2PKit.framework */,
+				D2AA9A3B1ACC30DE008C165A /* Foundation.framework */,
+				D2AA9A391ACC30D5008C165A /* Security.framework */,
+				D2AA9A371ACC30CE008C165A /* CFNetwork.framework */,
+				D2AA9A351ACC30C8008C165A /* libicucore.dylib */,
+				D2AA9A331ACC30BC008C165A /* CoreLocation.framework */,
+				D2AA9A311ACC30B5008C165A /* CoreBluetooth.framework */,
+				D2AA9A071ACC2F3D008C165A /* p2pkit-quickstart-ios */,
+				D2AA9A211ACC2F3D008C165A /* p2pkit-quickstart-iosTests */,
+				D2AA9A061ACC2F3D008C165A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D2AA9A061ACC2F3D008C165A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D2AA9A051ACC2F3D008C165A /* p2pkit-quickstart-ios.app */,
+				D2AA9A1E1ACC2F3D008C165A /* p2pkit-quickstart-iosTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D2AA9A071ACC2F3D008C165A /* p2pkit-quickstart-ios */ = {
+			isa = PBXGroup;
+			children = (
+				D2AA9A0C1ACC2F3D008C165A /* AppDelegate.h */,
+				D2AA9A0D1ACC2F3D008C165A /* AppDelegate.m */,
+				D2AA9A0F1ACC2F3D008C165A /* ViewController.h */,
+				D2AA9A101ACC2F3D008C165A /* ViewController.m */,
+				D2AA9A121ACC2F3D008C165A /* Main.storyboard */,
+				D2AA9A151ACC2F3D008C165A /* Images.xcassets */,
+				D2AA9A171ACC2F3D008C165A /* LaunchScreen.xib */,
+				D2AA9A081ACC2F3D008C165A /* Supporting Files */,
+			);
+			path = "p2pkit-quickstart-ios";
+			sourceTree = "<group>";
+		};
+		D2AA9A081ACC2F3D008C165A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D2AA9A091ACC2F3D008C165A /* Info.plist */,
+				D2AA9A0A1ACC2F3D008C165A /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D2AA9A211ACC2F3D008C165A /* p2pkit-quickstart-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				D2AA9A241ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m */,
+				D2AA9A221ACC2F3D008C165A /* Supporting Files */,
+			);
+			path = "p2pkit-quickstart-iosTests";
+			sourceTree = "<group>";
+		};
+		D2AA9A221ACC2F3D008C165A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D2AA9A231ACC2F3D008C165A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D2AA9A041ACC2F3D008C165A /* p2pkit-quickstart-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2AA9A281ACC2F3D008C165A /* Build configuration list for PBXNativeTarget "p2pkit-quickstart-ios" */;
+			buildPhases = (
+				D2AA9A011ACC2F3D008C165A /* Sources */,
+				D2AA9A021ACC2F3D008C165A /* Frameworks */,
+				D2AA9A031ACC2F3D008C165A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "p2pkit-quickstart-ios";
+			productName = "p2pkit-quickstart-ios";
+			productReference = D2AA9A051ACC2F3D008C165A /* p2pkit-quickstart-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D2AA9A1D1ACC2F3D008C165A /* p2pkit-quickstart-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D2AA9A2B1ACC2F3D008C165A /* Build configuration list for PBXNativeTarget "p2pkit-quickstart-iosTests" */;
+			buildPhases = (
+				D2AA9A1A1ACC2F3D008C165A /* Sources */,
+				D2AA9A1B1ACC2F3D008C165A /* Frameworks */,
+				D2AA9A1C1ACC2F3D008C165A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D2AA9A201ACC2F3D008C165A /* PBXTargetDependency */,
+			);
+			name = "p2pkit-quickstart-iosTests";
+			productName = "p2pkit-quickstart-iosTests";
+			productReference = D2AA9A1E1ACC2F3D008C165A /* p2pkit-quickstart-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D2AA99FD1ACC2F3D008C165A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Uepaa AG";
+				TargetAttributes = {
+					D2AA9A041ACC2F3D008C165A = {
+						CreatedOnToolsVersion = 6.2;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					D2AA9A1D1ACC2F3D008C165A = {
+						CreatedOnToolsVersion = 6.2;
+						TestTargetID = D2AA9A041ACC2F3D008C165A;
+					};
+				};
+			};
+			buildConfigurationList = D2AA9A001ACC2F3D008C165A /* Build configuration list for PBXProject "p2pkit-quickstart-ios" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D2AA99FC1ACC2F3D008C165A;
+			productRefGroup = D2AA9A061ACC2F3D008C165A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D2AA9A041ACC2F3D008C165A /* p2pkit-quickstart-ios */,
+				D2AA9A1D1ACC2F3D008C165A /* p2pkit-quickstart-iosTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D2AA9A031ACC2F3D008C165A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AA9A141ACC2F3D008C165A /* Main.storyboard in Resources */,
+				D2AA9A191ACC2F3D008C165A /* LaunchScreen.xib in Resources */,
+				D2AA9A161ACC2F3D008C165A /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AA9A1C1ACC2F3D008C165A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D2AA9A011ACC2F3D008C165A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AA9A111ACC2F3D008C165A /* ViewController.m in Sources */,
+				D2AA9A0E1ACC2F3D008C165A /* AppDelegate.m in Sources */,
+				D2AA9A0B1ACC2F3D008C165A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D2AA9A1A1ACC2F3D008C165A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D2AA9A251ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D2AA9A201ACC2F3D008C165A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D2AA9A041ACC2F3D008C165A /* p2pkit-quickstart-ios */;
+			targetProxy = D2AA9A1F1ACC2F3D008C165A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D2AA9A121ACC2F3D008C165A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2AA9A131ACC2F3D008C165A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		D2AA9A171ACC2F3D008C165A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D2AA9A181ACC2F3D008C165A /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D2AA9A261ACC2F3D008C165A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D2AA9A271ACC2F3D008C165A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D2AA9A291ACC2F3D008C165A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "p2pkit-quickstart-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D2AA9A2A1ACC2F3D008C165A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = "p2pkit-quickstart-ios/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		D2AA9A2C1ACC2F3D008C165A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "p2pkit-quickstart-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/p2pkit-quickstart-ios.app/p2pkit-quickstart-ios";
+			};
+			name = Debug;
+		};
+		D2AA9A2D1ACC2F3D008C165A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "p2pkit-quickstart-iosTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/p2pkit-quickstart-ios.app/p2pkit-quickstart-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D2AA9A001ACC2F3D008C165A /* Build configuration list for PBXProject "p2pkit-quickstart-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2AA9A261ACC2F3D008C165A /* Debug */,
+				D2AA9A271ACC2F3D008C165A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D2AA9A281ACC2F3D008C165A /* Build configuration list for PBXNativeTarget "p2pkit-quickstart-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2AA9A291ACC2F3D008C165A /* Debug */,
+				D2AA9A2A1ACC2F3D008C165A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D2AA9A2B1ACC2F3D008C165A /* Build configuration list for PBXNativeTarget "p2pkit-quickstart-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D2AA9A2C1ACC2F3D008C165A /* Debug */,
+				D2AA9A2D1ACC2F3D008C165A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D2AA99FD1ACC2F3D008C165A /* Project object */;
+}
