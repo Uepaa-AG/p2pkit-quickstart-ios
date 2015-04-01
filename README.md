@@ -169,7 +169,3 @@ Implement `PPKControllerDelegate` protocol to receive GEO discovery events
 	destination_ = nil;
 }
 ```
-
-## Android
-
-...
