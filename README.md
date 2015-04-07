@@ -3,6 +3,10 @@
 ## Table of Contents
 
 **[Download](#download)**  
+**[Initialization](#initialization)**  
+**[P2P Discovery](#p2p-discovery)**  
+**[GEO Discovery](#geo-discovery)**  
+**[Online Messaging](#online-messaging)**  
 
 ### Download
 
