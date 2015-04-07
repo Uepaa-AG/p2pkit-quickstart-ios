@@ -1,6 +1,6 @@
 # p2pkit.io Quickstart
 
-## Table of Contents
+### Table of Contents
 
 **[Download](#download)**  
 **[Signup](#signup)**  
