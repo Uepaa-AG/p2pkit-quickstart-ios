@@ -4,6 +4,7 @@
 
 **[Download](#download)**  
 **[Signup](#signup)**  
+**[Setup Xcode project](#setup-xcode-project)**  
 **[Initialization](#initialization)**  
 **[P2P Discovery](#p2p-discovery)**  
 **[GEO Discovery](#geo-discovery)**  
