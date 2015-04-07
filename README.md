@@ -17,6 +17,24 @@ Download the P2PKit library here: http://www.uepaa.ch
 
 Request your personal application key here: http://www.uepaa.ch
 
+### Setup Xcode project
+
+1: Add P2PKit:
+    - Drag P2PKit.framework into your Xcode project folder. (Make sure the "Copy items if needed" is checked)
+
+2: Add dependencies
+    - Click on Targets -> your app name -> and then the 'Build Phases' tab
+    - Expand 'Link Binary With Libraries' and make sure P2PKit.framework is in the list, if not then add it!
+    - Click the + button and add the additional dependencies mentioned above
+
+-- CoreBluetooth.framework
+-- CoreLocation.framework
+-- libicucore.dylib
+-- CFNetwork.framework
+-- Security.framework
+-- Foundation.framework
+-- ARC
+
 ### Initialization
 
 Import the P2PKit header
