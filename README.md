@@ -12,7 +12,7 @@
 
 ### Download
 
-Download the P2PKit library: [ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.0.1/p2pkit-ios-0.0.1.zip)
+Download the P2PKit library: [ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.0.1/p2pkit-ios-0.0.1.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.0.1/p2pkit-ios-0.0.1.zip.sha1)
 
 ### Signup
 
