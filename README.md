@@ -3,6 +3,7 @@
 ## Table of Contents
 
 **[Download](#download)**  
+**[Signup](#signup)**  
 **[Initialization](#initialization)**  
 **[P2P Discovery](#p2p-discovery)**  
 **[GEO Discovery](#geo-discovery)**  
