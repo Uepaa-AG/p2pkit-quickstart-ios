@@ -78,12 +78,10 @@ Implement `PPKControllerDelegate` protocol to receive P2P discovery events
 ```objc
 -(void)p2pPeerDiscovered:(NSString*)peerID {
 	NSLog(@"%@ is here", peerID);
-	destination_ = peerID;
 }
 
 -(void)p2pPeerLost:(NSString*)peerID {
 	NSLog(@"%@ is no longer here", peerID);
-	destination_ = nil;
 }
 ```
 
@@ -184,11 +182,9 @@ Implement `PPKControllerDelegate` protocol to receive GEO discovery events
 ```objc
 -(void)geoPeerDiscovered:(NSString*)peerID {
 	NSLog(@"%@ is around", peerID);
- 	destination_ = peerID;
 }
 
 -(void)geoPeerLost:(NSString*)peerID {
 	NSLog(@"%@ is no longer around", peerID);
-	destination_ = nil;
 }
 ```
