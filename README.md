@@ -101,9 +101,8 @@ Implement `PPKControllerDelegate` protocol to receive online messages
 Send online messages to discovered peers
 
 ```objc
-if (destination_) {
-	[PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding] 
-				   withHeader:@"SimpleChatMessage" to:destination_];
+    [PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding] 
+                   withHeader:@"SimpleChatMessage" to:destination_];
 }
 ```
 
