@@ -1,8 +1,14 @@
 # p2pkit.io Quickstart
 
-## Table of Contents
+### Table of Contents
 
 **[Download](#download)**  
+**[Signup](#signup)**  
+**[Setup Xcode project](#setup-xcode-project)**  
+**[Initialization](#initialization)**  
+**[P2P Discovery](#p2p-discovery)**  
+**[GEO Discovery](#geo-discovery)**  
+**[Online Messaging](#online-messaging)**  
 
 ### Download
 
@@ -11,6 +17,24 @@ Download the P2PKit library here: http://www.uepaa.ch
 ### Signup
 
 Request your personal application key here: http://www.uepaa.ch
+
+### Setup Xcode project
+
+1: Add P2PKit
+
+* Drag P2PKit.framework into your Xcode project folder. (Make sure the "Copy items if needed" is checked)
+
+2: Add dependencies
+* Click on Targets -> your app name -> and then the 'Build Phases' tab
+* Expand 'Link Binary With Libraries' and make sure P2PKit.framework is in the list, if not then add it!
+* Click the + button and add the additional dependencies mentioned above:
+ * CoreBluetooth.framework
+ * CoreLocation.framework
+ * libicucore.dylib
+ * CFNetwork.framework
+ * Security.framework
+ * Foundation.framework
+ * ARC
 
 ### Initialization
 
@@ -54,12 +78,10 @@ Implement `PPKControllerDelegate` protocol to receive P2P discovery events
 ```objc
 -(void)p2pPeerDiscovered:(NSString*)peerID {
 	NSLog(@"%@ is here", peerID);
-	destination_ = peerID;
 }
 
 -(void)p2pPeerLost:(NSString*)peerID {
 	NSLog(@"%@ is no longer here", peerID);
-	destination_ = nil;
 }
 ```
 
@@ -79,9 +101,8 @@ Implement `PPKControllerDelegate` protocol to receive online messages
 Send online messages to discovered peers
 
 ```objc
-if (destination_) {
-	[PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding] 
-				   withHeader:@"SimpleChatMessage" to:destination_];
+    [PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding] 
+                   withHeader:@"SimpleChatMessage" to:destination_];
 }
 ```
 
@@ -160,11 +181,9 @@ Implement `PPKControllerDelegate` protocol to receive GEO discovery events
 ```objc
 -(void)geoPeerDiscovered:(NSString*)peerID {
 	NSLog(@"%@ is around", peerID);
- 	destination_ = peerID;
 }
 
 -(void)geoPeerLost:(NSString*)peerID {
 	NSLog(@"%@ is no longer around", peerID);
-	destination_ = nil;
 }
 ```

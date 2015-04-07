@@ -2,7 +2,6 @@
 //  p2pkit_quickstart_iosTests.m
 //  p2pkit-quickstart-iosTests
 //
-//  Created by Christian Tschenett on 01/04/15.
 //  Copyright (c) 2015 Uepaa AG. All rights reserved.
 //
 
