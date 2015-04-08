@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [PPKController enableWithConfiguration:@"eyJhcHBJZCI6MTAyOCwidmFsaWRVbnRpbCI6MTY1MzMsImFwcFVVVUlEIjoiNEU4NEFDRTctNjI1Ny00MEUzLUJENTUtODlBNTA2RjRENUYxIiwic2lnbmF0dXJlIjoiVUE4b0piVWZMUTNZY2RRV2xwcWFLM1VQYjVZcTNaSzFUQzlLWU9EN1dxcHIxTDdWaDU5RmdvN0hLdElFcUVMM09KYWMyRXpPMk5sMzdrWUNwQ2ZldFRwMHJOZ2pxbEs4aXhqbktZVjZhL0NsM0VPYlIxM0l4WnBzeUtQb3VwVnZUU0haaGFNYW1xZVVMaDRLMlcwd3U2bGp6Mit6UjJaY2dMK0htMXhwMm84PSJ9" observer:self];
+    [PPKController enableWithConfiguration:@"eyJhcHBJZCI6MTAzNCwidmFsaWRVbnRpbCI6MTY1MzQsImFwcFVVVUlEIjoiMjE2OUIyOTUtQUI2RC00Qjk5LUJBNzEtQTI3RDBGMzBCRTFCIiwic2lnbmF0dXJlIjoicW5RMmE2aTliUm5BTEZHMWZLVnVkams2VGsxNnJ4eFEvb081dEwreHBCdWpmSGhtckwwSitENVliSHZkTzAxZkNRVDlvTm9ESGx5U0pNakU5TVNFc29XYzVFaEcyUU5sNk0rYmR3U3JiQnBha24xck50WG1qeEtsTVRJaUErbWtPdkZjVS82Z2dqSXFXTXdncFg1emZYN0hqSHdZd2dMbHFkVFNielczTHhZPSJ9" observer:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -37,7 +37,7 @@
     [PPKController startGeoDiscovery];
     [PPKController startOnlineMessaging];
     
-    [self logKey:[PPKController userID] value:@"My ID (SDK init success!)"];
+    [self logKey:[PPKController myPeerID] value:@"My ID (SDK init success!)"];
 }
 
 -(void)PPKControllerFailedWithError:(NSError*)error {
@@ -81,7 +81,7 @@
 -(void)p2pPeerDiscovered:(NSString*)peerID {
     [self logKey:peerID value:@"P2P discovered"];
     
-    [self send:@"Message: Hello P2P!" to:peerID];
+    [self send:@"From iOS: Hello P2P!" to:peerID];
 }
 
 -(void)p2pPeerLost:(NSString*)peerID {
@@ -134,7 +134,7 @@
 -(void)geoPeerDiscovered:(NSString*)peerID {
     [self logKey:peerID value:@"GEO discovered"];
     
-    [self send:@"Message: Hello GEO!" to:peerID];
+    [self send:@"From iOS: Hello GEO!" to:peerID];
 }
 
 -(void)geoPeerLost:(NSString*)peerID {
