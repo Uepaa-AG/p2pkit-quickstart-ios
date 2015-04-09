@@ -20,7 +20,7 @@
 		D2AA9A381ACC30CE008C165A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A371ACC30CE008C165A /* CFNetwork.framework */; };
 		D2AA9A3A1ACC30D5008C165A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A391ACC30D5008C165A /* Security.framework */; };
 		D2AA9A3C1ACC30DE008C165A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A3B1ACC30DE008C165A /* Foundation.framework */; };
-		D2AA9A441AD5132E008C165A /* P2PKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A431AD5132E008C165A /* P2PKit.framework */; };
+		D2AA9A461AD51D21008C165A /* P2PKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A451AD51D21008C165A /* P2PKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,7 +53,7 @@
 		D2AA9A371ACC30CE008C165A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D2AA9A391ACC30D5008C165A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D2AA9A3B1ACC30DE008C165A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D2AA9A431AD5132E008C165A /* P2PKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = P2PKit.framework; sourceTree = "<group>"; };
+		D2AA9A451AD51D21008C165A /* P2PKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = P2PKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 				D2AA9A3C1ACC30DE008C165A /* Foundation.framework in Frameworks */,
 				D2AA9A3A1ACC30D5008C165A /* Security.framework in Frameworks */,
 				D2AA9A381ACC30CE008C165A /* CFNetwork.framework in Frameworks */,
-				D2AA9A441AD5132E008C165A /* P2PKit.framework in Frameworks */,
+				D2AA9A461AD51D21008C165A /* P2PKit.framework in Frameworks */,
 				D2AA9A361ACC30C8008C165A /* libicucore.dylib in Frameworks */,
 				D2AA9A341ACC30BC008C165A /* CoreLocation.framework in Frameworks */,
 				D2AA9A321ACC30B5008C165A /* CoreBluetooth.framework in Frameworks */,
@@ -84,7 +84,7 @@
 		D2AA99FC1ACC2F3D008C165A = {
 			isa = PBXGroup;
 			children = (
-				D2AA9A431AD5132E008C165A /* P2PKit.framework */,
+				D2AA9A451AD51D21008C165A /* P2PKit.framework */,
 				D2AA9A3B1ACC30DE008C165A /* Foundation.framework */,
 				D2AA9A391ACC30D5008C165A /* Security.framework */,
 				D2AA9A371ACC30CE008C165A /* CFNetwork.framework */,

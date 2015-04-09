@@ -23,7 +23,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [PPKController enableWithConfiguration:@"eyJhcHBJZCI6MTAzNCwidmFsaWRVbnRpbCI6MTY1MzQsImFwcFVVVUlEIjoiMjE2OUIyOTUtQUI2RC00Qjk5LUJBNzEtQTI3RDBGMzBCRTFCIiwic2lnbmF0dXJlIjoicW5RMmE2aTliUm5BTEZHMWZLVnVkams2VGsxNnJ4eFEvb081dEwreHBCdWpmSGhtckwwSitENVliSHZkTzAxZkNRVDlvTm9ESGx5U0pNakU5TVNFc29XYzVFaEcyUU5sNk0rYmR3U3JiQnBha24xck50WG1qeEtsTVRJaUErbWtPdkZjVS82Z2dqSXFXTXdncFg1emZYN0hqSHdZd2dMbHFkVFNielczTHhZPSJ9" observer:self];
+    [PPKController enableWithConfiguration:@"<YOUR APP KEY>" observer:self];
 }
 
 - (void)didReceiveMemoryWarning {
