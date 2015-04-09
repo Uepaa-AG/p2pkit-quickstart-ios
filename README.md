@@ -12,15 +12,15 @@
 
 ### Download
 
-Download the P2PKit library: [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip.sha1)
+Download the p2pkit framework: [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip.sha1)
 
 ### Signup
 
-Request your personal application key here: http://www.uepaa.ch
+Request your personal application key here: FIXME
 
 ### Setup Xcode project
 
-1: Add P2PKit
+1: Add p2pkit
 
 * Drag P2PKit.framework into your Xcode project folder. (Make sure the "Copy items if needed" is checked)
 
@@ -34,31 +34,30 @@ Request your personal application key here: http://www.uepaa.ch
  * CFNetwork.framework
  * Security.framework
  * Foundation.framework
- * ARC
+
+ **p2pkit is built with ARC (automatic reference counting)**
 
 ### Initialization
 
-Import the P2PKit header
+Import the p2pkit header
 
 ```objc
 #import <P2PKit/P2PKit.h>
 ```
 
-Initialize P2PKit with your personal application key
+Initialize p2pkit with your personal application key
 
 ```objc
 [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
 ```
 
-Implement `PPKControllerDelegate` protocol to start desired discovery- and messaging features when P2PKit is ready
+Implement `PPKControllerDelegate` protocol and start P2P discovery,GEO discovery or online messaging when p2pkit is ready
 
 ```objc
 -(void)PPKControllerInitialized {
 	[PPKController startP2PDiscovery];
 	[PPKController startGeoDiscovery];
 	[PPKController startOnlineMessaging];
-	
-	NSLog(@"My ID is %@ - please send me a message", [PPKController userID]);
 }
 ```
 
@@ -103,7 +102,6 @@ Send online messages to discovered peers
 ```objc
     [PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding] 
                    withHeader:@"SimpleChatMessage" to:destination_];
-}
 ```
 
 ### GEO Discovery
@@ -111,10 +109,10 @@ Send online messages to discovered peers
 Add location permissions to your `Info.plist` file
 ```
 <key>NSLocationAlwaysUsageDescription</key>
-<string>So that you can continuously discover, be discovered and receive notifications when your people of interest are nearby</string>
-
+<string>Your description here</string>
+// OR
 <key>NSLocationWhenInUseUsageDescription</key>
-<string>So that you can discover and be discovered by others</string>
+<string>Your description here</string>
 
 <key>UIBackgroundModes</key>
 <array>
@@ -125,42 +123,16 @@ Add location permissions to your `Info.plist` file
 Use `CLLocationManager` and implement `CLLocationManagerDelegate` protocol to report your GEO location
 
 ```objc
-#import <CoreLocation/CoreLocation.h>
-
-#define GPS_DEFAULT_DESIRED_ACCURACY 200
-#define GPS_DEFAULT_DISTANCE_FILTER 200
-
--(void)startLocationUpdates {
-    locMgr_ = [CLLocationManager new];
-    [locMgr_ setDelegate:self];
-    [locMgr_ setDesiredAccuracy:GPS_DEFAULT_DESIRED_ACCURACY];
-    [locMgr_ setDistanceFilter:GPS_DEFAULT_DISTANCE_FILTER];
-    [locMgr_ setPausesLocationUpdatesAutomatically:NO];
-    
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
-    if ([locMgr_ respondsToSelector:@selector(requestAlwaysAuthorization)]) {
-        [locMgr_ requestAlwaysAuthorization];
-    }
-#endif
-    
-    [locMgr_  startUpdatingLocation];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    if (locations.count < 1) {
-        return;
-    }
-    
-    CLLocation *loc = [locations objectAtIndex:0];
-    if (!loc) {
-        return;
-    }
-    
-    [PPKController updateUserLocation:loc];
-}
+    /* Avoid sending to many location updates, set a distance filter */
+    [myCLLocationManager setDistanceFilter:200];
 ```
 
-Implement `PPKControllerDelegate` protocol to report your GEO location when you have internet connectivity
+```objc
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    [PPKController updateUserLocation:[locations lastObject]];
+}
+```
+Be smart and only report GEO locations when `PPKGeoDiscoveryRunning`. Implement `PPKControllerDelegate` protocol to report your GEO location when you have internet connectivity
 
 ```objc
 -(void)geoDiscoveryStateChanged:(PPKGeoDiscoveryState)state {
