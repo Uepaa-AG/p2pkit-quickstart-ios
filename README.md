@@ -7,8 +7,8 @@
 **[Setup Xcode project](#setup-xcode-project)**  
 **[Initialization](#initialization)**  
 **[P2P Discovery](#p2p-discovery)**  
-**[GEO Discovery](#geo-discovery)**  
 **[Online Messaging](#online-messaging)**  
+**[GEO Discovery](#geo-discovery)**  
 
 ### Download
 
@@ -136,10 +136,12 @@ Be smart and only report GEO locations when `PPKGeoDiscoveryRunning`. Implement 
 
 ```objc
 -(void)geoDiscoveryStateChanged:(PPKGeoDiscoveryState)state {
+
  	switch (state) {
     	case PPKGeoDiscoveryRunning:
         	[self startLocationUpdates];
             break;
+            
         case PPKGeoDiscoverySuspended:
         case PPKGeoDiscoveryStopped:
             [self stopLocationUpdates];
