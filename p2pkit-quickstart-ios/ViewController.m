@@ -9,9 +9,6 @@
 #import <P2PKit/P2PKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-#define GPS_DEFAULT_DESIRED_ACCURACY 200
-#define GPS_DEFAULT_DISTANCE_FILTER 200
-
 @interface ViewController ()<PPKControllerDelegate,CLLocationManagerDelegate> {
     CLLocationManager* locMgr_;
 }
@@ -26,22 +23,21 @@
     [PPKController enableWithConfiguration:@"<YOUR APP KEY>" observer:self];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
 #pragma mark - PPKControllerDelegate
 
 -(void)PPKControllerInitialized {
+    
     [PPKController startP2PDiscovery];
     [PPKController startGeoDiscovery];
     [PPKController startOnlineMessaging];
     
-    [self logKey:[PPKController myPeerID] value:@"My ID (SDK init success!)"];
+    [self logKey:@"My ID (p2pkit init success!)" value:[PPKController myPeerID]];
 }
 
 -(void)PPKControllerFailedWithError:(NSError*)error {
+    
     NSString *description;
+    
     switch ((PPKErrorCode) error.code) {
         case PPKErrorAppKeyInvalid:
             description = @"Invalid app key";
@@ -59,11 +55,14 @@
             description = @"Expired app key";
             break;
     }
+    
     [self logKey:@"SDK init error" value:description];
 }
 
 -(void)p2pDiscoveryStateChanged:(PPKPeer2PeerDiscoveryState)state {
+    
     NSString *description;
+    
     switch (state) {
         case PPKPeer2PeerDiscoveryStopped:
             description = @"stopped";
@@ -75,12 +74,13 @@
             description = @"running";
             break;
     }
+    
     [self logKey:@"P2P state" value:description];
 }
 
 -(void)p2pPeerDiscovered:(NSString*)peerID {
-    [self logKey:peerID value:@"P2P discovered"];
     
+    [self logKey:peerID value:@"P2P discovered"];
     [self send:@"From iOS: Hello P2P!" to:peerID];
 }
 
@@ -89,7 +89,9 @@
 }
 
 -(void)onlineMessagingStateChanged:(PPKOnlineMessagingState)state {
+    
     NSString *description;
+    
     switch (state) {
         case PPKOnlineMessagingRunning:
             description = @"running";
@@ -104,16 +106,18 @@
             [self stopLocationUpdates];
             break;
     }
+    
     [self logKey:@"Online messaging state" value:description];
 }
 
--(void)messageReceived:(NSData*)messageBody header:(NSString*)messageHeader from:(NSString*)peerID
-{
+-(void)messageReceived:(NSData*)messageBody header:(NSString*)messageHeader from:(NSString*)peerID {
     [self logKey:peerID value:[[NSString alloc] initWithData:messageBody encoding:NSUTF8StringEncoding]];
 }
 
 -(void)geoDiscoveryStateChanged:(PPKGeoDiscoveryState)state {
+    
     NSString *description;
+    
     switch (state) {
         case PPKGeoDiscoveryRunning:
             description = @"running";
@@ -128,12 +132,13 @@
             [self stopLocationUpdates];
             break;
     }
+    
     [self logKey:@"GEO state" value:description];
 }
 
 -(void)geoPeerDiscovered:(NSString*)peerID {
-    [self logKey:peerID value:@"GEO discovered"];
     
+    [self logKey:peerID value:@"GEO discovered"];
     [self send:@"From iOS: Hello GEO!" to:peerID];
 }
 
@@ -156,41 +161,33 @@
 #pragma mark - CLLocationManagerDelegate
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    if (locations.count < 1) {
-        return;
-    }
-    
-    CLLocation *loc = [locations objectAtIndex:0];
-    if (!loc) {
-        return;
-    }
-    
-    [PPKController updateUserLocation:loc];
+    [PPKController updateUserLocation:[locations lastObject]];
 }
 
 #pragma mark - CLLocationManager Helpers
 
 -(void)startLocationUpdates {
+    
     if (locMgr_) {
         return;
     }
     
     locMgr_ = [CLLocationManager new];
     [locMgr_ setDelegate:self];
-    [locMgr_ setDesiredAccuracy:GPS_DEFAULT_DESIRED_ACCURACY];
-    [locMgr_ setDistanceFilter:GPS_DEFAULT_DISTANCE_FILTER];
-    [locMgr_ setPausesLocationUpdatesAutomatically:NO];
-    
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    [locMgr_ setDesiredAccuracy:200];
+
+    /* Avoid sending to many location updates, set a distance filter */
+    [locMgr_ setDistanceFilter:200];
+
     if ([locMgr_ respondsToSelector:@selector(requestAlwaysAuthorization)]) {
         [locMgr_ requestAlwaysAuthorization];
     }
-#endif
     
-    [locMgr_  startUpdatingLocation];
+    [locMgr_ startUpdatingLocation];
 }
 
 -(void)stopLocationUpdates {
+    
     if (!locMgr_) {
         return;
     }
