@@ -1,4 +1,4 @@
-# p2pkit.io Quickstart
+# p2pkit.io Quickstart (beta)
 
 ### Table of Contents
 
@@ -12,7 +12,7 @@
 
 ### Download
 
-Download the p2pkit framework: [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip.sha1)
+Download p2pkit.framework (beta): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/VERSION/p2pkit-ios-VERSION.zip.sha1)
 
 ### Signup
 
