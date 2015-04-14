@@ -36,10 +36,13 @@ Request your personal application key here: FIXME
  * Foundation.framework
 
  **p2pkit is built with ARC (automatic reference counting)**
+ 
+* **By using P2PKit.framework you agree to abide by our License (which is included with P2PKit.framework) and Terms Of Service available at http://www.p2pkit.io/policy.html**
+* **Please refer to "Third_party_licenses.txt" included with P2PKit.framework for 3rd party software that P2PKit.framework may be using - You will need to abide by their licenses as well**
 
 ### Initialization
 
-Import the p2pkit header
+Import the p2pkit header, the header also contains documentation
 
 ```objc
 #import <P2PKit/P2PKit.h>
