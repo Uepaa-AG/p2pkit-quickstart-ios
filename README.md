@@ -12,7 +12,7 @@ Rocket science in candy wrap! With just a few lines of code, p2pkit packs a punc
 **[P2P Discovery](#p2p-discovery)**  
 **[Online Messaging](#online-messaging)**  
 **[GEO Discovery](#geo-discovery)**  
-**[p2pkit License](#p2pkit license)**  
+**[p2pkit License](#p2pkit-license)**  
 
 
 ### Download
