@@ -1,8 +1,10 @@
-# p2pkit.io Quickstart (beta)
+# p2pkit.io (beta) Quickstart
+
+Rocket science in candy wrap! With just a few lines of code, p2pkit packs a punch by enabling you to accurately discover and directly message users nearby!
 
 ### Table of Contents
 
-**[License](#license)**  
+
 **[Download](#download)**  
 **[Signup](#signup)**  
 **[Setup Xcode project](#setup-xcode-project)**  
@@ -10,10 +12,8 @@
 **[P2P Discovery](#p2p-discovery)**  
 **[Online Messaging](#online-messaging)**  
 **[GEO Discovery](#geo-discovery)**  
+**[License](#license)**  
 
-### License
-* By using P2PKit.framework you agree to abide by our License (which is included with P2PKit.framework) and Terms Of Service available at http://www.p2pkit.io/policy.html
-* Please refer to "Third_party_licenses.txt" included with P2PKit.framework for 3rd party software that P2PKit.framework may be using - You will need to abide by their licenses as well
 
 ### Download
 
@@ -21,7 +21,7 @@ Download p2pkit.framework (beta): [P2PKit.framework ZIP](http://p2pkit.io/maven2
 
 ### Signup
 
-Request your personal application key here: FIXME
+Request your personal application key: http://p2pkit.io/signup.html
 
 ### Setup Xcode project
 
@@ -166,3 +166,7 @@ Implement `PPKControllerDelegate` protocol to receive GEO discovery events
 	NSLog(@"%@ is no longer around", peerID);
 }
 ```
+
+### License
+* By using P2PKit.framework you agree to abide by our License (which is included with P2PKit.framework) and Terms Of Service available at http://www.p2pkit.io/policy.html
+* Please refer to "Third_party_licenses.txt" included with P2PKit.framework for 3rd party software that P2PKit.framework may be using - You will need to abide by their licenses as well
