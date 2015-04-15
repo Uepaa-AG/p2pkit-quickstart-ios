@@ -12,6 +12,7 @@ Rocket science in candy wrap! With just a few lines of code, p2pkit packs a punc
 **[P2P Discovery](#p2p-discovery)**  
 **[Online Messaging](#online-messaging)**  
 **[GEO Discovery](#geo-discovery)**  
+**[Documentation](#documentation)**  
 **[p2pkit License](#p2pkit-license)**  
 
 
@@ -44,7 +45,7 @@ Request your personal application key: http://p2pkit.io/signup.html
  
 ### Initialization
 
-Import the p2pkit header, the header also contains documentation
+Import the p2pkit header
 
 ```objc
 #import <P2PKit/P2PKit.h>
@@ -167,6 +168,12 @@ Implement `PPKControllerDelegate` protocol to receive GEO discovery events
 }
 ```
 
+## Documentation
+
+For more details and further information, please refer to the PPKController.h header file
+```objc
+<P2PKit/PPKController.h>
+```
 ### p2pkit License
 * By using P2PKit.framework you agree to abide by our License (which is included with P2PKit.framework) and Terms Of Service available at http://www.p2pkit.io/policy.html
 * Please refer to "Third_party_licenses.txt" included with P2PKit.framework for 3rd party software that P2PKit.framework may be using - You will need to abide by their licenses as well
