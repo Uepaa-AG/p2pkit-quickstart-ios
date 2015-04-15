@@ -95,9 +95,7 @@ Implement `PPKControllerDelegate` protocol to receive P2P discovery events
 Implement `PPKControllerDelegate` protocol to receive online messages
 
 ```objc
--(void)messageReceived:(NSData*)messageBody header:(NSString*)messageHeader 
-	   from:(NSString*)peerID 
-{
+-(void)messageReceived:(NSData*)messageBody header:(NSString*)messageHeader from:(NSString*)peerID {
 	NSLog(@"Message received from %@: %@", peerID,
 		[[NSString alloc] initWithData:messageBody encoding:NSUTF8StringEncoding]);
 }
