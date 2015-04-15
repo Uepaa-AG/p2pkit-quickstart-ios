@@ -33,7 +33,7 @@ Request your personal application key: http://p2pkit.io/signup.html
 2: Add dependencies
 * Click on Targets -> your app name -> and then the 'Build Phases' tab
 * Expand 'Link Binary With Libraries' and make sure P2PKit.framework is in the list, if not then add it!
-* Click the + button and add the additional dependencies mentioned above:
+* Click the + button and add the additional dependencies mentioned below:
  * CoreBluetooth.framework
  * CoreLocation.framework
  * libicucore.dylib
