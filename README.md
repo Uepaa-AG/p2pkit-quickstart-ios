@@ -1,6 +1,7 @@
 # p2pkit.io (beta) Quickstart
 
-Rocket science in candy wrap! With just a few lines of code, p2pkit packs a punch by enabling you to accurately discover and directly message users nearby!
+#### A hyperlocal interaction toolkit
+p2pkit is an easy to use SDK that bundles together several discovery technologies kung-fu style! With just a few lines of code, p2pkit enables you to accurately discover and directly message users nearby!
 
 ### Table of Contents
 
