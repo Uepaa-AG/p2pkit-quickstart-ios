@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -19,22 +19,93 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hOm-KH-4TR">
-                                <rect key="frame" x="16" y="20" width="288" height="548"/>
+                                <rect key="frame" x="16" y="111" width="288" height="411"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ODC-iz-Loy">
+                                <rect key="frame" x="136" y="72" width="51" height="31"/>
+                                <color key="onTintColor" red="0.84705882349999995" green="0.098039215690000001" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KVH-Js-XqW">
+                                <rect key="frame" x="240" y="72" width="51" height="31"/>
+                                <color key="onTintColor" red="0.84705882349999995" green="0.098039215690000001" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </switch>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="eWP-Er-B4h">
+                                <rect key="frame" x="32" y="72" width="51" height="31"/>
+                                <color key="onTintColor" red="0.84705882352941175" green="0.098039215686274508" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enable p2pkit" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UTW-lZ-Ubv">
+                                <rect key="frame" x="16" y="28" width="80" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="IDy-nj-E5Y"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="P2P Discovery" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXw-u6-pM5">
+                                <rect key="frame" x="120" y="28" width="80" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Cnv-GX-nG1"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Geo Discovery" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cbe-kO-dlb">
+                                <rect key="frame" x="224" y="28" width="80" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Sxg-iC-Sjv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kFL-XH-RYT">
+                                <rect key="frame" x="16" y="530" width="288" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.84705882349999995" green="0.098039215690000001" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Clear Log">
+                                    <color key="titleColor" red="0.84705882349999995" green="0.098039215690000001" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.84705882349999995" green="0.098039215690000001" blue="0.78039215689999997" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="hOm-KH-4TR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="8co-cE-dOn"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="hOm-KH-4TR" secondAttribute="bottom" id="RgW-IM-dIF"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="hOm-KH-4TR" secondAttribute="trailing" id="m64-CV-gg7"/>
-                            <constraint firstItem="hOm-KH-4TR" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="nax-EX-jgH"/>
+                            <constraint firstItem="Cbe-kO-dlb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="17T-xr-C3i"/>
+                            <constraint firstItem="hOm-KH-4TR" firstAttribute="width" secondItem="kFL-XH-RYT" secondAttribute="width" id="1AX-Ca-Auc"/>
+                            <constraint firstItem="hOm-KH-4TR" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="63B-OT-17r"/>
+                            <constraint firstAttribute="centerX" secondItem="hOm-KH-4TR" secondAttribute="centerX" id="7GW-3j-pjm"/>
+                            <constraint firstItem="hOm-KH-4TR" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="8ca-uA-7dC"/>
+                            <constraint firstItem="DXw-u6-pM5" firstAttribute="centerX" secondItem="ODC-iz-Loy" secondAttribute="centerX" id="G4F-bx-rhu"/>
+                            <constraint firstItem="KVH-Js-XqW" firstAttribute="centerX" secondItem="Cbe-kO-dlb" secondAttribute="centerX" id="MSq-ES-ShL"/>
+                            <constraint firstItem="eWP-Er-B4h" firstAttribute="top" secondItem="UTW-lZ-Ubv" secondAttribute="bottom" constant="8" id="NgU-Nf-xMw"/>
+                            <constraint firstItem="Cbe-kO-dlb" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="VDH-sX-q3k"/>
+                            <constraint firstItem="ODC-iz-Loy" firstAttribute="top" secondItem="DXw-u6-pM5" secondAttribute="bottom" constant="8" id="aXg-iE-1J3"/>
+                            <constraint firstItem="hOm-KH-4TR" firstAttribute="top" secondItem="ODC-iz-Loy" secondAttribute="top" constant="39" id="elU-w4-zBG"/>
+                            <constraint firstItem="DXw-u6-pM5" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="ilj-7f-eop"/>
+                            <constraint firstItem="UTW-lZ-Ubv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="klg-et-txb"/>
+                            <constraint firstItem="KVH-Js-XqW" firstAttribute="top" secondItem="Cbe-kO-dlb" secondAttribute="bottom" constant="8" id="ksM-Ii-8dC"/>
+                            <constraint firstItem="kFL-XH-RYT" firstAttribute="top" secondItem="hOm-KH-4TR" secondAttribute="bottom" constant="8" id="ovf-Ek-BHh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kFL-XH-RYT" secondAttribute="bottom" constant="8" symbolic="YES" id="ozz-rv-dpi"/>
+                            <constraint firstItem="UTW-lZ-Ubv" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="sHu-SJ-nsb"/>
+                            <constraint firstItem="eWP-Er-B4h" firstAttribute="centerX" secondItem="UTW-lZ-Ubv" secondAttribute="centerX" id="wUl-tc-hkx"/>
+                            <constraint firstAttribute="centerX" secondItem="DXw-u6-pM5" secondAttribute="centerX" id="xgd-BY-ohk"/>
+                            <constraint firstItem="hOm-KH-4TR" firstAttribute="centerX" secondItem="kFL-XH-RYT" secondAttribute="centerX" id="zv0-mY-nNr"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="clearButton" destination="kFL-XH-RYT" id="qK3-T6-nCt"/>
+                        <outlet property="discoveryToggleSwitch" destination="ODC-iz-Loy" id="AYr-Sk-seo"/>
+                        <outlet property="geoToggleSwitch" destination="KVH-Js-XqW" id="3fD-kD-a48"/>
                         <outlet property="logTextView" destination="hOm-KH-4TR" id="tWN-89-gDC"/>
+                        <outlet property="masterToggleSwitch" destination="eWP-Er-B4h" id="c9s-Na-SK2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

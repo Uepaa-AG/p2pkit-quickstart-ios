@@ -11,8 +11,22 @@
 
 @interface ViewController ()<PPKControllerDelegate,CLLocationManagerDelegate> {
     CLLocationManager* locMgr_;
+    
+    BOOL p2pkitEnabled_;
+    BOOL p2pkitFirstInit_;
+    
+    BOOL discoveryEnabled_;
+    BOOL geoEnabled_;
+    BOOL messagingEnabled_;
 }
+
+@property (weak, nonatomic) IBOutlet UISwitch *masterToggleSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *discoveryToggleSwitch;
+@property (weak, nonatomic) IBOutlet UISwitch *geoToggleSwitch;
+
 @property (weak, nonatomic) IBOutlet UITextView *logTextView;
+@property (weak, nonatomic) IBOutlet UIButton *clearButton;
+
 @end
 
 @implementation ViewController
@@ -20,16 +34,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    p2pkitFirstInit_ = YES;
+    
+    [self setupUI];
+    [self enableP2PKit];
+}
+
+-(void)enableP2PKit {
     [PPKController enableWithConfiguration:@"<YOUR APP KEY>" observer:self];
+}
+
+-(void)disableP2PKit {
+    
+    [PPKController disable];
+    p2pkitEnabled_ = NO;
 }
 
 #pragma mark - PPKControllerDelegate
 
 -(void)PPKControllerInitialized {
     
-    [PPKController startP2PDiscovery];
-    [PPKController startGeoDiscovery];
-    [PPKController startOnlineMessaging];
+    p2pkitEnabled_ = YES;
+    [self updateUIState];
+    
+    if (p2pkitFirstInit_) {
+        [PPKController startP2PDiscovery];
+        [PPKController startGeoDiscovery];
+        [PPKController startOnlineMessaging];
+        
+        p2pkitFirstInit_ = NO;
+    }
     
     [self logKey:@"My ID (p2pkit init success!)" value:[PPKController myPeerID]];
 }
@@ -56,6 +90,9 @@
             break;
     }
     
+    p2pkitEnabled_ = NO;
+    [self updateUIState];
+    
     [self logKey:@"SDK init error" value:description];
 }
 
@@ -66,26 +103,28 @@
     switch (state) {
         case PPKPeer2PeerDiscoveryStopped:
             description = @"stopped";
+            discoveryEnabled_ = NO;
             break;
         case PPKPeer2PeerDiscoverySuspended:
             description = @"suspended";
+            discoveryEnabled_ = YES;
             break;
         case PPKPeer2PeerDiscoveryRunning:
             description = @"running";
+            discoveryEnabled_ = YES;
             break;
     }
     
+    [self updateUIState];
     [self logKey:@"P2P state" value:description];
 }
 
 -(void)p2pPeerDiscovered:(NSString*)peerID {
-    
-    [self logKey:peerID value:@"P2P discovered"];
-    [self send:@"From iOS: Hello P2P!" to:peerID];
+    [self logKey:@"P2P discovered" value:peerID];
 }
 
 -(void)p2pPeerLost:(NSString*)peerID {
-    [self logKey:peerID value:@"P2P lost"];
+    [self logKey:@"P2P lost" value:peerID];
 }
 
 -(void)onlineMessagingStateChanged:(PPKOnlineMessagingState)state {
@@ -95,18 +134,22 @@
     switch (state) {
         case PPKOnlineMessagingRunning:
             description = @"running";
+            messagingEnabled_ = YES;
             [self startLocationUpdates];
             break;
         case PPKOnlineMessagingSuspended:
             description = @"suspended";
+            messagingEnabled_ = YES;
             [self stopLocationUpdates];
             break;
         case PPKOnlineMessagingStopped:
             description = @"stopped";
+            messagingEnabled_ = NO;
             [self stopLocationUpdates];
             break;
     }
     
+    [self updateUIState];
     [self logKey:@"Online messaging state" value:description];
 }
 
@@ -121,29 +164,33 @@
     switch (state) {
         case PPKGeoDiscoveryRunning:
             description = @"running";
+            geoEnabled_ = YES;
             [self startLocationUpdates];
             break;
         case PPKGeoDiscoverySuspended:
             description = @"suspended";
+            geoEnabled_ = YES;
             [self stopLocationUpdates];
             break;
         case PPKGeoDiscoveryStopped:
             description = @"stopped";
+            geoEnabled_ = NO;
             [self stopLocationUpdates];
             break;
     }
     
+    [self updateUIState];
     [self logKey:@"GEO state" value:description];
 }
 
 -(void)geoPeerDiscovered:(NSString*)peerID {
     
-    [self logKey:peerID value:@"GEO discovered"];
+    [self logKey:@"GEO discovered" value:peerID];
     [self send:@"From iOS: Hello GEO!" to:peerID];
 }
 
 -(void)geoPeerLost:(NSString*)peerID {
-    [self logKey:peerID value:@"GEO lost"];
+    [self logKey:@"GEO lost" value:peerID];
 }
 
 #pragma mark - Helpers
@@ -195,6 +242,64 @@
     [locMgr_ stopUpdatingLocation];
     [locMgr_ setDelegate:nil];
     locMgr_ = nil;
+}
+
+#pragma mark - UI Actions
+
+-(void)setupUI {
+    [self.clearButton addTarget:self action:@selector(clearLog) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.masterToggleSwitch addTarget:self action:@selector(toggleP2PKitEnable) forControlEvents:UIControlEventValueChanged];
+    [self.discoveryToggleSwitch addTarget:self action:@selector(toggleP2PDiscovery) forControlEvents:UIControlEventValueChanged];
+    [self.geoToggleSwitch addTarget:self action:@selector(toggleGeoDiscovery) forControlEvents:UIControlEventValueChanged];
+    
+    [self updateUIState];
+}
+
+-(void)updateUIState {
+    self.masterToggleSwitch.on = p2pkitEnabled_;
+    self.discoveryToggleSwitch.on = discoveryEnabled_;
+    self.geoToggleSwitch.on = (geoEnabled_ && messagingEnabled_);
+    
+    self.discoveryToggleSwitch.enabled = p2pkitEnabled_;
+    self.geoToggleSwitch.enabled = p2pkitEnabled_;
+}
+
+-(void)toggleP2PKitEnable {
+    
+    if (self.masterToggleSwitch.on) {
+        [self enableP2PKit];
+    }
+    else {
+        [self disableP2PKit];
+        [self updateUIState];
+    }
+}
+
+-(void)toggleP2PDiscovery {
+    
+    if (self.discoveryToggleSwitch.on) {
+        [PPKController startP2PDiscovery];
+    }
+    else {
+        [PPKController stopP2PDiscovery];
+    }
+}
+
+-(void)toggleGeoDiscovery {
+    
+    if (self.geoToggleSwitch.on) {
+        [PPKController startGeoDiscovery];
+        [PPKController startOnlineMessaging];
+    }
+    else {
+        [PPKController stopOnlineMessaging];
+        [PPKController stopGeoDiscovery];
+    }
+}
+
+-(void)clearLog {
+    self.logTextView.text = @"";
 }
 
 @end
