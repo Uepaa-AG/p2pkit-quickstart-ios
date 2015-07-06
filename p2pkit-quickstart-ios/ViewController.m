@@ -11,6 +11,7 @@
 
 @interface ViewController ()<PPKControllerDelegate,CLLocationManagerDelegate> {
     CLLocationManager* locMgr_;
+    NSDateFormatter* timeFormatter_;
     
     BOOL p2pkitEnabled_;
     BOOL p2pkitFirstInit_;
@@ -197,8 +198,12 @@
 
 -(void)logKey:(NSString*)key value:(NSString*)value {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.logTextView.text = [NSString stringWithFormat:@"%@: %@\n%@", key, value, self.logTextView.text];
+        self.logTextView.text = [NSString stringWithFormat:@"%@ - %@: %@\n%@", [self getCurrentFormattedTime], key, value, self.logTextView.text];
     });
+}
+
+-(NSString *)getCurrentFormattedTime {
+    return [timeFormatter_ stringFromDate:[NSDate date]];
 }
 
 -(void)send:(NSString*)message to:(NSString*)peerID {
@@ -247,6 +252,10 @@
 #pragma mark - UI Actions
 
 -(void)setupUI {
+    
+    timeFormatter_ = [[NSDateFormatter alloc] init];
+    [timeFormatter_ setDateFormat:@"HH:mm:ss"];
+    
     [self.clearButton addTarget:self action:@selector(clearLog) forControlEvents:UIControlEventTouchUpInside];
     
     [self.masterToggleSwitch addTarget:self action:@selector(toggleP2PKitEnable) forControlEvents:UIControlEventValueChanged];
