@@ -20,20 +20,6 @@
                ReferencedContainer = "container:p2pkit-quickstart-ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "NO"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2AA9A1D1ACC2F3D008C165A"
-               BuildableName = "p2pkit-quickstart-iosTests.xctest"
-               BlueprintName = "p2pkit-quickstart-iosTests"
-               ReferencedContainer = "container:p2pkit-quickstart-ios.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D2AA9A1D1ACC2F3D008C165A"
-               BuildableName = "p2pkit-quickstart-iosTests.xctest"
-               BlueprintName = "p2pkit-quickstart-iosTests"
-               ReferencedContainer = "container:p2pkit-quickstart-ios.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
