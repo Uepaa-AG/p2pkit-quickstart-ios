@@ -26,6 +26,7 @@ Download p2pkit.framework (beta): [P2PKit.framework ZIP](http://p2pkit.io/maven2
 Request your personal application key: http://p2pkit.io/signup.html
 
 ### Setup Xcode project
+**P2PKit.framework supports both Objective-C and Swift**
 
 1: Add p2pkit
 
@@ -49,22 +50,42 @@ Request your personal application key: http://p2pkit.io/signup.html
 Import the p2pkit header
 
 ```objc
-#import <P2PKit/P2PKit.h>
+OBJECTIVE-C
+#import <P2PKit/P2Pkit.h>
+```
+
+```
+SWIFT
+If you are using Swift you would need to import P2PKit.framework in your project's "Objective-C Bridging Header" file (#import <P2PKit/P2Pkit.h>). If you do not yet have an "Objective-C Bridging Header" file in your project please refer to the Swift documentation for instructions how to create one.
 ```
 
 Initialize p2pkit with your personal application key
 
 ```objc
+OBJECTIVE-C
 [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
+```
+```swift
+SWIFT
+PPKController.enableWithConfiguration("<YOUR APPLICATION KEY>", observer:self)
 ```
 
 Implement `PPKControllerDelegate` protocol and start P2P discovery,GEO discovery or online messaging when p2pkit is ready
 
 ```objc
+OBJECTIVE-C
 -(void)PPKControllerInitialized {
 	[PPKController startP2PDiscovery];
 	[PPKController startGeoDiscovery];
 	[PPKController startOnlineMessaging];
+}
+```
+```swift
+SWIFT
+func PPKControllerInitialized() {
+    PPKController.startP2PDiscovery();
+    PPKController.startGeoDiscovery();
+    PPKController.startOnlineMessaging();
 }
 ```
 
@@ -82,6 +103,7 @@ Add BLE (Bluetooth low energy) permissions to your `Info.plist` file
 Implement `PPKControllerDelegate` protocol to receive P2P discovery events
 
 ```objc
+OBJECTIVE-C
 -(void)p2pPeerDiscovered:(NSString*)peerID {
 	NSLog(@"%@ is here", peerID);
 }
@@ -90,23 +112,44 @@ Implement `PPKControllerDelegate` protocol to receive P2P discovery events
 	NSLog(@"%@ is no longer here", peerID);
 }
 ```
+```swift
+SWIFT
+func p2pPeerDiscovered(peerID: String!) {
+    NSLog("%@ is here", peerID);
+}
 
+func p2pPeerLost(peerID: String!) {
+    NSLog("%@ is no longer here", peerID);
+}
+```
 ### Online Messaging
 
 Implement `PPKControllerDelegate` protocol to receive online messages
 
 ```objc
+OBJECTIVE-C
 -(void)messageReceived:(NSData*)messageBody header:(NSString*)messageHeader from:(NSString*)peerID {
 	NSLog(@"Message received from %@: %@", peerID,
 		[[NSString alloc] initWithData:messageBody encoding:NSUTF8StringEncoding]);
+}
+```
+```swift
+SWIFT
+func messageReceived(messageBody: NSData!, header messageHeader: String!, from peerID: String!) {
+    NSLog("Message received from %@: %@", peerID, NSString(data: messageBody, encoding:NSUTF8StringEncoding)!);
 }
 ```
 
 Send online messages to discovered peers
 
 ```objc
+OBJECTIVE-C
     [PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding] 
-                   withHeader:@"SimpleChatMessage" to:destination_];
+                   withHeader:@"SimpleChatMessage" to:peerID];
+```
+```swift
+SWIFT
+    PPKController.sendMessage("Hello World".dataUsingEncoding(NSUTF8StringEncoding), withHeader: "SimpleChatMessage", to: peerID);
 ```
 
 ### GEO Discovery
@@ -128,18 +171,34 @@ Add location permissions to your `Info.plist` file
 Use `CLLocationManager` and implement `CLLocationManagerDelegate` protocol to report your GEO location
 
 ```objc
+OBJECTIVE-C
     /* Avoid sending to many location updates, set a distance filter */
     [myCLLocationManager setDistanceFilter:200];
 ```
 
+```swift
+SWIFT
+    /* Avoid sending to many location updates, set a distance filter */
+    myCLLocationManager.distanceFilter = 200;
+```
+
 ```objc
+OBJECTIVE-C
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     [PPKController updateUserLocation:[locations lastObject]];
 }
 ```
+```swift
+SWIFT
+func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+    PPKController.updateUserLocation(locations.last as! CLLocation);
+}
+```
+
 Be smart and only report GEO locations when `PPKGeoDiscoveryRunning`. Implement `PPKControllerDelegate` protocol to report your GEO location when you have internet connectivity
 
 ```objc
+OBJECTIVE-C
 -(void)geoDiscoveryStateChanged:(PPKGeoDiscoveryState)state {
 
  	switch (state) {
@@ -154,10 +213,23 @@ Be smart and only report GEO locations when `PPKGeoDiscoveryRunning`. Implement 
 	}
 }
 ```
-
+```swift
+SWIFT
+func geoDiscoveryStateChanged(state: PPKGeoDiscoveryState) {
+    
+    switch state {
+        case .Running:
+            self.startLocationUpdates();
+           
+        case .Suspended, .Stopped:
+            self.stopLocationUpdates();
+    }
+}
+```
 Implement `PPKControllerDelegate` protocol to receive GEO discovery events
 
 ```objc
+OBJECTIVE-C
 -(void)geoPeerDiscovered:(NSString*)peerID {
 	NSLog(@"%@ is around", peerID);
 }
@@ -166,10 +238,20 @@ Implement `PPKControllerDelegate` protocol to receive GEO discovery events
 	NSLog(@"%@ is no longer around", peerID);
 }
 ```
+```swift
+SWIFT
+func geoPeerDiscovered(peerID: String!) {
+    NSLog("%@ is around", peerID);
+}
+
+func geoPeerLost(peerID: String!) {
+    NSLog("%@ is no longer around", peerID);
+}
+```
 
 ## Documentation
 
-For more details and further information, please refer to the PPKController.h header file
+For more details and further information, please refer to the `PPKController.h` header file
 ```objc
 <P2PKit/PPKController.h>
 ```
