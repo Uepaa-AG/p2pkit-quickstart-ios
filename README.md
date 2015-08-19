@@ -70,7 +70,7 @@ SWIFT
 PPKController.enableWithConfiguration("<YOUR APPLICATION KEY>", observer:self)
 ```
 
-Implement `PPKControllerDelegate` protocol and start P2P discovery,GEO discovery or online messaging when p2pkit is ready
+Conform to the `PPKControllerDelegate` protocol by implementing the optional methods, you could then start P2P discovery, GEO discovery or online messaging when p2pkit is ready
 
 ```objc
 OBJECTIVE-C
