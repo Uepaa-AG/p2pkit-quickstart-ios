@@ -1,5 +1,6 @@
 # Wait, check out p2pkit.io [1.0.1-preview!](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
 ### Something big is coming, check out our [developer preview branch](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview) and get first look at the most significant update to p2pkit yet!
+*p2pkit.io 1.0.x will be officially unveiled at [OktoberHackFest](http://oktoberhackfest.com/) Munich on Saturday 26 Sept*
 
 [![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
 
