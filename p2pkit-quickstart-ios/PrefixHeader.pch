@@ -1,0 +1,10 @@
+//
+//  PrefixHeader.pch
+//  p2pkit-quickstart-ios
+//
+//  Copyright (c) 2015 Uepaa AG. All rights reserved.
+//
+
+#ifndef UPA_CONFIGURATION_TYPE
+    #define UPA_CONFIGURATION_TYPE 2
+#endif
