@@ -1,5 +1,5 @@
 # Wait!
-### Something big is coming, check out our preview branch and get first look at the most significant update to p2pkit yet!
+### Something big is coming, check out our developer preview branch and get first look at the most significant update to p2pkit yet!
 ### [Click here](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
 
 [![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
