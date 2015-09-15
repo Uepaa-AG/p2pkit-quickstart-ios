@@ -1,5 +1,10 @@
-# p2pkit.io (beta) Quickstart
+# Wait!
+### Something big is coming, check out our preview branch and get first look at the most significant update to p2pkit yet!
+### [Click here](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
 
+[![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
+
+# p2pkit.io (beta) Quickstart
 #### A hyperlocal interaction toolkit
 p2pkit is an easy to use SDK that bundles together several discovery technologies kung-fu style! With just a few lines of code, p2pkit enables you to accurately discover and directly message users nearby.
 
@@ -44,7 +49,7 @@ Request your personal application key: http://p2pkit.io/signup.html
  * Foundation.framework
 
  **p2pkit is built with ARC (automatic reference counting)**
- 
+
 ### Initialization
 
 Import the p2pkit header
@@ -144,7 +149,7 @@ Send online messages to discovered peers
 
 ```objc
 OBJECTIVE-C
-    [PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding] 
+    [PPKController sendMessage:[@"Hello World" dataUsingEncoding:NSUTF8StringEncoding]
                    withHeader:@"SimpleChatMessage" to:peerID];
 ```
 ```swift
@@ -205,7 +210,7 @@ OBJECTIVE-C
     	case PPKGeoDiscoveryRunning:
         	[self startLocationUpdates];
             break;
-            
+
         case PPKGeoDiscoverySuspended:
         case PPKGeoDiscoveryStopped:
             [self stopLocationUpdates];
@@ -216,11 +221,11 @@ OBJECTIVE-C
 ```swift
 SWIFT
 func geoDiscoveryStateChanged(state: PPKGeoDiscoveryState) {
-    
+
     switch state {
         case .Running:
             self.startLocationUpdates();
-           
+
         case .Suspended, .Stopped:
             self.stopLocationUpdates();
     }
