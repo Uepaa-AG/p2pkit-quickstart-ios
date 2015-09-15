@@ -25,7 +25,7 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 ### Download
 
-Download p2pkit.framework: [P2PKit.framework ZIP](http://p2pkit.io/ios-preview/P2PKit-ios-1.0.1-preview.zip) [SHA1](http://p2pkit.io/ios-preview/P2PKit-ios-1.0.1-preview.zip.sha1)
+Download p2pkit.framework (1.0.1-preview): [P2PKit.framework ZIP](http://p2pkit.io/ios-preview/P2PKit-ios-1.0.1-preview.zip) [SHA1](http://p2pkit.io/ios-preview/P2PKit-ios-1.0.1-preview.zip.sha1)
 
 ##### (this preview expires on Sept 30th, 2015)
 
