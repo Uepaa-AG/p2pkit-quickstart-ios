@@ -1,10 +1,9 @@
-# Wait!
-### Something big is coming, check out our developer preview branch and get first look at the most significant update to p2pkit yet!
-### [Click here](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
+# Wait, check out p2pkit.io [1.0.1-preview!](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
+### Something big is coming, check out our [developer preview branch](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview) and get first look at the most significant update to p2pkit yet!
 
 [![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
 
-# p2pkit.io (beta) Quickstart
+# p2pkit.io (0.1.6, beta) Quickstart
 #### A hyperlocal interaction toolkit
 p2pkit is an easy to use SDK that bundles together several discovery technologies kung-fu style! With just a few lines of code, p2pkit enables you to accurately discover and directly message users nearby.
 
@@ -24,7 +23,7 @@ p2pkit is an easy to use SDK that bundles together several discovery technologie
 
 ### Download
 
-Download p2pkit.framework (beta): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.1.6/p2pkit-ios-0.1.6.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.1.6/p2pkit-ios-0.1.6.zip.sha1)
+Download p2pkit.framework (0.1.6, beta): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.1.6/p2pkit-ios-0.1.6.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.1.6/p2pkit-ios-0.1.6.zip.sha1)
 
 ### Signup
 
