@@ -6,7 +6,7 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 ![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)
 
 ## Quickstart video
-[![Get started video](https://i.ytimg.com/vi_webp/_tL371MUNDg/mqdefault.webp)](https://youtu.be/_tL371MUNDg)
+[![Get started video](https://i.ytimg.com/vi/_tL371MUNDg/mqdefault.jpg)](https://youtu.be/_tL371MUNDg)
 
 [Watch video here](https://youtu.be/_tL371MUNDg)
 
