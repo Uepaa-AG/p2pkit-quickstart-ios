@@ -34,6 +34,7 @@
     [super viewDidLoad];
     
     [self setupUI];
+    [self setupNotifications];
     
     @try {
         
@@ -98,10 +99,13 @@
     else {
         [self logKey:@"P2P discovered" value:peer.peerID];
     }
+    
+    [self sendLocalNotificationWhenInBackgroundForPeer:peer withMessage:@"Discovered new peer"];
 }
 
 -(void)p2pPeerLost:(PPKPeer *)peer {
     [self logKey:@"P2P lost" value:peer.peerID];
+    [self sendLocalNotificationWhenInBackgroundForPeer:peer withMessage:@"Lost peer"];
 }
 
 -(void)didUpdateP2PDiscoveryInfoForPeer:(PPKPeer*)peer {
@@ -120,6 +124,8 @@
     else {
         [self logKey:@"P2P updated" value:peer.peerID];
     }
+    
+    [self sendLocalNotificationWhenInBackgroundForPeer:peer withMessage:@"Updated peer"];
 }
 
 -(void)onlineMessagingStateChanged:(PPKOnlineMessagingState)state {
@@ -243,6 +249,39 @@
 
 -(void)clearLog {
     self.logTextView.text = @"";
+}
+
+-(void)setupNotifications {
+    
+#if UPA_CONFIGURATION_TYPE > 0
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+        
+        UIUserNotificationType types = (UIUserNotificationTypeBadge | UIUserNotificationTypeAlert);
+        UIUserNotificationSettings *notificationSettings = [UIUserNotificationSettings settingsForTypes:types categories:nil];
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:notificationSettings];
+    }
+#endif
+}
+
+-(void)sendLocalNotificationWhenInBackgroundForPeer:(PPKPeer*)peer withMessage:(NSString*)message {
+
+#if UPA_CONFIGURATION_TYPE > 0
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if ([UIApplication sharedApplication].applicationState == UIApplicationStateBackground) {
+            
+            UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+            if ([notificationSettings types] & UIUserNotificationTypeBadge) {
+                
+                UILocalNotification *notification = [UILocalNotification new];
+                notification.alertBody = [NSString stringWithFormat:@"%@ (%@)", message, peer.peerID];
+                
+                [[UIApplication sharedApplication] presentLocalNotificationNow:notification];
+            }
+        }
+    });
+#endif
 }
 
 #pragma mark - UI Actions
