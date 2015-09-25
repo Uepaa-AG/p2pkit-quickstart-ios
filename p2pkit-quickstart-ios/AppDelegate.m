@@ -20,8 +20,8 @@
 
 -(BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
     
-    [PPKController enableDeveloperPreviewWithObserver:self];
-    
+    [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
+
     nearbyPeersViewController = (NearbyPeersViewController*)self.window.rootViewController;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorUpdateNotification:) name:@"userSelectedNewColorNotification" object:nil];
     

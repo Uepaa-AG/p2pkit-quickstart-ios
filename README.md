@@ -1,14 +1,9 @@
-# p2pkit.io (developer preview) Quickstart
+# p2pkit.io iOS Quickstart
 #### A hyperlocal interaction toolkit
 
-p2pkit is an easy to use SDK that bundles together several proximity technologies kung-fu style! With p2pkit apps immediately understand their proximity to nearby devices and users, verify their identity, and exchange information with them.
+p2pkit is an easy to use SDK that bundles together several proximity technologies kung-fu style! With p2pkit apps immediately understand their proximity to nearby devices and users, 'verify' their identity, and exchange information with them.
 
 ![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)
-
-## Quickstart video
-[![Get started video](https://i.ytimg.com/vi/_tL371MUNDg/mqdefault.jpg)](https://youtu.be/_tL371MUNDg)
-
-[Watch video here](https://youtu.be/_tL371MUNDg)
 
 ## Table of Contents
 
@@ -22,24 +17,26 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 **[Documentation](#documentation)**  
 **[p2pkit License](#p2pkit-license)**  
 
+### Get started video
+
+[![Get started video](https://i.ytimg.com/vi/_tL371MUNDg/mqdefault.jpg)](https://youtu.be/_tL371MUNDg)
+
+[Watch video here](https://youtu.be/_tL371MUNDg)
 
 ### Download
 
-Download p2pkit.framework (1.0.1-preview): [P2PKit.framework ZIP](http://p2pkit.io/ios-preview/P2PKit-ios-1.0.1-preview.zip) [SHA1](http://p2pkit.io/ios-preview/P2PKit-ios-1.0.1-preview.zip.sha1)
+Download p2pkit.framework (1.0.1): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.1/p2pkit-ios-1.0.1.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.1/p2pkit-ios-1.0.1.zip.sha1)
 
-##### (this preview expires on Sept 30th, 2015)
+Release Notes can be found here: http://p2pkit.io/changelog.html
 
 ### Signup
 
-We would love you to signup here: http://p2pkit.io/signup.html
-
-However, for this preview version no application key is required as it already includes one (expires on the 30th of September 2015).
+Request your evaluation/testing application key: http://p2pkit.io/signup.html
 
 ### Setup Xcode project
 **P2PKit.framework supports both Objective-C and Swift**
 
 1: Add p2pkit
-
 * Drag P2PKit.framework into your Xcode project folder. (Make sure the "Copy items if needed" is checked)
 
 2: Add dependencies
@@ -53,7 +50,7 @@ However, for this preview version no application key is required as it already i
  * Security.framework
  * Foundation.framework
 
- **p2pkit is built with ARC (automatic reference counting)**
+ **p2pkit is built with ARC (automatic reference counting) and supports iOS 7.0 and above**
 
 ### Initialization
 
@@ -69,15 +66,15 @@ SWIFT
 If you are using Swift you would need to import P2PKit.framework in your project's "Objective-C Bridging Header" file (#import <P2PKit/P2Pkit.h>). If you do not yet have an "Objective-C Bridging Header" file in your project please refer to the Swift documentation for instructions how to create one.
 ```
 
-Initialize the developer preview of p2pkit
+Initialize p2pkit with your personal application key
 
 ```objc
 OBJECTIVE-C
-[PPKController enableDeveloperPreviewWithObserver:self];
+[PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
 ```
 ```swift
 SWIFT
-PPKController.enableDeveloperPreviewWithObserver(self)
+PPKController.enableWithConfiguration("<YOUR APPLICATION KEY>", observer:self)
 ```
 
 Conform to the `PPKControllerDelegate` protocol by implementing the optional methods, you could then start P2P discovery, GEO discovery or online messaging when p2pkit is ready
@@ -315,5 +312,5 @@ For more details and further information, please refer to the `PPKController.h` 
 <P2PKit/PPKController.h>
 ```
 ### p2pkit License
-* By using P2PKit.framework you agree to abide by our License, Terms Of Service and other policies which are included with P2PKit.framework
+* By using P2PKit.framework you agree to abide by our Terms of Service, License Agreement and Policies which are available at the following address: http://p2pkit.io/policy.html
 * Please refer to "Third_party_licenses.txt" included with P2PKit.framework for 3rd party software that P2PKit.framework may be using - You will need to abide by their licenses as well
