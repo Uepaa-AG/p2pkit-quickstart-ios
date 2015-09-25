@@ -1,40 +1,42 @@
-# Wait!
-### Something big is coming, check out our preview branch and get first look at the most significant update to p2pkit yet!
-### [Click here](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
-
-[![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)](https://github.com/Uepaa-AG/p2pkit-quickstart-ios/tree/preview)
-
-# p2pkit.io (beta) Quickstart
+# p2pkit.io iOS Quickstart
 #### A hyperlocal interaction toolkit
-p2pkit is an easy to use SDK that bundles together several discovery technologies kung-fu style! With just a few lines of code, p2pkit enables you to accurately discover and directly message users nearby.
 
-### Table of Contents
+p2pkit is an easy to use SDK that bundles together several proximity technologies kung-fu style! With p2pkit apps immediately understand their proximity to nearby devices and users, 'verify' their identity, and exchange information with them.
 
+![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)
+
+## Table of Contents
 
 **[Download](#download)**  
 **[Signup](#signup)**  
 **[Setup Xcode project](#setup-xcode-project)**  
 **[Initialization](#initialization)**  
 **[P2P Discovery](#p2p-discovery)**  
-**[Online Messaging](#online-messaging)**  
-**[GEO Discovery](#geo-discovery)**  
+**[Online Messaging (beta)](#online-messaging-beta)**  
+**[GEO Discovery (beta)](#geo-discovery-beta)**  
 **[Documentation](#documentation)**  
 **[p2pkit License](#p2pkit-license)**  
 
+### Get started video
+
+[![Get started video](https://i.ytimg.com/vi/_tL371MUNDg/mqdefault.jpg)](https://youtu.be/_tL371MUNDg)
+
+[Watch video here](https://youtu.be/_tL371MUNDg)
 
 ### Download
 
-Download p2pkit.framework (beta): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.1.6/p2pkit-ios-0.1.6.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/0.1.6/p2pkit-ios-0.1.6.zip.sha1)
+Download p2pkit.framework (1.0.1): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.1/p2pkit-ios-1.0.1.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.1/p2pkit-ios-1.0.1.zip.sha1)
+
+Release Notes can be found here: http://p2pkit.io/changelog.html
 
 ### Signup
 
-Request your personal application key: http://p2pkit.io/signup.html
+Request your evaluation/testing application key: http://p2pkit.io/signup.html
 
 ### Setup Xcode project
 **P2PKit.framework supports both Objective-C and Swift**
 
 1: Add p2pkit
-
 * Drag P2PKit.framework into your Xcode project folder. (Make sure the "Copy items if needed" is checked)
 
 2: Add dependencies
@@ -48,7 +50,7 @@ Request your personal application key: http://p2pkit.io/signup.html
  * Security.framework
  * Foundation.framework
 
- **p2pkit is built with ARC (automatic reference counting)**
+ **p2pkit is built with ARC (automatic reference counting) and supports iOS 7.0 and above**
 
 ### Initialization
 
@@ -88,15 +90,17 @@ OBJECTIVE-C
 ```swift
 SWIFT
 func PPKControllerInitialized() {
-    PPKController.startP2PDiscovery();
-    PPKController.startGeoDiscovery();
-    PPKController.startOnlineMessaging();
+    PPKController.startP2PDiscovery()
+    PPKController.startGeoDiscovery()
+    PPKController.startOnlineMessaging()
 }
 ```
 
 ### P2P Discovery
 
-Add BLE (Bluetooth low energy) permissions to your `Info.plist` file
+With p2p discovery you can understand your proximity to nearby devices and exchange information with them. p2pkit supports discovery, lost and payload APIs.
+
+For starts, add BLE (Bluetooth low energy) permissions to your `Info.plist` file
 ```
 <key>UIBackgroundModes</key>
 <array>
@@ -105,29 +109,76 @@ Add BLE (Bluetooth low energy) permissions to your `Info.plist` file
 </array>
 ```
 
-Implement `PPKControllerDelegate` protocol to receive P2P discovery events
+
+Start p2p discovery and feel free to pass in additional data (such as your own user ID) which will be discovered by other peers nearby
 
 ```objc
 OBJECTIVE-C
--(void)p2pPeerDiscovered:(NSString*)peerID {
-	NSLog(@"%@ is here", peerID);
+	NSData *myDiscoveryInfo = [@"Hello from Objective-C!" dataUsingEncoding:NSUTF8StringEncoding];
+	[PPKController startP2PDiscoveryWithDiscoveryInfo:myDiscoveryInfo];
+```
+```swift
+SWIFT
+	let myDiscoveryInfo = "Hello from Swift!".dataUsingEncoding(NSUTF8StringEncoding)
+	PPKController.startP2PDiscoveryWithDiscoveryInfo(myDiscoveryInfo)
+```
+At a later stage, publish new discovery info which will be pushed to nearby peers
+
+```objc
+OBJECTIVE-C
+	NSData *myDiscoveryInfo = [@"p2pkit is awesome!" dataUsingEncoding:NSUTF8StringEncoding];
+	[PPKController pushNewP2PDiscoveryInfo:myDiscoveryInfo];
+```
+```swift
+SWIFT
+	let myDiscoveryInfo = "p2pkit is awesome!".dataUsingEncoding(NSUTF8StringEncoding)
+	PPKController.pushNewP2PDiscoveryInfo(myDiscoveryInfo)
+```
+
+Implement `PPKControllerDelegate` protocol to receive P2P discovery events and access peer info
+
+```objc
+OBJECTIVE-C
+-(void)p2pPeerDiscovered:(PPKPeer*)peer {
+	NSString *discoveryInfoString = [[NSString alloc] initWithData:peer.discoveryInfo encoding:NSUTF8StringEncoding];
+	NSLog(@"%@ is here with discovery info: %@", peer.peerID, discoveryInfoString);
 }
 
--(void)p2pPeerLost:(NSString*)peerID {
-	NSLog(@"%@ is no longer here", peerID);
+-(void)p2pPeerLost:(PPKPeer*)peer {
+	NSLog(@"%@ is no longer here", peer.peerID);
+}
+```
+
+```swift
+SWIFT
+func p2pPeerDiscovered(peer: PPKPeer!) {
+    let discoveryInfoString = NSString(data: peer.discoveryInfo, encoding:NSUTF8StringEncoding)
+    NSLog("%@ is here with discovery info: %@", peer.peerID, discoveryInfoString!)
+}
+
+func p2pPeerLost(peer: PPKPeer!) {
+    NSLog("%@ is no longer here", peer.peerID)
+}
+```
+
+Receive the updated discovery info from a peer
+
+```objc
+OBJECTIVE-C
+-(void)didUpdateP2PDiscoveryInfoForPeer:(PPKPeer*)peer {
+	NSString *discoveryInfo = [[NSString alloc] initWithData:peer.discoveryInfo encoding:NSUTF8StringEncoding];
+	NSLog(@"%@ has updated discovery info: %@", peer.peerID, discoveryInfo);
 }
 ```
 ```swift
 SWIFT
-func p2pPeerDiscovered(peerID: String!) {
-    NSLog("%@ is here", peerID);
-}
-
-func p2pPeerLost(peerID: String!) {
-    NSLog("%@ is no longer here", peerID);
+func didUpdateP2PDiscoveryInfoForPeer(peer: PPKPeer!) {
+	let discoveryInfo = NSString(data: peer.discoveryInfo, encoding: NSUTF8StringEncoding)
+	NSLog("%@ has updated discovery info: %@", peer.peerID, discoveryInfo!)
 }
 ```
-### Online Messaging
+
+### Online Messaging (beta)
 
 Implement `PPKControllerDelegate` protocol to receive online messages
 
@@ -141,7 +192,7 @@ OBJECTIVE-C
 ```swift
 SWIFT
 func messageReceived(messageBody: NSData!, header messageHeader: String!, from peerID: String!) {
-    NSLog("Message received from %@: %@", peerID, NSString(data: messageBody, encoding:NSUTF8StringEncoding)!);
+    NSLog("Message received from %@: %@", peerID, NSString(data: messageBody, encoding:NSUTF8StringEncoding)!)
 }
 ```
 
@@ -154,10 +205,10 @@ OBJECTIVE-C
 ```
 ```swift
 SWIFT
-    PPKController.sendMessage("Hello World".dataUsingEncoding(NSUTF8StringEncoding), withHeader: "SimpleChatMessage", to: peerID);
+    PPKController.sendMessage("Hello World".dataUsingEncoding(NSUTF8StringEncoding), withHeader: "SimpleChatMessage", to: peerID)
 ```
 
-### GEO Discovery
+### GEO Discovery (beta)
 
 Add location permissions to your `Info.plist` file
 ```
@@ -184,7 +235,7 @@ OBJECTIVE-C
 ```swift
 SWIFT
     /* Avoid sending to many location updates, set a distance filter */
-    myCLLocationManager.distanceFilter = 200;
+    myCLLocationManager.distanceFilter = 200
 ```
 
 ```objc
@@ -196,7 +247,7 @@ OBJECTIVE-C
 ```swift
 SWIFT
 func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-    PPKController.updateUserLocation(locations.last as! CLLocation);
+    PPKController.updateUserLocation(locations.last as! CLLocation)
 }
 ```
 
@@ -224,10 +275,10 @@ func geoDiscoveryStateChanged(state: PPKGeoDiscoveryState) {
 
     switch state {
         case .Running:
-            self.startLocationUpdates();
+            self.startLocationUpdates()
 
         case .Suspended, .Stopped:
-            self.stopLocationUpdates();
+            self.stopLocationUpdates()
     }
 }
 ```
@@ -246,11 +297,11 @@ OBJECTIVE-C
 ```swift
 SWIFT
 func geoPeerDiscovered(peerID: String!) {
-    NSLog("%@ is around", peerID);
+    NSLog("%@ is around", peerID)
 }
 
 func geoPeerLost(peerID: String!) {
-    NSLog("%@ is no longer around", peerID);
+    NSLog("%@ is no longer around", peerID)
 }
 ```
 
@@ -261,5 +312,5 @@ For more details and further information, please refer to the `PPKController.h` 
 <P2PKit/PPKController.h>
 ```
 ### p2pkit License
-* By using P2PKit.framework you agree to abide by our License (which is included with P2PKit.framework) and Terms Of Service available at http://www.p2pkit.io/policy.html
+* By using P2PKit.framework you agree to abide by our Terms of Service, License Agreement and Policies which are available at the following address: http://p2pkit.io/policy.html
 * Please refer to "Third_party_licenses.txt" included with P2PKit.framework for 3rd party software that P2PKit.framework may be using - You will need to abide by their licenses as well

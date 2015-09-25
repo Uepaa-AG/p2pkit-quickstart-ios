@@ -7,20 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A85BB9161B7367FA00E7B417 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A85BB9151B7367FA00E7B417 /* libicucore.dylib */; };
+		A87AB5521B9759E200D5CCB8 /* P2PKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87AB5511B9759E200D5CCB8 /* P2PKit.framework */; };
+		A8B210551B84A0940016C911 /* wheel_bg_transparent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B210541B84A0940016C911 /* wheel_bg_transparent@2x.png */; };
+		A8C036D91B98816E0042912E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C036D71B98816E0042912E /* LaunchScreen.xib */; };
+		A8C71D711B83234200D32001 /* NearbyPeersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D701B83234200D32001 /* NearbyPeersViewController.m */; };
+		A8C71D741B83236500D32001 /* ColorPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D731B83236500D32001 /* ColorPickerViewController.m */; };
+		A8C71D7E1B83264D00D32001 /* DLEdge.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D781B83264D00D32001 /* DLEdge.m */; };
+		A8C71D7F1B83264D00D32001 /* DLForcedGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D7A1B83264D00D32001 /* DLForcedGraphView.m */; };
+		A8C71D801B83264D00D32001 /* DLGraphScene.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D7C1B83264D00D32001 /* DLGraphScene.m */; };
+		A8C71D911B8326C300D32001 /* wheel_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8C71D841B8326C300D32001 /* wheel_arrow@2x.png */; };
+		A8C71D941B8326C300D32001 /* JCRotateGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D891B8326C300D32001 /* JCRotateGestureRecognizer.m */; };
+		A8C71D951B8326C300D32001 /* JCWheelCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D8B1B8326C300D32001 /* JCWheelCenterView.m */; };
+		A8C71D961B8326C300D32001 /* JCWheelItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D8D1B8326C300D32001 /* JCWheelItem.m */; };
+		A8C71D971B8326C300D32001 /* JCWheelView.m in Sources */ = {isa = PBXBuildFile; fileRef = A8C71D8F1B8326C300D32001 /* JCWheelView.m */; };
+		A8D05B9E1B83657B00AC7961 /* SpriteKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8D05B9D1B83657B00AC7961 /* SpriteKit.framework */; };
 		D2AA9A0B1ACC2F3D008C165A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A0A1ACC2F3D008C165A /* main.m */; };
 		D2AA9A0E1ACC2F3D008C165A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A0D1ACC2F3D008C165A /* AppDelegate.m */; };
-		D2AA9A111ACC2F3D008C165A /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A101ACC2F3D008C165A /* ViewController.m */; };
+		D2AA9A111ACC2F3D008C165A /* ConsoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A101ACC2F3D008C165A /* ConsoleViewController.m */; };
 		D2AA9A141ACC2F3D008C165A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2AA9A121ACC2F3D008C165A /* Main.storyboard */; };
 		D2AA9A161ACC2F3D008C165A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2AA9A151ACC2F3D008C165A /* Images.xcassets */; };
-		D2AA9A191ACC2F3D008C165A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = D2AA9A171ACC2F3D008C165A /* LaunchScreen.xib */; };
 		D2AA9A251ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D2AA9A241ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m */; };
 		D2AA9A321ACC30B5008C165A /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A311ACC30B5008C165A /* CoreBluetooth.framework */; };
 		D2AA9A341ACC30BC008C165A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A331ACC30BC008C165A /* CoreLocation.framework */; };
-		D2AA9A361ACC30C8008C165A /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A351ACC30C8008C165A /* libicucore.dylib */; };
 		D2AA9A381ACC30CE008C165A /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A371ACC30CE008C165A /* CFNetwork.framework */; };
 		D2AA9A3A1ACC30D5008C165A /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A391ACC30D5008C165A /* Security.framework */; };
 		D2AA9A3C1ACC30DE008C165A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A3B1ACC30DE008C165A /* Foundation.framework */; };
-		D2AA9A461AD51D21008C165A /* P2PKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2AA9A451AD51D21008C165A /* P2PKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,26 +46,50 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A80F92F81B97197400DC0756 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		A85BB9151B7367FA00E7B417 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		A87AB5511B9759E200D5CCB8 /* P2PKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = P2PKit.framework; sourceTree = "<group>"; };
+		A87F4BFC1B8C7062005E25AD /* Third_party_licenses.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = Third_party_licenses.txt; path = "p2pkit-quickstart-ios/Third_party_licenses.txt"; sourceTree = "<group>"; };
+		A8B210541B84A0940016C911 /* wheel_bg_transparent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheel_bg_transparent@2x.png"; sourceTree = "<group>"; };
+		A8C036D81B98816E0042912E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A8C71D6F1B83234200D32001 /* NearbyPeersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbyPeersViewController.h; sourceTree = "<group>"; };
+		A8C71D701B83234200D32001 /* NearbyPeersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbyPeersViewController.m; sourceTree = "<group>"; };
+		A8C71D721B83236500D32001 /* ColorPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ColorPickerViewController.h; sourceTree = "<group>"; };
+		A8C71D731B83236500D32001 /* ColorPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ColorPickerViewController.m; sourceTree = "<group>"; };
+		A8C71D771B83264D00D32001 /* DLEdge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLEdge.h; sourceTree = "<group>"; };
+		A8C71D781B83264D00D32001 /* DLEdge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLEdge.m; sourceTree = "<group>"; };
+		A8C71D791B83264D00D32001 /* DLForcedGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLForcedGraphView.h; sourceTree = "<group>"; };
+		A8C71D7A1B83264D00D32001 /* DLForcedGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLForcedGraphView.m; sourceTree = "<group>"; };
+		A8C71D7B1B83264D00D32001 /* DLGraphScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DLGraphScene.h; sourceTree = "<group>"; };
+		A8C71D7C1B83264D00D32001 /* DLGraphScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DLGraphScene.m; sourceTree = "<group>"; };
+		A8C71D841B8326C300D32001 /* wheel_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheel_arrow@2x.png"; sourceTree = "<group>"; };
+		A8C71D881B8326C300D32001 /* JCRotateGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCRotateGestureRecognizer.h; sourceTree = "<group>"; };
+		A8C71D891B8326C300D32001 /* JCRotateGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCRotateGestureRecognizer.m; sourceTree = "<group>"; };
+		A8C71D8A1B8326C300D32001 /* JCWheelCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCWheelCenterView.h; sourceTree = "<group>"; };
+		A8C71D8B1B8326C300D32001 /* JCWheelCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCWheelCenterView.m; sourceTree = "<group>"; };
+		A8C71D8C1B8326C300D32001 /* JCWheelItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCWheelItem.h; sourceTree = "<group>"; };
+		A8C71D8D1B8326C300D32001 /* JCWheelItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCWheelItem.m; sourceTree = "<group>"; };
+		A8C71D8E1B8326C300D32001 /* JCWheelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCWheelView.h; sourceTree = "<group>"; };
+		A8C71D8F1B8326C300D32001 /* JCWheelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCWheelView.m; sourceTree = "<group>"; };
+		A8D05B9D1B83657B00AC7961 /* SpriteKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SpriteKit.framework; path = System/Library/Frameworks/SpriteKit.framework; sourceTree = SDKROOT; };
+		A8D05B9F1B83664500AC7961 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		D2AA9A051ACC2F3D008C165A /* p2pkit-quickstart-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "p2pkit-quickstart-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AA9A091ACC2F3D008C165A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2AA9A0A1ACC2F3D008C165A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D2AA9A0C1ACC2F3D008C165A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		D2AA9A0D1ACC2F3D008C165A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		D2AA9A0F1ACC2F3D008C165A /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		D2AA9A101ACC2F3D008C165A /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		D2AA9A0F1ACC2F3D008C165A /* ConsoleViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ConsoleViewController.h; sourceTree = "<group>"; };
+		D2AA9A101ACC2F3D008C165A /* ConsoleViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ConsoleViewController.m; sourceTree = "<group>"; };
 		D2AA9A131ACC2F3D008C165A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D2AA9A151ACC2F3D008C165A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		D2AA9A181ACC2F3D008C165A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		D2AA9A1E1ACC2F3D008C165A /* p2pkit-quickstart-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "p2pkit-quickstart-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2AA9A231ACC2F3D008C165A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2AA9A241ACC2F3D008C165A /* p2pkit_quickstart_iosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = p2pkit_quickstart_iosTests.m; sourceTree = "<group>"; };
 		D2AA9A311ACC30B5008C165A /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		D2AA9A331ACC30BC008C165A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		D2AA9A351ACC30C8008C165A /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
 		D2AA9A371ACC30CE008C165A /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		D2AA9A391ACC30D5008C165A /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		D2AA9A3B1ACC30DE008C165A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D2AA9A451AD51D21008C165A /* P2PKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = P2PKit.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +97,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A87AB5521B9759E200D5CCB8 /* P2PKit.framework in Frameworks */,
+				A85BB9161B7367FA00E7B417 /* libicucore.dylib in Frameworks */,
 				D2AA9A3C1ACC30DE008C165A /* Foundation.framework in Frameworks */,
+				A8D05B9E1B83657B00AC7961 /* SpriteKit.framework in Frameworks */,
 				D2AA9A3A1ACC30D5008C165A /* Security.framework in Frameworks */,
 				D2AA9A381ACC30CE008C165A /* CFNetwork.framework in Frameworks */,
-				D2AA9A461AD51D21008C165A /* P2PKit.framework in Frameworks */,
-				D2AA9A361ACC30C8008C165A /* libicucore.dylib in Frameworks */,
 				D2AA9A341ACC30BC008C165A /* CoreLocation.framework in Frameworks */,
 				D2AA9A321ACC30B5008C165A /* CoreBluetooth.framework in Frameworks */,
 			);
@@ -81,18 +118,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D2AA99FC1ACC2F3D008C165A = {
+		A8C71D751B83261E00D32001 /* 3rdParty */ = {
 			isa = PBXGroup;
 			children = (
-				D2AA9A451AD51D21008C165A /* P2PKit.framework */,
+				A8C71D811B8326B100D32001 /* JCWheelView */,
+				A8C71D761B83263D00D32001 /* DLGraphView */,
+			);
+			path = 3rdParty;
+			sourceTree = "<group>";
+		};
+		A8C71D761B83263D00D32001 /* DLGraphView */ = {
+			isa = PBXGroup;
+			children = (
+				A8C71D771B83264D00D32001 /* DLEdge.h */,
+				A8C71D781B83264D00D32001 /* DLEdge.m */,
+				A8C71D791B83264D00D32001 /* DLForcedGraphView.h */,
+				A8C71D7A1B83264D00D32001 /* DLForcedGraphView.m */,
+				A8C71D7B1B83264D00D32001 /* DLGraphScene.h */,
+				A8C71D7C1B83264D00D32001 /* DLGraphScene.m */,
+			);
+			path = DLGraphView;
+			sourceTree = "<group>";
+		};
+		A8C71D811B8326B100D32001 /* JCWheelView */ = {
+			isa = PBXGroup;
+			children = (
+				A8C71D821B8326C300D32001 /* Assets */,
+				A8C71D861B8326C300D32001 /* Classes */,
+			);
+			path = JCWheelView;
+			sourceTree = "<group>";
+		};
+		A8C71D821B8326C300D32001 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
+				A8B210541B84A0940016C911 /* wheel_bg_transparent@2x.png */,
+				A8C71D841B8326C300D32001 /* wheel_arrow@2x.png */,
+			);
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		A8C71D861B8326C300D32001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				A8C71D881B8326C300D32001 /* JCRotateGestureRecognizer.h */,
+				A8C71D891B8326C300D32001 /* JCRotateGestureRecognizer.m */,
+				A8C71D8A1B8326C300D32001 /* JCWheelCenterView.h */,
+				A8C71D8B1B8326C300D32001 /* JCWheelCenterView.m */,
+				A8C71D8C1B8326C300D32001 /* JCWheelItem.h */,
+				A8C71D8D1B8326C300D32001 /* JCWheelItem.m */,
+				A8C71D8E1B8326C300D32001 /* JCWheelView.h */,
+				A8C71D8F1B8326C300D32001 /* JCWheelView.m */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		A8FF38151B4ECAC200FE70E9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A87AB5511B9759E200D5CCB8 /* P2PKit.framework */,
+				A8D05B9F1B83664500AC7961 /* QuartzCore.framework */,
+				A8D05B9D1B83657B00AC7961 /* SpriteKit.framework */,
+				A85BB9151B7367FA00E7B417 /* libicucore.dylib */,
 				D2AA9A3B1ACC30DE008C165A /* Foundation.framework */,
 				D2AA9A391ACC30D5008C165A /* Security.framework */,
 				D2AA9A371ACC30CE008C165A /* CFNetwork.framework */,
-				D2AA9A351ACC30C8008C165A /* libicucore.dylib */,
 				D2AA9A331ACC30BC008C165A /* CoreLocation.framework */,
 				D2AA9A311ACC30B5008C165A /* CoreBluetooth.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D2AA99FC1ACC2F3D008C165A = {
+			isa = PBXGroup;
+			children = (
+				A87F4BFC1B8C7062005E25AD /* Third_party_licenses.txt */,
 				D2AA9A071ACC2F3D008C165A /* p2pkit-quickstart-ios */,
 				D2AA9A211ACC2F3D008C165A /* p2pkit-quickstart-iosTests */,
+				A8FF38151B4ECAC200FE70E9 /* Frameworks */,
 				D2AA9A061ACC2F3D008C165A /* Products */,
 			);
 			sourceTree = "<group>";
@@ -109,13 +212,18 @@
 		D2AA9A071ACC2F3D008C165A /* p2pkit-quickstart-ios */ = {
 			isa = PBXGroup;
 			children = (
+				A8C71D751B83261E00D32001 /* 3rdParty */,
 				D2AA9A0C1ACC2F3D008C165A /* AppDelegate.h */,
 				D2AA9A0D1ACC2F3D008C165A /* AppDelegate.m */,
-				D2AA9A0F1ACC2F3D008C165A /* ViewController.h */,
-				D2AA9A101ACC2F3D008C165A /* ViewController.m */,
+				A8C71D721B83236500D32001 /* ColorPickerViewController.h */,
+				A8C71D731B83236500D32001 /* ColorPickerViewController.m */,
+				A8C71D6F1B83234200D32001 /* NearbyPeersViewController.h */,
+				A8C71D701B83234200D32001 /* NearbyPeersViewController.m */,
+				D2AA9A0F1ACC2F3D008C165A /* ConsoleViewController.h */,
+				D2AA9A101ACC2F3D008C165A /* ConsoleViewController.m */,
 				D2AA9A121ACC2F3D008C165A /* Main.storyboard */,
+				A8C036D71B98816E0042912E /* LaunchScreen.xib */,
 				D2AA9A151ACC2F3D008C165A /* Images.xcassets */,
-				D2AA9A171ACC2F3D008C165A /* LaunchScreen.xib */,
 				D2AA9A081ACC2F3D008C165A /* Supporting Files */,
 			);
 			path = "p2pkit-quickstart-ios";
@@ -126,6 +234,7 @@
 			children = (
 				D2AA9A091ACC2F3D008C165A /* Info.plist */,
 				D2AA9A0A1ACC2F3D008C165A /* main.m */,
+				A80F92F81B97197400DC0756 /* PrefixHeader.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -191,7 +300,7 @@
 		D2AA99FD1ACC2F3D008C165A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0620;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Uepaa AG";
 				TargetAttributes = {
 					D2AA9A041ACC2F3D008C165A = {
@@ -232,8 +341,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A8C036D91B98816E0042912E /* LaunchScreen.xib in Resources */,
+				A8C71D911B8326C300D32001 /* wheel_arrow@2x.png in Resources */,
 				D2AA9A141ACC2F3D008C165A /* Main.storyboard in Resources */,
-				D2AA9A191ACC2F3D008C165A /* LaunchScreen.xib in Resources */,
+				A8B210551B84A0940016C911 /* wheel_bg_transparent@2x.png in Resources */,
 				D2AA9A161ACC2F3D008C165A /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -252,8 +363,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D2AA9A111ACC2F3D008C165A /* ViewController.m in Sources */,
+				D2AA9A111ACC2F3D008C165A /* ConsoleViewController.m in Sources */,
+				A8C71D971B8326C300D32001 /* JCWheelView.m in Sources */,
+				A8C71D801B83264D00D32001 /* DLGraphScene.m in Sources */,
+				A8C71D741B83236500D32001 /* ColorPickerViewController.m in Sources */,
+				A8C71D711B83234200D32001 /* NearbyPeersViewController.m in Sources */,
+				A8C71D961B8326C300D32001 /* JCWheelItem.m in Sources */,
 				D2AA9A0E1ACC2F3D008C165A /* AppDelegate.m in Sources */,
+				A8C71D7E1B83264D00D32001 /* DLEdge.m in Sources */,
+				A8C71D941B8326C300D32001 /* JCRotateGestureRecognizer.m in Sources */,
+				A8C71D7F1B83264D00D32001 /* DLForcedGraphView.m in Sources */,
+				A8C71D951B8326C300D32001 /* JCWheelCenterView.m in Sources */,
 				D2AA9A0B1ACC2F3D008C165A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,20 +397,20 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A8C036D71B98816E0042912E /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A8C036D81B98816E0042912E /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
 		D2AA9A121ACC2F3D008C165A /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				D2AA9A131ACC2F3D008C165A /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		D2AA9A171ACC2F3D008C165A /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				D2AA9A181ACC2F3D008C165A /* Base */,
-			);
-			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -378,15 +498,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "p2pkit-quickstart-ios/PrefixHeader.pch";
 				INFOPLIST_FILE = "p2pkit-quickstart-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -394,15 +519,20 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_RESOURCE_RULES_PATH = "$(SDKROOT)/ResourceRules.plist";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_RESOURCE_RULES_PATH = "";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "p2pkit-quickstart-ios/PrefixHeader.pch";
 				INFOPLIST_FILE = "p2pkit-quickstart-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

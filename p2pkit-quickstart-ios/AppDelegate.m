@@ -5,40 +5,102 @@
 //  Copyright (c) 2015 Uepaa AG. All rights reserved.
 //
 
+#import <P2PKit/P2PKit.h>
 #import "AppDelegate.h"
+#import "NearbyPeersViewController.h"
 
-@interface AppDelegate ()
 
+@interface AppDelegate () <PPKControllerDelegate> {
+    NearbyPeersViewController *nearbyPeersViewController;
+}
 @end
+
 
 @implementation AppDelegate
 
+-(BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
+    
+    [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    nearbyPeersViewController = (NearbyPeersViewController*)self.window.rootViewController;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorUpdateNotification:) name:@"userSelectedNewColorNotification" object:nil];
+    
     return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
+#pragma mark - PPKControllerDelegate
+
+-(void)PPKControllerInitialized {
+    
+    [nearbyPeersViewController performSelector:@selector(setup) withObject:nil afterDelay:0.5];
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+-(void)PPKControllerFailedWithError:(NSError*)error {
+    
+    NSString *description;
+    
+    switch ((PPKErrorCode) error.code) {
+        case PPKErrorAppKeyInvalid:
+            description = @"Invalid app key";
+            break;
+        case PPKErrorAppKeyExpired:
+            description = @"Expired app key";
+            break;
+        case PPKErrorOnlineProtocolVersionNotSupported:
+            description = @"Server protocol mismatch";
+            break;
+        case PPKErrorOnlineAppKeyInvalid:
+            description = @"Invalid app key";
+            break;
+        case PPKErrorOnlineAppKeyExpired:
+            description = @"Expired app key";
+            break;
+    }
+    
+    [[[UIAlertView alloc] initWithTitle:@"p2pkit Error" message:description delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+-(void)p2pPeerDiscovered:(PPKPeer*)peer {
+    
+    [nearbyPeersViewController addNodeForPeer:peer];
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+-(void)p2pPeerLost:(PPKPeer*)peer {
+    
+    [nearbyPeersViewController removeNodeForPeer:peer];
 }
 
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+-(void)didUpdateP2PDiscoveryInfoForPeer:(PPKPeer*)peer {
+    
+    [nearbyPeersViewController updateNodeForPeer:peer];
+}
+
+-(void)p2pDiscoveryStateChanged:(PPKPeer2PeerDiscoveryState)state {
+    
+    if (state == PPKPeer2PeerDiscoveryStopped) {
+        [nearbyPeersViewController removeNodesForAllPeers];
+    }
+}
+
+#pragma mark - Notifications
+
+-(void)colorUpdateNotification:(NSNotification*)notification {
+    
+    switch ([PPKController p2pDiscoveryState]) {
+            
+        case PPKPeer2PeerDiscoverySuspended:
+        case PPKPeer2PeerDiscoveryRunning:
+            
+            [PPKController pushNewP2PDiscoveryInfo:notification.object];
+
+            break;
+            
+        case PPKPeer2PeerDiscoveryStopped:
+            
+            [PPKController startP2PDiscoveryWithDiscoveryInfo:notification.object];
+            
+            break;
+    }
 }
 
 @end
