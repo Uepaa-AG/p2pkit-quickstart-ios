@@ -25,7 +25,7 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 ### Download
 
-Download p2pkit.framework (1.0.1): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.1/p2pkit-ios-1.0.1.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.1/p2pkit-ios-1.0.1.zip.sha1)
+Download p2pkit.framework (1.0.4): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.4/p2pkit-ios-1.0.4.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.4/p2pkit-ios-1.0.4.zip.sha1)
 
 Release Notes can be found here: http://p2pkit.io/changelog.html
 
@@ -45,7 +45,7 @@ Request your evaluation/testing application key: http://p2pkit.io/signup.html
 * Click the + button and add the additional dependencies mentioned below:
  * CoreBluetooth.framework
  * CoreLocation.framework
- * libicucore.dylib
+ * libicucore.tbd
  * CFNetwork.framework
  * Security.framework
  * Foundation.framework
