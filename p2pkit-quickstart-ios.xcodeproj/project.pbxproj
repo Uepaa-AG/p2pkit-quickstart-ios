@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A85BB9161B7367FA00E7B417 /* libicucore.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = A85BB9151B7367FA00E7B417 /* libicucore.dylib */; };
+		A87A00261BECD4FF0011F8A1 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = A87A00251BECD4FF0011F8A1 /* libicucore.tbd */; };
 		A87AB5521B9759E200D5CCB8 /* P2PKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87AB5511B9759E200D5CCB8 /* P2PKit.framework */; };
 		A8B210551B84A0940016C911 /* wheel_bg_transparent@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A8B210541B84A0940016C911 /* wheel_bg_transparent@2x.png */; };
 		A8C036D91B98816E0042912E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A8C036D71B98816E0042912E /* LaunchScreen.xib */; };
@@ -47,7 +47,7 @@
 
 /* Begin PBXFileReference section */
 		A80F92F81B97197400DC0756 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
-		A85BB9151B7367FA00E7B417 /* libicucore.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libicucore.dylib; path = usr/lib/libicucore.dylib; sourceTree = SDKROOT; };
+		A87A00251BECD4FF0011F8A1 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		A87AB5511B9759E200D5CCB8 /* P2PKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = P2PKit.framework; sourceTree = "<group>"; };
 		A87F4BFC1B8C7062005E25AD /* Third_party_licenses.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = Third_party_licenses.txt; path = "p2pkit-quickstart-ios/Third_party_licenses.txt"; sourceTree = "<group>"; };
 		A8B210541B84A0940016C911 /* wheel_bg_transparent@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "wheel_bg_transparent@2x.png"; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A87AB5521B9759E200D5CCB8 /* P2PKit.framework in Frameworks */,
-				A85BB9161B7367FA00E7B417 /* libicucore.dylib in Frameworks */,
+				A87A00261BECD4FF0011F8A1 /* libicucore.tbd in Frameworks */,
 				D2AA9A3C1ACC30DE008C165A /* Foundation.framework in Frameworks */,
 				A8D05B9E1B83657B00AC7961 /* SpriteKit.framework in Frameworks */,
 				D2AA9A3A1ACC30D5008C165A /* Security.framework in Frameworks */,
@@ -177,9 +177,9 @@
 			isa = PBXGroup;
 			children = (
 				A87AB5511B9759E200D5CCB8 /* P2PKit.framework */,
+				A87A00251BECD4FF0011F8A1 /* libicucore.tbd */,
 				A8D05B9F1B83664500AC7961 /* QuartzCore.framework */,
 				A8D05B9D1B83657B00AC7961 /* SpriteKit.framework */,
-				A85BB9151B7367FA00E7B417 /* libicucore.dylib */,
 				D2AA9A3B1ACC30DE008C165A /* Foundation.framework */,
 				D2AA9A391ACC30D5008C165A /* Security.framework */,
 				D2AA9A371ACC30CE008C165A /* CFNetwork.framework */,
@@ -450,7 +450,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -486,7 +486,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -498,7 +498,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -519,7 +518,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_RESOURCE_RULES_PATH = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
