@@ -55,14 +55,82 @@
 -(void)addNodeForPeer:(PPKPeer*)peer {
     
     [nearbyPeers_ setObject:peer forKey:@(nextNodeIndex_)];
-    [graphScene_ addEdge:DLMakeEdge(0, nextNodeIndex_)];
+    
+    DLEdge *edge = DLMakeEdge(0, nextNodeIndex_);
+    edge.repulsion = [self getRepulsionForProximityStrength:peer.proximityStrength];
+    edge.attraction = [self getAttractionForProximityStrength:peer.proximityStrength];
+    [graphScene_ addEdge:edge];
 }
 
--(void)updateNodeForPeer:(PPKPeer*)peer {
+-(CGFloat)getRepulsionForProximityStrength:(PPKProximityStrength)proximityStrength {
+    
+    CGFloat repulsion;
+    switch (proximityStrength) {
+        case PPKProximityStrengthExtremelyWeak:
+            repulsion = 2000.f;
+            break;
+        case PPKProximityStrengthWeak:
+            repulsion = 1500.f;
+            break;
+        case PPKProximityStrengthMedium:
+            repulsion = 1100.f;
+            break;
+        case PPKProximityStrengthStrong:
+            repulsion = 900.f;
+            break;
+        case PPKProximityStrengthImmediate:
+            repulsion = 700.f;
+            break;
+        default:
+            repulsion = 1100.f;
+            break;
+    }
+    
+    return repulsion;
+}
+
+-(CGFloat)getAttractionForProximityStrength:(PPKProximityStrength)proximityStrength {
+    
+    CGFloat attraction;
+    switch (proximityStrength) {
+        case PPKProximityStrengthExtremelyWeak:
+            attraction = 0.03f;
+            break;
+        case PPKProximityStrengthWeak:
+            attraction = 0.05f;
+            break;
+        case PPKProximityStrengthMedium:
+            attraction = 0.07f;
+            break;
+        case PPKProximityStrengthStrong:
+            attraction = 0.1f;
+            break;
+        case PPKProximityStrengthImmediate:
+            attraction = 0.12f;
+            break;
+        default:
+            attraction = 0.07f;
+            break;
+    }
+    
+    return attraction;
+}
+
+-(void)updateColorForPeer:(PPKPeer*)peer {
     
     NSNumber *index = [nearbyPeers_ allKeysForObject:peer].firstObject;
     SKShapeNode *node = peerNodes_[index];
     [self setColor:[self colorFromData:peer.discoveryInfo] forNode:node animated:YES];
+}
+
+-(void)updateProximityStrengthForPeer:(PPKPeer*)peer {
+    
+    NSNumber *index = [nearbyPeers_ allKeysForObject:peer].firstObject;
+    
+    DLEdge *edge = DLMakeEdge(0, index.intValue);
+    edge.repulsion = [self getRepulsionForProximityStrength:peer.proximityStrength];
+    edge.attraction = [self getAttractionForProximityStrength:peer.proximityStrength];
+    [graphScene_ updateEdge:edge];
 }
 
 -(void)removeNodeForPeer:(PPKPeer*)peer {
@@ -91,8 +159,12 @@
         
         CGAffineTransform transform = CGAffineTransformMakeScale(1.3, 1.3);
         [vertex setPath:CGPathCreateMutableCopyByTransformingPath(vertex.path, &transform)];
-        [vertex setPhysicsBody:[SKPhysicsBody bodyWithCircleOfRadius:vertex.frame.size.width/2]];
+        
+        CGFloat mass = vertex.physicsBody.mass;
+        vertex.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:vertex.frame.size.width/2];
+        vertex.physicsBody.mass = mass;
         vertex.physicsBody.allowsRotation = NO;
+        
         vertex.name = @"me";
         ownNode_ = vertex;
         [self setColor:ownColor_ forNode:ownNode_ animated:NO];
@@ -120,14 +192,26 @@
 
 -(void)setup {
     
-    [self presentColorPicker];
-    [graphScene_ addEdge:DLMakeEdge(0, 0)];
+    DLEdge *edge = DLMakeEdge(0, 0);
+    edge.repulsion = 1100.f;
+    edge.attraction = 0.07f;
+    [graphScene_ addEdge:edge];
     
 #if UPA_CONFIGURATION_TYPE == 0
     [self.infoButton removeFromSuperview];
 #else
     [self.infoButton addTarget:self action:@selector(toggleConsoleView) forControlEvents:UIControlEventTouchUpInside];
 #endif
+    
+    NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+    NSData *colorData = [userDef objectForKey:@"ownColor"];
+    
+    if (colorData != nil) {
+        [self setOwnColor:[self colorFromData:colorData]];
+    }
+    else {
+        [self presentColorPicker];
+    }
 }
 
 -(void)presentColorPicker {
@@ -135,16 +219,28 @@
     ColorPickerViewController *colorPickerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"colorPickerViewController"];
     
     [colorPickerVC setOnCompleteBlock:^(UIColor *color) {
-
-        [self.infoButton setHidden:NO];
-        ownColor_ = color;
-        if (ownNode_) [self setColor:ownColor_ forNode:ownNode_ animated:NO];
-        [self updateDiscoveryInfo];
+        
+        NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
+        [userDef setObject:[self dataFromColor:color] forKey:@"ownColor"];
+        [userDef synchronize];
+        
+        [self setOwnColor:color];
     }];
     
     [self presentViewController:colorPickerVC animated:YES completion:^{
         [colorPickerVC setSelectedColor:ownColor_];
     }];
+}
+
+-(void)setOwnColor:(UIColor*)color {
+    
+    ownColor_ = color;
+    if (ownNode_) {
+        [self setColor:ownColor_ forNode:ownNode_ animated:NO];
+    }
+    
+    [self.infoButton setHidden:NO];
+    [self updateDiscoveryInfo];
 }
 
 -(void)setColor:(UIColor*)color forNode:(SKShapeNode*)node animated:(BOOL)animated {

@@ -10,8 +10,10 @@
 @interface NearbyPeersViewController : UIViewController
 
 -(void)setup;
+
 -(void)addNodeForPeer:(PPKPeer*)peer;
--(void)updateNodeForPeer:(PPKPeer*)peer;
+-(void)updateColorForPeer:(PPKPeer*)peer;
+-(void)updateProximityStrengthForPeer:(PPKPeer*)peer;
 -(void)removeNodeForPeer:(PPKPeer*)peer;
 -(void)removeNodesForAllPeers;
 

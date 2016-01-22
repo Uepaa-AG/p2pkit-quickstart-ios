@@ -9,9 +9,10 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 **[Download](#download)**  
 **[Signup](#signup)**  
-**[Setup Xcode project](#setup-xcode-project)**  
+**[Setup](#setup)**  
 **[Initialization](#initialization)**  
 **[P2P Discovery](#p2p-discovery)**  
+**[Proximity Ranging (beta)](#proximity-ranging-beta)**  
 **[Online Messaging (beta)](#online-messaging-beta)**  
 **[GEO Discovery (beta)](#geo-discovery-beta)**  
 **[Documentation](#documentation)**  
@@ -25,7 +26,7 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 ### Download
 
-Download p2pkit.framework (1.0.4): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.4/p2pkit-ios-1.0.4.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.0.4/p2pkit-ios-1.0.4.zip.sha1)
+Download p2pkit.framework (1.1.1): [P2PKit.framework ZIP](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.1.1/p2pkit-ios-1.1.1.zip) [SHA1](http://p2pkit.io/maven2/ch/uepaa/p2p/p2pkit-ios/1.1.1/p2pkit-ios-1.1.1.zip.sha1)
 
 Release Notes can be found here: http://p2pkit.io/changelog.html
 
@@ -33,7 +34,17 @@ Release Notes can be found here: http://p2pkit.io/changelog.html
 
 Request your evaluation/testing application key: http://p2pkit.io/signup.html
 
-### Setup Xcode project
+### Setup
+
+**If you are using [CocoaPods](https://cocoapods.org/), then add these lines to your Podfile:**
+
+```ruby
+platform :ios, '7.0'
+pod 'p2pkit'
+```
+
+#### Manual setup without CocoaPods
+
 **P2PKit.framework supports both Objective-C and Swift**
 
 1: Add p2pkit
@@ -77,24 +88,25 @@ SWIFT
 PPKController.enableWithConfiguration("<YOUR APPLICATION KEY>", observer:self)
 ```
 
-Conform to the `PPKControllerDelegate` protocol by implementing the optional methods, you could then start P2P discovery, GEO discovery or online messaging when p2pkit is ready
+Conform to the `PPKControllerDelegate` protocol by implementing the optional methods, you could then start P2P discovery when p2pkit is ready
 
 ```objc
 OBJECTIVE-C
 -(void)PPKControllerInitialized {
-	[PPKController startP2PDiscovery];
-	[PPKController startGeoDiscovery];
-	[PPKController startOnlineMessaging];
+	[PPKController startP2PDiscoveryWithDiscoveryInfo:nil];
 }
 ```
 ```swift
 SWIFT
 func PPKControllerInitialized() {
-    PPKController.startP2PDiscovery()
-    PPKController.startGeoDiscovery()
-    PPKController.startOnlineMessaging()
+    PPKController.startP2PDiscoveryWithDiscoveryInfo(nil);
 }
 ```
+
+p2pkit is using the CoreBluetooth State Preservation and Restoration API. State restoration enables p2pkit-enabled apps to continue to discover and be discovered even if the application has crashed or was terminated by the OS. In order for state restoration to work, you would need to `startP2PDiscoveryWithDiscoveryInfo:` when the application is relaunched.
+
+**Note:** Please make sure you `stopP2PDiscovery` when your end-user no longer wishes to discover or be discovered.
+
 
 ### P2P Discovery
 
@@ -165,20 +177,75 @@ Receive the updated discovery info from a peer
 
 ```objc
 OBJECTIVE-C
--(void)didUpdateP2PDiscoveryInfoForPeer:(PPKPeer*)peer {
+-(void)discoveryInfoUpdatedForPeer:(PPKPeer*)peer {
 	NSString *discoveryInfo = [[NSString alloc] initWithData:peer.discoveryInfo encoding:NSUTF8StringEncoding];
 	NSLog(@"%@ has updated discovery info: %@", peer.peerID, discoveryInfo);
 }
 ```
 ```swift
 SWIFT
-func didUpdateP2PDiscoveryInfoForPeer(peer: PPKPeer!) {
+func discoveryInfoUpdatedForPeer(peer: PPKPeer!) {
 	let discoveryInfo = NSString(data: peer.discoveryInfo, encoding: NSUTF8StringEncoding)
 	NSLog("%@ has updated discovery info: %@", peer.peerID, discoveryInfo!)
 }
 ```
 
+### Proximity Ranging (beta)
+
+Proximity Ranging adds context to the discovery events by providing 5 levels of proximity strength (from “immediate” to “extremely weak”). You could associate "proximity strength" with distance, but due to the unreliable nature of signal strength (different hardware, environmental conditions, etc.) we preferred not to associate the two. Nevertheless, in many cases you will be able to determine who is the closest peer to you (if he is significantly closer than others).
+
+**Note: This feature is in beta and you should only use it for evaluation and testing purposes.**
+
+Please enable the Beta feature first
+
+```objc
+OBJECTIVE-C
+    [PPKController enableProximityRanging];
+```
+```swift
+SWIFT
+    PPKController.enableProximityRanging()
+```
+
+Proximity Strength is a property of to the `PPKPeer` object. Updates are received when the proximity strength of a nearby peer changes, for updates you would need to implement the delegate method `-(void)proximityStrengthChangedForPeer:(PPKPeer*)peer`.
+
+```objc
+OBJECTIVE-C
+-(void)proximityStrengthChangedForPeer:(PPKPeer*)peer {
+    if (peer.proximityStrength > PPKProximityStrengthWeak) {
+        NSLog(@"%@ is in range, do something with it", peer.peerID);
+    }
+    else {
+        NSLog(@"%@ is not yet in range", peer.peerID);
+    }
+}
+```
+```swift
+SWIFT
+func proximityStrengthChangedForPeer(peer: PPKPeer!) {
+    if (peer.proximityStrength.rawValue > PPKProximityStrength.Weak.rawValue) {
+        NSLog("%@ is in range, do something with it", peer.peerID);
+    }
+    else {
+        NSLog("%@ is not yet in range", peer.peerID);
+    }
+}
+```
+
+**Note** If the proximity strength for a peer cannot be determined, the proximity strength value will be `PPKProximityStrengthUnknown`
+
 ### Online Messaging (beta)
+
+Start by enabling the online messaging feature first
+
+```objc
+OBJECTIVE-C
+	[PPKController startOnlineMessaging];
+```
+```swift
+SWIFT
+    PPKController.startOnlineMessaging()
+```
 
 Implement `PPKControllerDelegate` protocol to receive online messages
 
@@ -209,6 +276,17 @@ SWIFT
 ```
 
 ### GEO Discovery (beta)
+
+Start by enabling the GEO Discovery first
+
+```objc
+OBJECTIVE-C
+	[PPKController startGeoDiscovery];
+```
+```swift
+SWIFT
+    PPKController.startGeoDiscovery()
+```
 
 Add location permissions to your `Info.plist` file
 ```
@@ -307,9 +385,9 @@ func geoPeerLost(peerID: String!) {
 
 ## Documentation
 
-For more details and further information, please refer to the `PPKController.h` header file
+For more details and further information, please refer to the `P2PKit.h` header file
 ```objc
-<P2PKit/PPKController.h>
+<P2PKit/P2PKit.h>
 ```
 ### p2pkit License
 * By using P2PKit.framework you agree to abide by our Terms of Service, License Agreement and Policies which are available at the following address: http://p2pkit.io/policy.html

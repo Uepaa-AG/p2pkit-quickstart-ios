@@ -14,13 +14,10 @@
 
 @interface DLGraphScene : SKScene
 
-@property (nonatomic, assign) CGFloat repulsion;
-@property (nonatomic, assign) CGFloat attraction;
 @property (nonatomic, weak) id<DLGraphSceneDelegate> delegate;
 
 - (void)addEdge:(DLEdge *)edge;
-- (void)addEdges:(NSArray *)edges;
+- (void)updateEdge:(DLEdge *)edge;
 - (void)removeEdge:(DLEdge *)edge;
-- (void)removeEdges:(NSArray *)edges;
 
 @end

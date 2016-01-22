@@ -11,6 +11,9 @@ DLEdge* DLMakeEdge(NSUInteger i, NSUInteger j);
 @property (nonatomic, assign, readonly) NSUInteger i;
 @property (nonatomic, assign, readonly) NSUInteger j;
 
+@property (nonatomic) CGFloat repulsion;
+@property (nonatomic) CGFloat attraction;
+
 + (instancetype)edgeWithI:(NSUInteger)i J:(NSUInteger)j;
 
 @end

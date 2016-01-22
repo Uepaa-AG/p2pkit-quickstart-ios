@@ -1,17 +1,21 @@
 #import "DLGraphScene.h"
 #import "DLEdge.h"
 
+#define REPULSION_DEFAULT_VALUE   100.f
+#define ATTRACTION_DEFAULT_VALUE  0.01f
 
 @interface DLGraphScene () {
-    NSMutableSet *touchedNodes_;
-    NSMutableArray *edges_;
-    
-    BOOL touchDidMove_;
     BOOL contentCreated_;
+    
+    NSMutableSet *touchedAndMovedNodes_;
+    
+    NSMutableArray *edges_;
+    NSMutableDictionary *vertexes_;
+    NSMutableDictionary *connections_;
+    
+    NSMutableDictionary *repulsionsPerNode_;
+    NSMutableDictionary *attractionsPerNode_;
 }
-
-@property (atomic, strong) NSMutableDictionary *vertexes;
-@property (atomic, strong) NSMutableDictionary *connections;
 
 @end
 
@@ -25,16 +29,15 @@
 - (instancetype)initWithSize:(CGSize)size {
     
     if (self = [super initWithSize:size]) {
-        _connections = [NSMutableDictionary dictionary];
-        _vertexes = [NSMutableDictionary dictionary];
-
-        _repulsion = 900.f;
-        _attraction = 0.1f;
+        connections_ = [NSMutableDictionary dictionary];
+        vertexes_ = [NSMutableDictionary dictionary];
+        
+        repulsionsPerNode_ = [NSMutableDictionary dictionary];
+        attractionsPerNode_ = [NSMutableDictionary dictionary];
         
         edges_ = [NSMutableArray new];
-        touchedNodes_ = [NSMutableSet new];
+        touchedAndMovedNodes_ = [NSMutableSet new];
         
-        touchDidMove_ = NO;
         contentCreated_ = NO;
     }
 
@@ -64,32 +67,49 @@
 
 - (void)update:(NSTimeInterval)currentTime {
     
-    [self.vertexes enumerateKeysAndObjectsUsingBlock:^(NSNumber *index1, SKShapeNode *v, BOOL *stop) {
+    [vertexes_ enumerateKeysAndObjectsUsingBlock:^(NSNumber *index1, SKShapeNode *v, BOOL *stop) {
         
-        if ([touchedNodes_ containsObject:v]) return;
+        if ([touchedAndMovedNodes_ containsObject:v]) return;
         
         NSUInteger i = index1.integerValue;
         
         __block CGFloat vForceX = 0;
         __block CGFloat vForceY = 0;
         
-        [self.vertexes enumerateKeysAndObjectsUsingBlock:^(NSNumber *index2, SKShapeNode *u, BOOL *stop) {
+        [vertexes_ enumerateKeysAndObjectsUsingBlock:^(NSNumber *index2, SKShapeNode *u, BOOL *stop) {
             
             NSUInteger j = index2.integerValue;
             if (i == j) return;
             
+            CGFloat repulsion = REPULSION_DEFAULT_VALUE;
+            if (i == 0) {
+                repulsion = [[repulsionsPerNode_ objectForKey:index2] floatValue];
+            }
+            else if (j == 0) {
+                repulsion = [[repulsionsPerNode_ objectForKey:index1] floatValue];
+            }
+            
             double rsq = pow((v.position.x - u.position.x), 2) + pow((v.position.y - u.position.y), 2);
-            vForceX += self.repulsion * (v.position.x - u.position.x) / rsq;
-            vForceY += self.repulsion * (v.position.y - u.position.y) / rsq;
+            vForceX += repulsion * (v.position.x - u.position.x) / rsq;
+            vForceY += repulsion * (v.position.y - u.position.y) / rsq;
         }];
         
-        [self.vertexes enumerateKeysAndObjectsUsingBlock:^(NSNumber *index2, SKShapeNode *u, BOOL *stop) {
+        [vertexes_ enumerateKeysAndObjectsUsingBlock:^(NSNumber *index2, SKShapeNode *u, BOOL *stop) {
             
             NSUInteger j = index2.integerValue;
+            if (i == j) return;
             if(![self hasConnectedA:i toB:j]) return;
             
-            vForceX += self.attraction * (u.position.x - v.position.x);
-            vForceY += self.attraction * (u.position.y - v.position.y);
+            CGFloat attraction = ATTRACTION_DEFAULT_VALUE;
+            if (i == 0) {
+                attraction = [[attractionsPerNode_ objectForKey:index2] floatValue];
+            }
+            else if (j == 0) {
+                attraction = [[attractionsPerNode_ objectForKey:index1] floatValue];
+            }
+            
+            vForceX += attraction * (u.position.x - v.position.x);
+            vForceY += attraction * (u.position.y - v.position.y);
         }];
         
         v.physicsBody.linearDamping = 0.95;
@@ -106,11 +126,11 @@
 
 - (void)updateConnections {
     
-    [self.connections enumerateKeysAndObjectsUsingBlock:^(DLEdge *key, SKShapeNode *connection, BOOL *stop) {
+    [connections_ enumerateKeysAndObjectsUsingBlock:^(DLEdge *key, SKShapeNode *connection, BOOL *stop) {
         CGMutablePathRef pathToDraw = CGPathCreateMutable();
         
-        SKNode *vertexA = self.vertexes[@(key.i)];
-        SKNode *vertexB = self.vertexes[@(key.j)];
+        SKNode *vertexA = vertexes_[@(key.i)];
+        SKNode *vertexB = vertexes_[@(key.j)];
         
         CGPathMoveToPoint(pathToDraw, NULL, vertexA.position.x, vertexA.position.y);
         CGPathAddLineToPoint(pathToDraw, NULL, vertexB.position.x, vertexB.position.y);
@@ -129,36 +149,34 @@
     if (edge.i != edge.j) [self createConnectionForEdge:edge];
 }
 
-- (void)addEdges:(NSArray *)edges {
+- (void)updateEdge:(DLEdge *)edge {
     
-    for (DLEdge *edge in edges) {
-        [self addEdge:edge];
-    }
+    [repulsionsPerNode_ setObject:@(edge.repulsion) forKey:@(edge.i)];
+    [attractionsPerNode_ setObject:@(edge.attraction) forKey:@(edge.i)];
+    
+    [repulsionsPerNode_ setObject:@(edge.repulsion) forKey:@(edge.j)];
+    [attractionsPerNode_ setObject:@(edge.attraction) forKey:@(edge.j)];
 }
 
 - (void)removeEdge:(DLEdge *)edge {
     
     [edges_ removeObject:edge];
 
-    SKShapeNode *connection = self.connections[edge];
+    SKShapeNode *connection = connections_[edge];
     if (connection) {
         [connection removeFromParent];
-        [self.connections removeObjectForKey:edge];
+        [connections_ removeObjectForKey:edge];
     }
     
-    SKShapeNode *vertex = self.vertexes[@(edge.j)];
+    SKShapeNode *vertex = vertexes_[@(edge.j)];
     if (vertex) {
         [NSObject cancelPreviousPerformRequestsWithTarget:vertex];
         [vertex removeFromParent];
-        [self.vertexes removeObjectForKey:@(edge.j)];
+        [vertexes_ removeObjectForKey:@(edge.j)];
+        [repulsionsPerNode_ removeObjectForKey:@(edge.j)];
+        [attractionsPerNode_ removeObjectForKey:@(edge.j)];
     }
-}
-
-- (void)removeEdges:(NSArray *)edges {
     
-    for (DLEdge *edge in edges) {
-        [self removeEdge:edge];
-    }
 }
 
 #pragma mark - Private
@@ -175,7 +193,7 @@
     circle.position = center;
 
     [self addChild:circle];
-    self.vertexes[@(index)] = circle;
+    vertexes_[@(index)] = circle;
 }
 
 - (void)createConnectionForEdge:(DLEdge *)edge {
@@ -190,19 +208,21 @@
     [connection runAction:zoom];
 
     [self addChild:connection];
-    self.connections[edge] = connection;
+    connections_[edge] = connection;
 }
 
 - (void)createVertexesForEdge:(DLEdge *)edge {
     
-    [self createVertexIfNeeded:edge.i];
-    [self createVertexIfNeeded:edge.j];
-}
-
-- (void)createVertexIfNeeded:(NSUInteger)index {
+    if (vertexes_[@(edge.i)] == nil) {
+        [self createVertexWithIndex:edge.i];
+        [repulsionsPerNode_ setObject:@(edge.repulsion) forKey:@(edge.i)];
+        [attractionsPerNode_ setObject:@(edge.attraction) forKey:@(edge.i)];
+    }
     
-    if (self.vertexes[@(index)] == nil) {
-        [self createVertexWithIndex:index];
+    if (vertexes_[@(edge.j)] == nil) {
+        [self createVertexWithIndex:edge.j];
+        [repulsionsPerNode_ setObject:@(edge.repulsion) forKey:@(edge.j)];
+        [attractionsPerNode_ setObject:@(edge.attraction) forKey:@(edge.j)];
     }
 }
 
@@ -251,19 +271,17 @@
         CGPoint positionInScene = [touch locationInNode:self];
         CGPoint previousPosition = [touch previousLocationInNode:self];
         
-        if (![self positionMoved:positionInScene toPrevious:previousPosition]) {
-            return;
-        }
-        
         SKNode *node = [self nodeAtPoint:previousPosition];
         if (node) {
-            node.position = positionInScene;
-            node.physicsBody.dynamic = NO;
-            [touchedNodes_ addObject:node];
+            [node setPosition:positionInScene];
+            [node.physicsBody setDynamic:NO];
+            
+            if ([self positionMoved:positionInScene toPrevious:previousPosition]) {
+                [touchedAndMovedNodes_ addObject:node];
+            }
+            
         }
     }];
-    
-    touchDidMove_ = YES;
 }
 
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -280,22 +298,21 @@
         
         CGPoint positionInScene = [touch locationInNode:self];
         CGPoint previousPosition = [touch previousLocationInNode:self];
+        
         SKNode *node = [self nodeAtPoint:previousPosition];
         if (node) {
-            if (!touchDidMove_) {
-                NSUInteger index = [[self.vertexes allKeysForObject:node].firstObject integerValue];
+            [node.physicsBody setDynamic:YES];
+            
+            if ([touchedAndMovedNodes_ containsObject:node]) {
+                [node setPosition:positionInScene];
+                [touchedAndMovedNodes_ removeObject:node];
+            }
+            else {
+                NSUInteger index = [[vertexes_ allKeysForObject:node].firstObject integerValue];
                 [self notifyDelegateTapOnVertex:node atIndex:index];
             }
-            
-            node.position = positionInScene;
-            node.physicsBody.dynamic = YES;
-            [touchedNodes_ removeObject:node];
         }
     }];
-    
-    if (touchedNodes_.count == 0) {
-        touchDidMove_ = NO;
-    }
 }
 
 - (SKNode*)nodeAtPoint:(CGPoint)point {

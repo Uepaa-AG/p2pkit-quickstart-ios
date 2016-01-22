@@ -93,7 +93,7 @@
             discoveryInfo = [NSString stringWithFormat:@"%ld bytes", (unsigned long)peer.discoveryInfo.length];
         }
         
-        NSString *message = [NSString stringWithFormat:@"%@ (%@)", peer.peerID, discoveryInfo];
+        NSString *message = [NSString stringWithFormat:@"%@ (%@, %@)", peer.peerID, discoveryInfo, [self getDescriptionForProximityStrength:peer.proximityStrength]];
         [self logKey:@"P2P discovered" value:message];
     }
     else {
@@ -108,7 +108,7 @@
     [self sendLocalNotificationWhenInBackgroundForPeer:peer withMessage:@"Lost peer"];
 }
 
--(void)didUpdateP2PDiscoveryInfoForPeer:(PPKPeer*)peer {
+-(void)discoveryInfoUpdatedForPeer:(PPKPeer*)peer {
     
     if (peer.discoveryInfo) {
         
@@ -126,6 +126,39 @@
     }
     
     [self sendLocalNotificationWhenInBackgroundForPeer:peer withMessage:@"Updated peer"];
+}
+
+-(void)proximityStrengthChangedForPeer:(PPKPeer*)peer {
+    
+    NSString *message = [NSString stringWithFormat:@"%@ (%@)", peer.peerID, [self getDescriptionForProximityStrength:peer.proximityStrength]];
+    [self logKey:@"P2P proximity" value:message];
+}
+
+-(NSString*)getDescriptionForProximityStrength:(PPKProximityStrength)proximityStrength {
+    
+    NSString *proximity = @"";
+    switch (proximityStrength) {
+        case PPKProximityStrengthImmediate:
+            proximity = @"immediate";
+            break;
+        case PPKProximityStrengthStrong:
+            proximity = @"strong";
+            break;
+        case PPKProximityStrengthMedium:
+            proximity = @"medium";
+            break;
+        case PPKProximityStrengthWeak:
+            proximity = @"weak";
+            break;
+        case PPKProximityStrengthExtremelyWeak:
+            proximity = @"extremely weak";
+            break;
+        case PPKProximityStrengthUnknown:
+            proximity = @"unknown";
+            break;
+    }
+    
+    return proximity;
 }
 
 -(void)onlineMessagingStateChanged:(PPKOnlineMessagingState)state {
@@ -186,6 +219,7 @@
 
 -(void)geoPeerDiscovered:(NSString*)peerID {
     [self logKey:@"GEO discovered" value:peerID];
+    [self send:@"From iOS: Hello GEO!" to:peerID];
 }
 
 -(void)geoPeerLost:(NSString*)peerID {

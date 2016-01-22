@@ -60,6 +60,8 @@ DLEdge* DLMakeEdge(NSUInteger i, NSUInteger j)
     if (copy != nil) {
         copy->_i = _i;
         copy->_j = _j;
+        copy->_attraction = _attraction;
+        copy->_repulsion = _repulsion;
     }
 
     return copy;

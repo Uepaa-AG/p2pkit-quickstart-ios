@@ -32,7 +32,7 @@
 
 -(void)PPKControllerInitialized {
     
-    [nearbyPeersViewController performSelector:@selector(setup) withObject:nil afterDelay:0.5];
+    [nearbyPeersViewController setup];
 }
 
 -(void)PPKControllerFailedWithError:(NSError*)error {
@@ -70,9 +70,14 @@
     [nearbyPeersViewController removeNodeForPeer:peer];
 }
 
--(void)didUpdateP2PDiscoveryInfoForPeer:(PPKPeer*)peer {
+-(void)discoveryInfoUpdatedForPeer:(PPKPeer*)peer {
     
-    [nearbyPeersViewController updateNodeForPeer:peer];
+    [nearbyPeersViewController updateColorForPeer:peer];
+}
+
+-(void)proximityStrengthChangedForPeer:(PPKPeer*)peer {
+    
+    [nearbyPeersViewController updateProximityStrengthForPeer:peer];
 }
 
 -(void)p2pDiscoveryStateChanged:(PPKPeer2PeerDiscoveryState)state {
@@ -97,6 +102,7 @@
             
         case PPKPeer2PeerDiscoveryStopped:
             
+            [PPKController enableProximityRanging];
             [PPKController startP2PDiscoveryWithDiscoveryInfo:notification.object];
             
             break;
