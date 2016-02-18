@@ -39,7 +39,7 @@ Request your evaluation/testing application key: http://p2pkit.io/signup.html
 **If you are using [CocoaPods](https://cocoapods.org/), then add these lines to your Podfile:**
 
 ```ruby
-platform :ios, '7.0'
+platform :ios, '7.1'
 pod 'p2pkit'
 ```
 
@@ -61,7 +61,7 @@ pod 'p2pkit'
  * Security.framework
  * Foundation.framework
 
- **p2pkit is built with ARC (automatic reference counting) and supports iOS 7.0 and above**
+ **p2pkit is built with ARC (automatic reference counting) and supports iOS 7.1 and above**
 
 ### Initialization
 
