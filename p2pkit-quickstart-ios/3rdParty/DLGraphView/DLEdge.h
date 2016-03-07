@@ -14,6 +14,9 @@ DLEdge* DLMakeEdge(NSUInteger i, NSUInteger j);
 @property (nonatomic) CGFloat repulsion;
 @property (nonatomic) CGFloat attraction;
 
+@property (nonatomic) BOOL unknownConnection;
+@property (nonatomic) BOOL immediateConnection;
+
 + (instancetype)edgeWithI:(NSUInteger)i J:(NSUInteger)j;
 
 @end

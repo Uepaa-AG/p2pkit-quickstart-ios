@@ -112,6 +112,8 @@
             vForceY += attraction * (u.position.y - v.position.y);
         }];
         
+        v.physicsBody.friction = 0.8;
+        v.physicsBody.restitution = 0.3;
         v.physicsBody.linearDamping = 0.95;
         v.physicsBody.velocity = CGVectorMake((v.physicsBody.velocity.dx + vForceX),
                                               (v.physicsBody.velocity.dy + vForceY));
@@ -126,15 +128,27 @@
 
 - (void)updateConnections {
     
-    [connections_ enumerateKeysAndObjectsUsingBlock:^(DLEdge *key, SKShapeNode *connection, BOOL *stop) {
+    [connections_ enumerateKeysAndObjectsUsingBlock:^(DLEdge *edge, SKShapeNode *connection, BOOL *stop) {
         CGMutablePathRef pathToDraw = CGPathCreateMutable();
         
-        SKNode *vertexA = vertexes_[@(key.i)];
-        SKNode *vertexB = vertexes_[@(key.j)];
+        SKNode *vertexA = vertexes_[@(edge.i)];
+        SKNode *vertexB = vertexes_[@(edge.j)];
         
         CGPathMoveToPoint(pathToDraw, NULL, vertexA.position.x, vertexA.position.y);
         CGPathAddLineToPoint(pathToDraw, NULL, vertexB.position.x, vertexB.position.y);
-        connection.path = pathToDraw;
+        
+        if (edge.unknownConnection) {
+            
+            CGFloat pattern[] = {2.0, 2.0};
+            
+            CGPathRef dashed = CGPathCreateCopyByDashingPath(pathToDraw, NULL, 0, pattern, 2);
+            connection.path = dashed;
+            
+            CGPathRelease(dashed);
+            
+        } else {
+            connection.path = pathToDraw;
+        }
         
         CGPathRelease(pathToDraw);
     }];
@@ -151,11 +165,25 @@
 
 - (void)updateEdge:(DLEdge *)edge {
     
+    NSUInteger index = [edges_ indexOfObject:edge];
+    [edges_ replaceObjectAtIndex:index withObject:edge];
+    
+    [connections_ enumerateKeysAndObjectsUsingBlock:^(DLEdge *key, SKShapeNode *connection, BOOL *stop) {
+        if ([key isEqual:edge]) {
+            [connections_ removeObjectForKey:key];
+            [connections_ setObject:connection forKey:edge];
+            *stop = YES;
+        }
+    }];
+    
     [repulsionsPerNode_ setObject:@(edge.repulsion) forKey:@(edge.i)];
     [attractionsPerNode_ setObject:@(edge.attraction) forKey:@(edge.i)];
     
     [repulsionsPerNode_ setObject:@(edge.repulsion) forKey:@(edge.j)];
     [attractionsPerNode_ setObject:@(edge.attraction) forKey:@(edge.j)];
+    
+    SKShapeNode *connection = connections_[edge];
+    connection.strokeColor = (edge.immediateConnection ? [SKColor whiteColor] : [SKColor darkGrayColor]);
 }
 
 - (void)removeEdge:(DLEdge *)edge {
@@ -199,7 +227,7 @@
 - (void)createConnectionForEdge:(DLEdge *)edge {
     
     SKShapeNode *connection = [SKShapeNode node];
-    connection.strokeColor = [SKColor darkGrayColor];
+    connection.strokeColor = (edge.immediateConnection ? [SKColor whiteColor] : [SKColor darkGrayColor]);
     connection.fillColor = [SKColor darkGrayColor];
     connection.lineWidth = 3.f;
     connection.alpha = 0.0;

@@ -62,6 +62,8 @@ DLEdge* DLMakeEdge(NSUInteger i, NSUInteger j)
         copy->_j = _j;
         copy->_attraction = _attraction;
         copy->_repulsion = _repulsion;
+        copy->_unknownConnection = _unknownConnection;
+        copy->_immediateConnection = _immediateConnection;
     }
 
     return copy;

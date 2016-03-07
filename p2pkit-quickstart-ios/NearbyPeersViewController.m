@@ -59,6 +59,8 @@
     DLEdge *edge = DLMakeEdge(0, nextNodeIndex_);
     edge.repulsion = [self getRepulsionForProximityStrength:peer.proximityStrength];
     edge.attraction = [self getAttractionForProximityStrength:peer.proximityStrength];
+    edge.unknownConnection = (peer.proximityStrength == PPKProximityStrengthUnknown);
+    edge.immediateConnection = (peer.proximityStrength == PPKProximityStrengthImmediate);
     [graphScene_ addEdge:edge];
 }
 
@@ -67,22 +69,22 @@
     CGFloat repulsion;
     switch (proximityStrength) {
         case PPKProximityStrengthExtremelyWeak:
-            repulsion = 2000.f;
+            repulsion = 2500.f;
             break;
         case PPKProximityStrengthWeak:
-            repulsion = 1500.f;
+            repulsion = 2000.f;
             break;
         case PPKProximityStrengthMedium:
-            repulsion = 1100.f;
+            repulsion = 1500.f;
             break;
         case PPKProximityStrengthStrong:
-            repulsion = 900.f;
+            repulsion = 1100.f;
             break;
         case PPKProximityStrengthImmediate:
             repulsion = 700.f;
             break;
         default:
-            repulsion = 1100.f;
+            repulsion = 1500.f;
             break;
     }
     
@@ -94,22 +96,22 @@
     CGFloat attraction;
     switch (proximityStrength) {
         case PPKProximityStrengthExtremelyWeak:
-            attraction = 0.03f;
+            attraction = 0.025f;
             break;
         case PPKProximityStrengthWeak:
-            attraction = 0.05f;
+            attraction = 0.03f;
             break;
         case PPKProximityStrengthMedium:
-            attraction = 0.07f;
+            attraction = 0.05f;
             break;
         case PPKProximityStrengthStrong:
-            attraction = 0.1f;
+            attraction = 0.07f;
             break;
         case PPKProximityStrengthImmediate:
             attraction = 0.12f;
             break;
         default:
-            attraction = 0.07f;
+            attraction = 0.05f;
             break;
     }
     
@@ -130,7 +132,11 @@
     DLEdge *edge = DLMakeEdge(0, index.intValue);
     edge.repulsion = [self getRepulsionForProximityStrength:peer.proximityStrength];
     edge.attraction = [self getAttractionForProximityStrength:peer.proximityStrength];
+    edge.unknownConnection = (peer.proximityStrength == PPKProximityStrengthUnknown);
+    edge.immediateConnection = (peer.proximityStrength == PPKProximityStrengthImmediate);
     [graphScene_ updateEdge:edge];
+    
+    [self updateStrokesForAllNodes];
 }
 
 -(void)removeNodeForPeer:(PPKPeer*)peer {
@@ -165,23 +171,25 @@
         vertex.physicsBody.mass = mass;
         vertex.physicsBody.allowsRotation = NO;
         
-        vertex.name = @"me";
+        SKLabelNode *label = [SKLabelNode new];
+        [label setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
+        [label setText:@"me"];
+        [vertex addChild:label];
+        
         ownNode_ = vertex;
         [self setColor:ownColor_ forNode:ownNode_ animated:NO];
         
     } else {
         
-        vertex.name = @(index).stringValue;
         PPKPeer *peer = [nearbyPeers_ objectForKey:@(index)];
         [peerNodes_ setObject:vertex forKey:@(index)];
         [self setColor:[self colorFromData:peer.discoveryInfo] forNode:vertex animated:NO];
     }
     
-    SKLabelNode *label = [SKLabelNode new];
-    [label setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
-    [label setText:vertex.name];
-    [vertex addChild:label];
+    [vertex setLineWidth:2.0];
     nextNodeIndex_++;
+    
+    [self updateStrokesForAllNodes];
 }
 
 -(void)tapOnVertex:(SKNode *)vertex atIndex:(NSUInteger)index {
@@ -245,7 +253,6 @@
 
 -(void)setColor:(UIColor*)color forNode:(SKShapeNode*)node animated:(BOOL)animated {
     
-    [node setStrokeColor:color];
     [node setFillColor:color];
     
     if (animated) {
@@ -258,6 +265,26 @@
         
         [node runAction:[SKAction group:@[moveNode, changeColor]]];
     }
+}
+
+-(void)updateStrokesForAllNodes {
+    
+    UIColor *highlightColor = [UIColor whiteColor];
+    
+    __block BOOL hasImmediatePeers = NO;
+    [nearbyPeers_ enumerateKeysAndObjectsUsingBlock:^(NSNumber *index, PPKPeer *peer, BOOL * _Nonnull stop) {
+        
+        SKShapeNode *node = peerNodes_[index];
+        if (peer.proximityStrength == PPKProximityStrengthImmediate) {
+            [node setStrokeColor:highlightColor];
+            hasImmediatePeers = YES;
+        }
+        else {
+            [node setStrokeColor:node.fillColor];
+        }
+    }];
+    
+    [ownNode_ setStrokeColor:(hasImmediatePeers ? highlightColor : ownNode_.fillColor)];
 }
 
 -(void)toggleConsoleView {
