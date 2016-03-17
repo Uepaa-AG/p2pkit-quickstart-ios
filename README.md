@@ -60,8 +60,8 @@ P2PKit.framework supports both Objective-C and Swift. The SDK is built with ARC 
  * CFNetwork.framework
  * Security.framework
  * Foundation.framework
- 
- **Note:** Bitcode is currently not supported by p2pkit. In case your project is bitcode enabled, you need to disable this option (Build Settings &gt; Build Options &gt; Enable Bitcode: No).
+
+**Note:** Bitcode is currently not supported by p2pkit. In case your project is bitcode enabled, you need to disable this option (Build Settings &gt; Build Options &gt; Enable Bitcode: No).
 
 ### Initialization
 
