@@ -45,7 +45,7 @@ pod 'p2pkit'
 
 #### Manual setup without CocoaPods
 
-**P2PKit.framework supports both Objective-C and Swift**
+P2PKit.framework supports both Objective-C and Swift. The SDK is built with ARC (automatic reference counting) and supports iOS 7.1 and above.
 
 1: Add p2pkit
 * Drag P2PKit.framework into your Xcode project folder. (Make sure the "Copy items if needed" is checked)
@@ -60,8 +60,8 @@ pod 'p2pkit'
  * CFNetwork.framework
  * Security.framework
  * Foundation.framework
-
- **p2pkit is built with ARC (automatic reference counting) and supports iOS 7.1 and above**
+ 
+ **Note:** Bitcode is currently not supported by p2pkit. In case your project is bitcode enabled, you need to disable this option (Build Settings &gt; Build Options &gt; Enable Bitcode: No).
 
 ### Initialization
 
