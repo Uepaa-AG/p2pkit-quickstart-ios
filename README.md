@@ -2,7 +2,7 @@
 
 #### A peer-to-peer proximity SDK for iOS and Android
 
-p2pkit is an easy to use SDK that bundles together several proximity technologies kung-fu style! With p2pkit apps immediately understand their proximity to nearby devices and users, 'verify' their identity, and exchange information with them.
+p2pkit is an easy to use SDK that bundles together several proximity technologies kung-fu style! With p2pkit apps immediately understand their proximity to nearby devices and users, estimate their range and exchange information with them.
 
 ![p2pkit - proximity starts here](p2pkit-quickstart-ios.gif)
 
@@ -36,4 +36,4 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 ### p2pkit License
 * By using P2PKit you agree to abide by our Terms of Service, License Agreement and Policies which are available here: http://p2pkit.io/policy.html
-* Please refer to "Third_party_licenses.txt" included with P2PKit for 3rd party software that the framework may be using. You will need to abide by their licenses as well.
+* Please refer to "Third_party_licenses.txt" included with P2PKit.framework for 3rd party software that P2PKit.framework may be using - You will need to abide by their licenses as well
