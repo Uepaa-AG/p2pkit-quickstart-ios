@@ -23,8 +23,8 @@
 
 @implementation ColorPickerViewController
 
-- (void)viewDidLoad
-{
+-(void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.colors = @[RGB(233, 65, 76), RGB(236, 99, 51), RGB(239, 136, 51), RGB(244, 173, 51),
@@ -45,18 +45,18 @@
     [self.view addSubview:self.colorView];
 }
 
-- (void)viewDidLayoutSubviews {
+-(void)viewDidLayoutSubviews {
     
     [self.view.subviews enumerateObjectsUsingBlock:^(UIView *subview, NSUInteger idx, BOOL *stop) {
         [subview setCenter:CGPointMake(self.view.bounds.size.width/2, self.view.bounds.size.height/2)];
     }];
 }
 
--(void)setSelectedColor:(UIColor *)selectedColor {
+-(void)setSelectedColor:(UIColor*)selectedColor {
     
     [self.colors enumerateObjectsUsingBlock:^(UIColor *color, NSUInteger index, BOOL *stop) {
-
-        if ([color isEqual:selectedColor]) {
+ 
+        if ([self color:color isEqualToColor:selectedColor]) {
             [self.colorView setBackgroundColor:color];
             [self.wheelView selectItemAtIndex:index];
             _selectedColor = color;
@@ -73,20 +73,40 @@
 
 #pragma mark - JCWheelViewDelegate
 
-- (NSInteger)numberOfItemsInWheelView:(JCWheelView *)wheelView
-{
+-(NSInteger)numberOfItemsInWheelView:(JCWheelView*)wheelView {
     return self.colors.count;
 }
 
-- (void)wheelView:(JCWheelView *)wheelView didSelectItemAtIndex:(NSInteger)index
-{
+-(void)wheelView:(JCWheelView*)wheelView didSelectItemAtIndex:(NSInteger)index {
     self.colorView.backgroundColor = self.colors[index];
     _selectedColor = self.colors[index];
     [self dismissWithCurrentColor];
 }
 
--(void)wheelView:(JCWheelView *)wheelView didHoverItemAtIndex:(NSInteger)index {
+-(void)wheelView:(JCWheelView*)wheelView didHoverItemAtIndex:(NSInteger)index {
     self.colorView.backgroundColor = self.colors[index];
+}
+
+#pragma mark - Helpers
+
+-(BOOL)color:(UIColor*)color1 isEqualToColor:(UIColor*)color2 {
+    
+    CIColor *color1ci = [CIColor colorWithCGColor:color1.CGColor];
+    CIColor *color2ci = [CIColor colorWithCGColor:color2.CGColor];
+    
+    int red1 = color1ci.red * 255.0;
+    int green1 = color1ci.green * 255.0;
+    int blue1 = color1ci.blue * 255.0;
+    
+    int red2 = color2ci.red * 255.0;
+    int green2 = color2ci.green * 255.0;
+    int blue2 = color2ci.blue * 255.0;
+    
+    if (red1 == red2 && green1 == green2 && blue1 == blue2) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end

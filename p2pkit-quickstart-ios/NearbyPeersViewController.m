@@ -145,6 +145,8 @@
     [graphScene_ removeEdge:DLMakeEdge(0, index.integerValue)];
     [peerNodes_ removeObjectForKey:index];
     [nearbyPeers_ removeObjectForKey:index];
+    
+    [self updateStrokesForAllNodes];
 }
 
 -(void)removeNodesForAllPeers {
@@ -155,6 +157,8 @@
     
     [peerNodes_ removeAllObjects];
     [nearbyPeers_ removeAllObjects];
+    
+    [self updateStrokesForAllNodes];
 }
 
 #pragma mark - DLGraphSceneDelegate
@@ -188,11 +192,9 @@
     
     [vertex setLineWidth:2.0];
     nextNodeIndex_++;
-    
-    [self updateStrokesForAllNodes];
 }
 
--(void)tapOnVertex:(SKNode *)vertex atIndex:(NSUInteger)index {
+-(void)tapOnVertex:(SKNode*)vertex atIndex:(NSUInteger)index {
     if (index == 0) [self presentColorPicker];
 }
 
@@ -253,6 +255,7 @@
 
 -(void)setColor:(UIColor*)color forNode:(SKShapeNode*)node animated:(BOOL)animated {
     
+    [node setStrokeColor:color];
     [node setFillColor:color];
     
     if (animated) {
@@ -265,6 +268,8 @@
         
         [node runAction:[SKAction group:@[moveNode, changeColor]]];
     }
+    
+    [self updateStrokesForAllNodes];
 }
 
 -(void)updateStrokesForAllNodes {

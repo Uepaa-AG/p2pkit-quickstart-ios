@@ -103,7 +103,7 @@
         case PPKPeer2PeerDiscoveryStopped:
             
             [PPKController enableProximityRanging];
-            [PPKController startP2PDiscoveryWithDiscoveryInfo:notification.object];
+            [PPKController startP2PDiscoveryWithDiscoveryInfo:notification.object stateRestoration:NO];
             
             break;
     }

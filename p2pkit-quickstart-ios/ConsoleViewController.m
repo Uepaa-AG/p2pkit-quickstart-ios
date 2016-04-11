@@ -36,7 +36,7 @@
     [self setupUI];
     [self setupNotifications];
     
-    @try {
+    if ([PPKController isEnabled]) {
         
         /* p2pkit also supports multiple observers */
         [PPKController addObserver:self];
@@ -48,9 +48,6 @@
         
         /* Subscribe to notification to receive updates when the user changes its color */
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorUpdateNotification:) name:@"userSelectedNewColorNotification" object:nil];
-    }
-    @catch (NSException *exception) {
-        /* In case p2pkit was not initialized correctly */
     }
 }
 
@@ -338,7 +335,7 @@
 -(void)toggleP2PDiscovery {
     
     if (self.p2pToggleSwitch.on) {
-        [PPKController startP2PDiscoveryWithDiscoveryInfo:discoveryInfo_];
+        [PPKController startP2PDiscoveryWithDiscoveryInfo:discoveryInfo_ stateRestoration:NO];
     }
     else {
         [PPKController stopP2PDiscovery];
