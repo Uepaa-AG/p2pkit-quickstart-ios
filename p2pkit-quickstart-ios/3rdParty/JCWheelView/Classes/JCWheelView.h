@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 李京城. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
 #define DEGREES_TO_RADIANS(d) ((d) * M_PI / 180)
 #define RADIANS_TO_DEGREES(d) ((d) * 180 / M_PI)
 

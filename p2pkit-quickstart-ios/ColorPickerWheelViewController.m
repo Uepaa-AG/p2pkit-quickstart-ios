@@ -5,14 +5,14 @@
 //  Copyright (c) 2015 Uepaa AG. All rights reserved.
 //
 
-#import "ColorPickerViewController.h"
+#import "ColorPickerWheelViewController.h"
 #import "JCWheelView.h"
 
 
 #define RGB(r, g, b) [UIColor colorWithRed:(r)/255.0f green:(g)/255.0f blue:(b)/255.0f alpha:1.0f]
 
 
-@interface ColorPickerViewController () <JCWheelViewDelegate>
+@interface ColorPickerWheelViewController () <JCWheelViewDelegate>
 
 @property (nonatomic, weak) IBOutlet JCWheelView *wheelView;
 @property (nonatomic, strong) UIView *colorView;
@@ -21,7 +21,7 @@
 @end
 
 
-@implementation ColorPickerViewController
+@implementation ColorPickerWheelViewController
 
 -(void)viewDidLoad {
     

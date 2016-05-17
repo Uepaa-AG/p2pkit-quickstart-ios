@@ -273,7 +273,7 @@
     SKShapeNode *node = [[SKShapeNode alloc] init];
     node.path = circlePath;
     node.zPosition = 10;
-    node.accessibilityLabel = @"node";
+    node.name = @"node";
     node.alpha = 0.0;
     
     node.physicsBody = [SKPhysicsBody bodyWithCircleOfRadius:radius];
@@ -288,7 +288,7 @@
 }
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IOS
 
 #pragma mark - Touch handling
 
@@ -343,16 +343,6 @@
     }];
 }
 
-- (SKNode*)nodeAtPoint:(CGPoint)point {
-    
-    NSArray *nodes = [self nodesAtPoint:point];
-    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SKNode *_node, id _) {
-        return [_node.accessibilityLabel isEqualToString:@"node"];
-    }];
-    
-    return [nodes filteredArrayUsingPredicate:predicate].firstObject;
-}
-
 - (BOOL)positionMoved:(CGPoint)position toPrevious:(CGPoint)previous {
     if (fabs(position.x - previous.x) > 1.0 || fabs(position.y - previous.y) > 1.0) {
         return YES;
@@ -360,7 +350,65 @@
     return NO;
 }
 
+#else
+
+-(void)mouseDragged:(NSEvent *)theEvent {
+    
+    CGPoint positionInScene = [theEvent locationInNode:self];
+    
+    if (touchedAndMovedNodes_.count > 0) {
+        SKNode *node = [touchedAndMovedNodes_ anyObject];
+        [node setPosition:[self getPositionInScene:positionInScene forNode:node]];
+    }
+    else {
+        SKNode *node = [self nodeAtPoint:positionInScene];
+        if (node) {
+            [node.physicsBody setDynamic:NO];
+            [touchedAndMovedNodes_ addObject:node];
+        }
+    }
+}
+
+-(void)mouseUp:(NSEvent *)theEvent {
+    if (touchedAndMovedNodes_.count > 0) {
+        SKNode *node = [touchedAndMovedNodes_ anyObject];
+        [node.physicsBody setDynamic:YES];
+        [touchedAndMovedNodes_ removeAllObjects];
+    }
+    else {
+        CGPoint positionInScene = [theEvent locationInNode:self];
+        SKNode *node = [self nodeAtPoint:positionInScene];
+        if (node) {
+            NSUInteger index = [[vertexes_ allKeysForObject:node].firstObject integerValue];
+            [self notifyDelegateTapOnVertex:node atIndex:index];
+        }
+    }
+}
+
+-(CGPoint)getPositionInScene:(CGPoint)position forNode:(SKNode*)node {
+    
+    if (position.x < 0.0 || position.x > self.size.width) {
+        position.x = node.position.x;
+    }
+    
+    if (position.y < 0.0 || position.y > self.size.height) {
+        position.y = node.position.y;
+    }
+    
+    return position;
+}
+
 #endif
+
+- (SKNode*)nodeAtPoint:(CGPoint)point {
+    
+    NSArray *nodes = [self nodesAtPoint:point];
+    NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(SKNode *_node, id _) {
+        return [_node.name isEqualToString:@"node"];
+    }];
+    
+    return [nodes filteredArrayUsingPredicate:predicate].firstObject;
+}
 
 #pragma mark - Delegate methods
 

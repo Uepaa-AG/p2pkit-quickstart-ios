@@ -2,7 +2,7 @@
 //  NearbyPeersViewController.m
 //  p2pkit-quickstart-ios
 //
-//  Copyright (c) 2015 Uepaa AG. All rights reserved.
+//  Copyright (c) 2016 Uepaa AG. All rights reserved.
 //
 
 #import <P2PKit/P2PKit.h>
@@ -10,7 +10,13 @@
 #import "NearbyPeersViewController.h"
 #import "DLForcedGraphView.h"
 #import "DLEdge.h"
-#import "ColorPickerViewController.h"
+#import "ConsoleViewController.h"
+
+#if TARGET_OS_IOS
+#import "ColorPickerWheelViewController.h"
+#else
+#import "ColorPickerGridViewController.h"
+#endif
 
 
 @interface NearbyPeersViewController () <DLGraphSceneDelegate> {
@@ -25,11 +31,18 @@
     
     NSData *discoveryInfo_;
     NSUInteger nextNodeIndex_;
+    
+    ConsoleViewController *consoleViewController_;
 }
 
 @property (strong, nonatomic) IBOutlet DLForcedGraphView *graphView;
+
+#if TARGET_OS_IOS
 @property (weak, nonatomic) IBOutlet UIButton *infoButton;
 @property (weak, nonatomic) IBOutlet UIView *consoleView;
+#else
+@property (weak, nonatomic) IBOutlet NSButton *infoButton;
+#endif
 
 @end
 
@@ -176,6 +189,7 @@
         vertex.physicsBody.allowsRotation = NO;
         
         SKLabelNode *label = [SKLabelNode new];
+        [label setFontName:@"HelveticaNeue-Thin"];
         [label setVerticalAlignmentMode:SKLabelVerticalAlignmentModeCenter];
         [label setText:@"me"];
         [vertex addChild:label];
@@ -202,15 +216,17 @@
 
 -(void)setup {
     
-    DLEdge *edge = DLMakeEdge(0, 0);
-    edge.repulsion = 1100.f;
-    edge.attraction = 0.07f;
-    [graphScene_ addEdge:edge];
-    
-#if UPA_CONFIGURATION_TYPE == 0
-    [self.infoButton removeFromSuperview];
+#if TARGET_OS_IOS
+    #if UPA_CONFIGURATION_TYPE == 0
+        [self.infoButton removeFromSuperview];
+    #else
+        [self.infoButton addTarget:self action:@selector(toggleConsoleView) forControlEvents:UIControlEventTouchUpInside];
+    #endif
 #else
-    [self.infoButton addTarget:self action:@selector(toggleConsoleView) forControlEvents:UIControlEventTouchUpInside];
+    consoleViewController_ = [self.storyboard instantiateControllerWithIdentifier:@"consoleViewController"];
+    
+    [self.infoButton setTarget:self];
+    [self.infoButton setAction:@selector(toggleConsoleView)];
 #endif
     
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
@@ -222,11 +238,20 @@
     else {
         [self presentColorPicker];
     }
+    
+    DLEdge *edge = DLMakeEdge(0, 0);
+    edge.repulsion = 1100.f;
+    edge.attraction = 0.07f;
+    [graphScene_ addEdge:edge];
 }
 
 -(void)presentColorPicker {
     
-    ColorPickerViewController *colorPickerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"colorPickerViewController"];
+#if TARGET_OS_IOS
+    ColorPickerWheelViewController *colorPickerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"colorPickerViewController"];
+#else
+    ColorPickerGridViewController *colorPickerVC = [self.storyboard instantiateControllerWithIdentifier:@"colorPickerViewController"];
+#endif
     
     [colorPickerVC setOnCompleteBlock:^(UIColor *color) {
         
@@ -237,9 +262,17 @@
         [self setOwnColor:color];
     }];
     
+#if TARGET_OS_IOS
+    
     [self presentViewController:colorPickerVC animated:YES completion:^{
         [colorPickerVC setSelectedColor:ownColor_];
     }];
+    
+#else
+    
+    [self presentViewController:colorPickerVC asPopoverRelativeToRect:NSMakeRect(ownNode_.frame.origin.x, ownNode_.frame.origin.y, ownNode_.frame.size.width, ownNode_.frame.size.height) ofView:self.view preferredEdge:NSRectEdgeMinY behavior:NSPopoverBehaviorTransient];
+
+#endif
 }
 
 -(void)setOwnColor:(UIColor*)color {
@@ -294,6 +327,8 @@
 
 -(void)toggleConsoleView {
     
+#if TARGET_OS_IOS
+    
     CGRect frame = CGRectMake(0, (self.consoleView.hidden ? 0 : self.view.frame.size.height), self.view.frame.size.width, self.view.frame.size.height);
     
     if (self.consoleView.hidden) {
@@ -310,6 +345,11 @@
         }];
     }
     
+#else
+    
+    [self presentViewControllerAsSheet:consoleViewController_];
+    
+#endif
 }
 
 -(UIColor*)colorFromData:(NSData*)data {

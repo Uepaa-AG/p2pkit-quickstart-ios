@@ -1,6 +1,6 @@
-# p2pkit.io iOS Quickstart
+# p2pkit.io iOS & Mac Quickstart
 
-#### A peer-to-peer proximity SDK for iOS and Android
+#### A peer-to-peer proximity SDK for iOS, OS X and Android
 
 p2pkit is an easy to use SDK that bundles together several proximity technologies kung-fu style! With p2pkit apps immediately understand their proximity to nearby devices and users, estimate their range and exchange information with them.
 
@@ -14,9 +14,10 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 2. This quickstart app requires p2pkit framework which needs to be downloaded separately, please follow the instructions here:
 [Download p2pkit](http://p2pkit.io/developer/get-started/ios/#download)
-3. Drag P2PKit.framework into your Xcode project folder. (Make sure the "Copy items if needed" is checked)
 
-4. Head to the AppDelegate.m file and replace ``<YOUR APPLICATION KEY>`` with your new key:
+3. Drag P2PKit.framework to the <code>p2pkit-quickstart-ios/dependencies/[ios/osx]</code> folder for the appropriate platform (iOS/Mac).
+
+4. Head to the P2PKitController.m file and replace ``<YOUR APPLICATION KEY>`` with your new key:
 
 ```
 [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];

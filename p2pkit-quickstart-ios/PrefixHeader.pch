@@ -8,3 +8,16 @@
 #ifndef UPA_CONFIGURATION_TYPE
     #define UPA_CONFIGURATION_TYPE 2
 #endif
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+    #if TARGET_OS_MAC
+        #if TARGET_OS_IPHONE || TARGET_IPHONE_SIMULATOR
+            #import <UIKit/UIKit.h>
+        #else
+            #import <Cocoa/Cocoa.h>
+            #define UIViewController NSViewController
+            #define UIColor NSColor
+        #endif
+    #endif
+#endif

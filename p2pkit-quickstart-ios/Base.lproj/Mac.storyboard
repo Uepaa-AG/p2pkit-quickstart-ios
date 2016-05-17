@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+    </dependencies>
+    <scenes>
+        <!--Application-->
+        <scene sceneID="JPo-4y-FX3">
+            <objects>
+                <application id="hnw-xV-0zn" sceneMemberID="viewController">
+                    <menu key="mainMenu" title="Main Menu" systemMenu="main" id="AYu-sK-qS6">
+                        <items>
+                            <menuItem title="p2pkit-quickstart-mac" id="1Xt-HY-uBw">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="p2pkit-quickstart-mac" systemMenu="apple" id="uQy-DD-JDr">
+                                    <items>
+                                        <menuItem title="About p2pkit-quickstart-mac" id="5kV-Vb-QxS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
+                                        <menuItem title="Preferences…" keyEquivalent="," id="BOF-NM-1cW"/>
+                                        <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
+                                        <menuItem title="Services" id="NMo-om-nkz">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <menu key="submenu" title="Services" systemMenu="services" id="hz9-B4-Xy5"/>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="4je-JR-u6R"/>
+                                        <menuItem title="Hide p2pkit-quickstart-mac" keyEquivalent="h" id="Olw-nP-bQN">
+                                            <connections>
+                                                <action selector="hide:" target="Ady-hI-5gd" id="PnN-Uc-m68"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Hide Others" keyEquivalent="h" id="Vdr-fp-XzO">
+                                            <modifierMask key="keyEquivalentModifierMask" option="YES" command="YES"/>
+                                            <connections>
+                                                <action selector="hideOtherApplications:" target="Ady-hI-5gd" id="VT4-aY-XCT"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Show All" id="Kd2-mp-pUS">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="unhideAllApplications:" target="Ady-hI-5gd" id="Dhg-Le-xox"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="kCx-OE-vgT"/>
+                                        <menuItem title="Quit p2pkit-quickstart-mac" keyEquivalent="q" id="4sb-4s-VLi">
+                                            <connections>
+                                                <action selector="terminate:" target="Ady-hI-5gd" id="Te7-pn-YzF"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                            <menuItem title="Window" id="aUF-d1-5bR">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="Td7-aD-5lo">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="OY7-WF-poV">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="VwT-WD-YPe"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="R4o-n2-Eq4">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
+                                        <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="DRN-fu-gQh"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </application>
+                <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="0.0"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="R2V-B0-nI4">
+            <objects>
+                <windowController showSeguePresentationStyle="single" id="B8D-0N-5wS" customClass="MainWindowController" sceneMemberID="viewController">
+                    <window key="window" title="p2pkit" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" restorable="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" miniaturizable="YES" resizable="YES" texturedBackground="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="196" y="240" width="780" height="560"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="320" height="240"/>
+                    </window>
+                    <connections>
+                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                    </connections>
+                </windowController>
+                <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="250"/>
+        </scene>
+        <!--Nearby Peers View Controller-->
+        <scene sceneID="hIz-AP-VOD">
+            <objects>
+                <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="NearbyPeersViewController" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" customClass="DLForcedGraphView">
+                        <rect key="frame" x="0.0" y="0.0" width="780" height="560"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T4I-h9-h4o">
+                                <rect key="frame" x="16" y="17" width="29" height="26"/>
+                                <buttonCell key="cell" type="disclosure" bezelStyle="roundedDisclosure" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gD7-QB-fhn">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="T4I-h9-h4o" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="isj-G5-baK"/>
+                            <constraint firstAttribute="bottom" secondItem="T4I-h9-h4o" secondAttribute="bottom" constant="20" id="jj3-rE-QGm"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="graphView" destination="m2S-Jp-Qdl" id="HEd-fv-bP7"/>
+                        <outlet property="infoButton" destination="T4I-h9-h4o" id="Lcr-OQ-hwg"/>
+                    </connections>
+                </viewController>
+                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="933"/>
+        </scene>
+        <!--Color Picker Grid View Controller-->
+        <scene sceneID="Lnb-hP-ujO">
+            <objects>
+                <viewController storyboardIdentifier="colorPickerViewController" id="LQr-t7-wqB" customClass="ColorPickerGridViewController" sceneMemberID="viewController">
+                    <view key="view" wantsLayer="YES" id="qKO-KP-bnA">
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="240"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </view>
+                </viewController>
+                <customObject id="lBh-k8-zIQ" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-60" y="2146"/>
+        </scene>
+        <!--Console View Controller-->
+        <scene sceneID="Sxp-zJ-XzM">
+            <objects>
+                <viewController storyboardIdentifier="consoleViewController" showSeguePresentationStyle="single" id="T60-QH-jDa" customClass="ConsoleViewController" sceneMemberID="viewController">
+                    <view key="view" id="HfJ-ow-XKU">
+                        <rect key="frame" x="0.0" y="0.0" width="720" height="500"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wGR-eE-KSh">
+                                <rect key="frame" x="142" y="452" width="192" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="bfi-kZ-3x3"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Start P2P Discovery" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="c4S-eq-i1Y">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-EG-5BQ">
+                                <rect key="frame" x="387" y="452" width="192" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="w8G-vO-2nQ"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Start GEO Discovery" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ebc-K5-5LR">
+                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpU-D9-RaZ">
+                                <rect key="frame" x="20" y="61" width="680" height="378"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="eHS-nf-mgF">
+                                    <rect key="frame" x="0.0" y="0.0" width="680" height="378"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="COh-p6-lGJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="680" height="378"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <size key="minSize" width="680" height="378"/>
+                                            <size key="maxSize" width="740" height="10000000"/>
+                                            <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="680" height="378"/>
+                                            <size key="maxSize" width="740" height="10000000"/>
+                                        </textView>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="orb-Bz-V18">
+                                    <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="oYE-ZL-fcE">
+                                    <rect key="frame" x="-100" y="-100" width="16" height="479"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YwU-gC-gqG">
+                                <rect key="frame" x="14" y="13" width="92" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="CU4-VF-JA3"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="Close" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="azG-LK-P4d">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <box hidden="YES" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="XB7-WC-rVY">
+                                <rect key="frame" x="358" y="447" width="5" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="s4G-1E-kh4"/>
+                                </constraints>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <font key="titleFont" metaFont="system"/>
+                            </box>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Px-Z7-hjh">
+                                <rect key="frame" x="600" y="21" width="100" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="0cZ-Nt-utt"/>
+                                    <constraint firstAttribute="width" constant="100" id="lTP-Eo-Ag8"/>
+                                </constraints>
+                                <buttonCell key="cell" type="roundRect" title="Clear Log" bezelStyle="roundedRect" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Z0D-Hj-i1i">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="cellTitle"/>
+                                </buttonCell>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="0Px-Z7-hjh" firstAttribute="centerY" secondItem="YwU-gC-gqG" secondAttribute="centerY" id="4Ez-MV-Le1"/>
+                            <constraint firstItem="XB7-WC-rVY" firstAttribute="centerX" secondItem="HfJ-ow-XKU" secondAttribute="centerX" id="4cs-W4-tPX"/>
+                            <constraint firstItem="YWf-EG-5BQ" firstAttribute="leading" secondItem="XB7-WC-rVY" secondAttribute="trailing" constant="32" id="5FD-G9-ap2"/>
+                            <constraint firstItem="xpU-D9-RaZ" firstAttribute="centerY" secondItem="HfJ-ow-XKU" secondAttribute="centerY" id="8q3-fa-nUd"/>
+                            <constraint firstItem="XB7-WC-rVY" firstAttribute="top" secondItem="HfJ-ow-XKU" secondAttribute="top" constant="12" id="Jx2-sQ-Lb5"/>
+                            <constraint firstAttribute="trailing" secondItem="xpU-D9-RaZ" secondAttribute="trailing" constant="20" id="PyG-ts-sNF"/>
+                            <constraint firstItem="0Px-Z7-hjh" firstAttribute="leading" secondItem="COh-p6-lGJ" secondAttribute="trailing" constant="-100" id="S56-zB-c5X"/>
+                            <constraint firstItem="XB7-WC-rVY" firstAttribute="leading" secondItem="wGR-eE-KSh" secondAttribute="trailing" constant="32" id="YOj-Ek-3x7"/>
+                            <constraint firstItem="YWf-EG-5BQ" firstAttribute="top" secondItem="HfJ-ow-XKU" secondAttribute="top" constant="20" id="cht-zS-7o0"/>
+                            <constraint firstItem="YwU-gC-gqG" firstAttribute="top" secondItem="xpU-D9-RaZ" secondAttribute="bottom" constant="20" id="dhS-Fp-pNl"/>
+                            <constraint firstItem="xpU-D9-RaZ" firstAttribute="leading" secondItem="HfJ-ow-XKU" secondAttribute="leading" constant="20" id="hTS-jz-qaK"/>
+                            <constraint firstItem="wGR-eE-KSh" firstAttribute="top" secondItem="HfJ-ow-XKU" secondAttribute="top" constant="20" id="jLq-5l-L0T"/>
+                            <constraint firstItem="YwU-gC-gqG" firstAttribute="leading" secondItem="HfJ-ow-XKU" secondAttribute="leading" constant="20" id="px7-on-LNk"/>
+                            <constraint firstAttribute="bottom" secondItem="YwU-gC-gqG" secondAttribute="bottom" constant="20" id="qYW-T3-Z2X"/>
+                            <constraint firstItem="xpU-D9-RaZ" firstAttribute="top" secondItem="wGR-eE-KSh" secondAttribute="bottom" constant="20" id="rIE-yW-hVS"/>
+                            <constraint firstItem="xpU-D9-RaZ" firstAttribute="top" secondItem="YWf-EG-5BQ" secondAttribute="bottom" constant="20" id="vUW-YF-d5L"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="clearButton" destination="0Px-Z7-hjh" id="1oi-OL-8Me"/>
+                        <outlet property="closeButton" destination="YwU-gC-gqG" id="pRc-dz-KJQ"/>
+                        <outlet property="geoToggleButton" destination="YWf-EG-5BQ" id="Ifl-7v-dbO"/>
+                        <outlet property="logTextView" destination="COh-p6-lGJ" id="YOl-KY-Dqc"/>
+                        <outlet property="p2pToggleButton" destination="wGR-eE-KSh" id="iw6-p1-sIl"/>
+                    </connections>
+                </viewController>
+                <customObject id="iE5-VB-H4E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="75" y="1656"/>
+        </scene>
+    </scenes>
+</document>
