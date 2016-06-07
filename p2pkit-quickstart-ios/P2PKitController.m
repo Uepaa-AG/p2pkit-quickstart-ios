@@ -47,17 +47,11 @@
         case PPKErrorAppKeyInvalid:
             description = @"Invalid app key";
             break;
-        case PPKErrorAppKeyExpired:
-            description = @"Expired app key";
-            break;
         case PPKErrorOnlineProtocolVersionNotSupported:
             description = @"Server protocol mismatch";
             break;
-        case PPKErrorOnlineAppKeyInvalid:
-            description = @"Invalid app key";
-            break;
-        case PPKErrorOnlineAppKeyExpired:
-            description = @"Expired app key";
+        default:
+            description = @"Unknown error";
             break;
     }
     
