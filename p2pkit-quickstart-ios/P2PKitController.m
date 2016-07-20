@@ -47,6 +47,9 @@
         case PPKErrorAppKeyInvalid:
             description = @"Invalid app key";
             break;
+        case PPKErrorInvalidBundleId:
+            description = @"Invalid bundle ID";
+            break;
         case PPKErrorOnlineProtocolVersionNotSupported:
             description = @"Server protocol mismatch";
             break;

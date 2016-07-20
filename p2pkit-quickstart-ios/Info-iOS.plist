@@ -22,6 +22,8 @@
 	<string>1.0.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>So you can be discovered by other users of the app.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>So that you can test p2pkit geo discovery features</string>
 	<key>NSMainStoryboardFile</key>
