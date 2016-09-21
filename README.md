@@ -9,19 +9,23 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 ## Get Started
 
-1. In order to use p2pkit you need an application key, you can obtain one here:
-[Get your Application Key](http://p2pkit.io/signup.html)
+1. Using p2pkit requires an application key, start by creating a p2pkit account here:
+[Create p2pkit account](http://p2pkit.io/signup.html)
 
-2. This quickstart app requires p2pkit framework which needs to be downloaded separately, please follow the instructions here:
+2. Once you have an account you can log-in to the console and create an application key: [Create your Application Key](https://p2pkit-console.uepaa.ch/login)
+
+  NOTE: p2pkit validates bundleID/package_name so don't forget to add ``ch.uepaa.quickstart`` to the known BundleID/package_names when creating your application key
+
+3. This quickstart app requires p2pkit framework which needs to be downloaded separately, please follow the instructions here:
 [Download p2pkit](http://p2pkit.io/developer/get-started/ios/#download)
 
-3. Drag P2PKit.framework to the <code>p2pkit-quickstart-ios/dependencies/[ios/osx]</code> folder for the appropriate platform (iOS/Mac).
+4. Drag P2PKit.framework to the <code>p2pkit-quickstart-ios/dependencies/[ios/osx]</code> folder for the appropriate platform (iOS/Mac).
 
-4. Head to the P2PKitController.m file and replace ``<YOUR APPLICATION KEY>`` with your new key:
+5. Head to the P2PKitController.m file and replace ``<YOUR APPLICATION KEY>`` with your new key:
 
-```
-[PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
-```
+  ```
+  [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
+  ```
 
 
 > In general, a tutorial as well as all other documentation is available on the developer section of our website:
