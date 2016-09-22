@@ -14,7 +14,7 @@ p2pkit is an easy to use SDK that bundles together several proximity technologie
 
 2. Once you have an account you can log-in to the console and create an application key: [Create your Application Key](https://p2pkit-console.uepaa.ch/login)
 
-  NOTE: p2pkit validates bundleID/package_name so don't forget to add ``ch.uepaa.quickstart`` to the known BundleID/package_names when creating your application key
+  NOTE: p2pkit validates bundleID/package_name so don't forget to add ``ch.uepaa.p2pkit-quickstart-ios`` to the known BundleID/package_names when creating your application key
 
 3. This quickstart app requires p2pkit framework which needs to be downloaded separately, please follow the instructions here:
 [Download p2pkit](http://p2pkit.io/developer/get-started/ios/#download)
