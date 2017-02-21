@@ -7,21 +7,17 @@
 
 #import "AppDelegate.h"
 #import "P2PKitController.h"
-#import "NearbyPeersViewController.h"
-
-
-@interface AppDelegate () <PPKControllerDelegate> {
-    P2PKitController *p2pkitController;
-}
-@end
-
+#import "NearbyPeersViewControlleriOS.h"
 
 @implementation AppDelegate
 
 -(BOOL)application:(UIApplication*)application didFinishLaunchingWithOptions:(NSDictionary*)launchOptions {
-
-    p2pkitController = [[P2PKitController alloc] initWithNearbyPeersViewController:(NearbyPeersViewController*)self.window.rootViewController];
+    [[P2PKitController sharedInstance] enableWithNearbyPeersViewController:(NearbyPeersViewControlleriOS*)self.window.rootViewController];
     return YES;
+}
+
+-(void)applicationWillTerminate:(UIApplication*)application {
+    [[P2PKitController sharedInstance] disable];
 }
 
 @end

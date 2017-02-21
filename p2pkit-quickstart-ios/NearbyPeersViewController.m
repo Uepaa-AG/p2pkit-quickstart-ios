@@ -7,16 +7,11 @@
 
 #import <P2PKit/P2PKit.h>
 
+#import "P2PKitController.h"
 #import "NearbyPeersViewController.h"
 #import "DLForcedGraphView.h"
 #import "DLEdge.h"
 #import "ConsoleViewController.h"
-
-#if TARGET_OS_IOS
-#import "ColorPickerWheelViewController.h"
-#else
-#import "ColorPickerGridViewController.h"
-#endif
 
 
 @interface NearbyPeersViewController () <DLGraphSceneDelegate> {
@@ -37,17 +32,20 @@
 
 @property (strong, nonatomic) IBOutlet DLForcedGraphView *graphView;
 
-#if TARGET_OS_IOS
-@property (weak, nonatomic) IBOutlet UIButton *infoButton;
-@property (weak, nonatomic) IBOutlet UIView *consoleView;
-#else
-@property (weak, nonatomic) IBOutlet NSButton *infoButton;
-#endif
-
 @end
 
 
 @implementation NearbyPeersViewController
+
+#pragma mark - Methods to override by subclass
+
+-(void)presentColorPicker {
+    @throw [NSException exceptionWithName:@"DidNotOverrideMethod" reason:@"You must override this method in your subclass" userInfo:nil];
+}
+
+-(void)showErrorDialog:(NSString*)message retryBlock:(dispatch_block_t)retryBlock {
+    @throw [NSException exceptionWithName:@"DidNotOverrideMethod" reason:@"You must override this method in your subclass" userInfo:nil];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,13 +57,14 @@
     graphScene_.delegate = self;
 }
 
--(void)updateDiscoveryInfo {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"userSelectedNewColorNotification" object:[self dataFromColor:ownColor_]];
-}
-
 #pragma mark - Node handling
 
 -(void)addNodeForPeer:(PPKPeer*)peer {
+    
+    if ([self checkPeerExists:peer]) {
+        [self updateColorForPeer:peer];
+        return;
+    }
     
     [nearbyPeers_ setObject:peer forKey:@(nextNodeIndex_)];
     
@@ -133,12 +132,20 @@
 
 -(void)updateColorForPeer:(PPKPeer*)peer {
     
+    if (![self checkPeerExists:peer]) {
+        return;
+    }
+    
     NSNumber *index = [nearbyPeers_ allKeysForObject:peer].firstObject;
     SKShapeNode *node = peerNodes_[index];
     [self setColor:[self colorFromData:peer.discoveryInfo] forNode:node animated:YES];
 }
 
 -(void)updateProximityStrengthForPeer:(PPKPeer*)peer {
+    
+    if (![self checkPeerExists:peer]) {
+        return;
+    }
     
     NSNumber *index = [nearbyPeers_ allKeysForObject:peer].firstObject;
     
@@ -153,6 +160,10 @@
 }
 
 -(void)removeNodeForPeer:(PPKPeer*)peer {
+    
+    if (![self checkPeerExists:peer]) {
+        return;
+    }
     
     NSNumber *index = [nearbyPeers_ allKeysForObject:peer].firstObject;
     [graphScene_ removeEdge:DLMakeEdge(0, index.integerValue)];
@@ -172,6 +183,14 @@
     [nearbyPeers_ removeAllObjects];
     
     [self updateStrokesForAllNodes];
+}
+
+-(BOOL)checkPeerExists:(PPKPeer*)peer {
+    if ([[nearbyPeers_ allKeysForObject:peer] count] > 0) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark - DLGraphSceneDelegate
@@ -216,19 +235,6 @@
 
 -(void)setup {
     
-#if TARGET_OS_IOS
-    #if UPA_CONFIGURATION_TYPE == 0
-        [self.infoButton removeFromSuperview];
-    #else
-        [self.infoButton addTarget:self action:@selector(toggleConsoleView) forControlEvents:UIControlEventTouchUpInside];
-    #endif
-#else
-    consoleViewController_ = [self.storyboard instantiateControllerWithIdentifier:@"consoleViewController"];
-    
-    [self.infoButton setTarget:self];
-    [self.infoButton setAction:@selector(toggleConsoleView)];
-#endif
-    
     NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
     NSData *colorData = [userDef objectForKey:@"ownColor"];
     
@@ -245,45 +251,28 @@
     [graphScene_ addEdge:edge];
 }
 
--(void)presentColorPicker {
+-(void)setOwnColor:(UIColor*)color {
     
-#if TARGET_OS_IOS
-    ColorPickerWheelViewController *colorPickerVC = [self.storyboard instantiateViewControllerWithIdentifier:@"colorPickerViewController"];
-#else
-    ColorPickerGridViewController *colorPickerVC = [self.storyboard instantiateControllerWithIdentifier:@"colorPickerViewController"];
-#endif
+    if ([ownColor_ isEqual:color]) {
+        return;
+    }
     
-    [colorPickerVC setOnCompleteBlock:^(UIColor *color) {
+    if ([[P2PKitController sharedInstance] startOrUpdateDiscoveryWithDiscoveryInfo:[self dataFromColor:color]]) {
         
         NSUserDefaults *userDef = [NSUserDefaults standardUserDefaults];
         [userDef setObject:[self dataFromColor:color] forKey:@"ownColor"];
         [userDef synchronize];
         
-        [self setOwnColor:color];
-    }];
-    
-#if TARGET_OS_IOS
-    
-    [self presentViewController:colorPickerVC animated:YES completion:^{
-        [colorPickerVC setSelectedColor:ownColor_];
-    }];
-    
-#else
-    
-    [self presentViewController:colorPickerVC asPopoverRelativeToRect:NSMakeRect(ownNode_.frame.origin.x, ownNode_.frame.origin.y, ownNode_.frame.size.width, ownNode_.frame.size.height) ofView:self.view preferredEdge:NSRectEdgeMinY behavior:NSPopoverBehaviorTransient];
-
-#endif
+        ownColor_ = color;
+        if (ownNode_) {
+            [self setColor:ownColor_ forNode:ownNode_ animated:NO];
+        }
+        
+    }
 }
 
--(void)setOwnColor:(UIColor*)color {
-    
-    ownColor_ = color;
-    if (ownNode_) {
-        [self setColor:ownColor_ forNode:ownNode_ animated:NO];
-    }
-    
-    [self.infoButton setHidden:NO];
-    [self updateDiscoveryInfo];
+-(UIColor*)getOwnColor {
+    return ownColor_;
 }
 
 -(void)setColor:(UIColor*)color forNode:(SKShapeNode*)node animated:(BOOL)animated {
@@ -305,6 +294,11 @@
     [self updateStrokesForAllNodes];
 }
 
+-(CGRect)getOwnNodeRect {
+    return ownNode_.frame;
+}
+
+
 -(void)updateStrokesForAllNodes {
     
     UIColor *highlightColor = [UIColor whiteColor];
@@ -325,32 +319,7 @@
     [ownNode_ setStrokeColor:(hasImmediatePeers ? highlightColor : ownNode_.fillColor)];
 }
 
--(void)toggleConsoleView {
-    
-#if TARGET_OS_IOS
-    
-    CGRect frame = CGRectMake(0, (self.consoleView.hidden ? 0 : self.view.frame.size.height), self.view.frame.size.width, self.view.frame.size.height);
-    
-    if (self.consoleView.hidden) {
-        [self.consoleView setHidden:NO];
-        [UIView animateWithDuration:0.5 animations:^{
-            self.consoleView.frame = frame;
-        }];
-    }
-    else {
-        [UIView animateWithDuration:0.5 animations:^{
-            [self.consoleView setFrame:frame];
-        } completion:^(BOOL finished) {
-            [self.consoleView setHidden:YES];
-        }];
-    }
-    
-#else
-    
-    [self presentViewControllerAsSheet:consoleViewController_];
-    
-#endif
-}
+
 
 -(UIColor*)colorFromData:(NSData*)data {
     

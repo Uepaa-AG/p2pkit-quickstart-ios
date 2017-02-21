@@ -15,22 +15,34 @@
 
 @end
 
+static dispatch_once_t token;
+static P2PKitController *sharedInstance = nil;
 @implementation P2PKitController
 
--(instancetype)initWithNearbyPeersViewController:(NearbyPeersViewController*)viewController {
++(P2PKitController *)sharedInstance {
+
+    dispatch_once(&token, ^{
+        sharedInstance = [P2PKitController new];
+    });
+    return sharedInstance;
+}
+
+-(void)enableWithNearbyPeersViewController:(NearbyPeersViewController*)viewController {
     
-    self = [super init];
-    if (self) {
-        nearbyPeersViewController = viewController;
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(colorUpdateNotification:) name:@"userSelectedNewColorNotification" object:nil];
-        
-        [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
-    }
-    return self;
+    nearbyPeersViewController = viewController;
+    [self enable];
+}
+
+-(void)enable {
+    [PPKController enableWithConfiguration:@"<YOUR APPLICATION KEY>" observer:self];
 }
 
 -(void)disable {
     [PPKController disable];
+}
+
+-(BOOL)isEnabled {
+    return [PPKController isEnabled];
 }
 
 #pragma mark - PPKControllerDelegate
@@ -39,99 +51,113 @@
     [nearbyPeersViewController setup];
 }
 
--(void)PPKControllerFailedWithError:(NSError*)error {
+-(void)PPKControllerFailedWithError:(PPKErrorCode)error {
     
     NSString *description;
     
-    switch ((PPKErrorCode) error.code) {
-        case PPKErrorAppKeyInvalid:
+    switch (error) {
+        case PPKErrorInvalidAppKey:
             description = @"Invalid app key";
             break;
         case PPKErrorInvalidBundleId:
             description = @"Invalid bundle ID";
             break;
-        case PPKErrorOnlineProtocolVersionNotSupported:
-            description = @"Server protocol mismatch";
+        case PPKErrorIncompatibleClientVersion:
+            description = @"Incompatible p2pkit (SDK) version, please update";
+            break;
+        case PPKErrorServerConnectionUnavailable:
+            description = @"Server connection not available.";
             break;
         default:
             description = @"Unknown error";
             break;
     }
     
-    [self showErrorDialog:description];
+     __weak P2PKitController *weakSelf = self;
+    [self showErrorDialog:description withRetryBlock:^{
+        [weakSelf enable];
+    }];
 }
 
--(void)p2pPeerDiscovered:(PPKPeer*)peer {
+-(BOOL)startOrUpdateDiscoveryWithDiscoveryInfo:(NSData*)data {
     
+    if(![PPKController isEnabled]){
+         [self showErrorDialog:@"Failed to update color, p2pkit is not running" withRetryBlock:nil];
+        return NO;
+    }
+    
+    BOOL success = NO;
+    
+    switch ([PPKController discoveryState]) {
+            
+        // case p2pkit discovery not yet started
+        case PPKDiscoveryStateStopped:
+
+            [PPKController enableProximityRanging];
+            [PPKController startDiscoveryWithDiscoveryInfo:data stateRestoration:NO];
+            success = YES;
+            
+            break;
+            
+        // case p2pkit discovery is already runnning/suspended
+        case PPKDiscoveryStateServerConnectionUnavailable:
+        case PPKDiscoveryStateSuspended:
+        case PPKDiscoveryStateRunning:
+            
+            @try {
+                [PPKController pushNewDiscoveryInfo:data];
+                success = YES;
+            } @catch (NSException *exception) {
+                [self showErrorDialog:@"Failed! Discovery info update is limited to once per 60 seconds" withRetryBlock:nil];
+                success = NO;
+            }
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+    return success;
+}
+
+-(void)stopDiscovery {
+    [PPKController stopDiscovery];
+}
+
+-(void)peerDiscovered:(PPKPeer*)peer {
     [nearbyPeersViewController addNodeForPeer:peer];
 }
 
--(void)p2pPeerLost:(PPKPeer*)peer {
-    
+-(void)peerLost:(PPKPeer*)peer {
     [nearbyPeersViewController removeNodeForPeer:peer];
 }
 
 -(void)discoveryInfoUpdatedForPeer:(PPKPeer*)peer {
-    
     [nearbyPeersViewController updateColorForPeer:peer];
 }
 
 -(void)proximityStrengthChangedForPeer:(PPKPeer*)peer {
-    
     [nearbyPeersViewController updateProximityStrengthForPeer:peer];
 }
 
--(void)p2pDiscoveryStateChanged:(PPKPeer2PeerDiscoveryState)state {
+-(void)discoveryStateChanged:(PPKDiscoveryState)state {
     
-    if (state == PPKPeer2PeerDiscoveryStopped) {
+    if (state == PPKDiscoveryStateStopped) {
         [nearbyPeersViewController removeNodesForAllPeers];
     }
-    else if (state == PPKPeer2PeerDiscoveryUnauthorized) {
-        [self showErrorDialog:@"P2P Discovery cannot run because it is missing a user permission"];
+    else if (state == PPKDiscoveryStateUnauthorized) {
+        [self showErrorDialog:@"p2pkit cannot run because it is missing a user permission" withRetryBlock:nil];
     }
-    else if (state == PPKPeer2PeerDiscoveryUnsupported) {
-        [self showErrorDialog:@"P2P Discovery is not supported on this device"];
-    }
-}
-
-#pragma mark - Notifications
-
--(void)colorUpdateNotification:(NSNotification*)notification {
-    
-    switch ([PPKController p2pDiscoveryState]) {
-            
-        case PPKPeer2PeerDiscoveryUnsupported:
-        case PPKPeer2PeerDiscoveryUnauthorized:
-            break;
-            
-        case PPKPeer2PeerDiscoverySuspended:
-        case PPKPeer2PeerDiscoveryRunning:
-            
-            [PPKController pushNewP2PDiscoveryInfo:notification.object];
-            
-            break;
-            
-        case PPKPeer2PeerDiscoveryStopped:
-            
-            [PPKController enableProximityRanging];
-            [PPKController startP2PDiscoveryWithDiscoveryInfo:notification.object stateRestoration:NO];
-            
-            break;
+    else if (state == PPKDiscoveryStateUnsupported) {
+        [self showErrorDialog:@"p2pkit is not supported on this device" withRetryBlock:nil];
     }
 }
 
 #pragma mark - Helpers
 
--(void)showErrorDialog:(NSString*)message {
-#if TARGET_OS_IOS
-    [[[UIAlertView alloc] initWithTitle:@"p2pkit Error" message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-#else
-    NSAlert *alert = [NSAlert new];
-    [alert setMessageText:@"p2pkit Error"];
-    [alert setInformativeText:message];
-    [alert addButtonWithTitle:@"OK"];
-    [alert runModal];
-#endif
+-(void)showErrorDialog:(NSString*)message withRetryBlock:(dispatch_block_t)retryBlock {
+    [nearbyPeersViewController showErrorDialog:message retryBlock:retryBlock];
 }
 
 @end

@@ -4,7 +4,7 @@
 @class DLEdge;
 
 
-@protocol DLGraphSceneDelegate <NSObject>
+@protocol DLGraphSceneDelegate <SKSceneDelegate>
 
 -(void)configureVertex:(SKShapeNode *)vertex atIndex:(NSUInteger)index;
 -(void)tapOnVertex:(SKNode*)vertex atIndex:(NSUInteger)index;

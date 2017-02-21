@@ -17,7 +17,6 @@
 
 @end
 
-
 @implementation ColorPickerGridViewController
 
 -(void)viewDidLoad {

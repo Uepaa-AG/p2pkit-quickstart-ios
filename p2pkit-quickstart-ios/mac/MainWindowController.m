@@ -7,12 +7,8 @@
 
 #import "MainWindowController.h"
 #import "P2PKitController.h"
-#import "NearbyPeersViewController.h"
+#import "NearbyPeersViewControllerMac.h"
 
-@interface MainWindowController () <PPKControllerDelegate> {
-    P2PKitController *p2pkitController;
-}
-@end
 
 @implementation MainWindowController
 
@@ -22,7 +18,7 @@
     [self.window setBackgroundColor:[NSColor blackColor]];
     [self.window setTitleVisibility:NSWindowTitleHidden];
     
-    p2pkitController = [[P2PKitController alloc] initWithNearbyPeersViewController:(NearbyPeersViewController*)self.contentViewController];
+    [[P2PKitController sharedInstance] enableWithNearbyPeersViewController:(NearbyPeersViewControllerMac*)self.contentViewController];
 }
 
 @end

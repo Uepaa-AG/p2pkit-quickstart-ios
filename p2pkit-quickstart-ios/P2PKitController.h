@@ -5,11 +5,16 @@
 //  Copyright (c) 2016 Uepaa AG. All rights reserved.
 //
 
-#import "NearbyPeersViewController.h"
-
+@class NearbyPeersViewController;
 @interface P2PKitController : NSObject
 
--(instancetype)initWithNearbyPeersViewController:(NearbyPeersViewController*)viewController;
++(P2PKitController *)sharedInstance;
+
+-(void)enableWithNearbyPeersViewController:(NearbyPeersViewController*)viewController;
+-(BOOL)startOrUpdateDiscoveryWithDiscoveryInfo:(NSData*)data;
+-(void)stopDiscovery;
 -(void)disable;
+-(BOOL)isEnabled;
+
 
 @end

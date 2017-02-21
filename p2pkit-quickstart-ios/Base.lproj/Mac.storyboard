@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2657" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -105,15 +106,15 @@
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--Nearby Peers View Controller-->
+        <!--Nearby Peers View Controller Mac-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="NearbyPeersViewController" sceneMemberID="viewController">
+                <viewController showSeguePresentationStyle="single" id="XfG-lQ-9wD" customClass="NearbyPeersViewControllerMac" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl" customClass="DLForcedGraphView">
                         <rect key="frame" x="0.0" y="0.0" width="780" height="560"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T4I-h9-h4o">
+                            <button hidden="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="T4I-h9-h4o">
                                 <rect key="frame" x="16" y="17" width="29" height="26"/>
                                 <buttonCell key="cell" type="disclosure" bezelStyle="roundedDisclosure" imagePosition="only" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="gD7-QB-fhn">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
@@ -127,8 +128,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="graphView" destination="m2S-Jp-Qdl" id="HEd-fv-bP7"/>
-                        <outlet property="infoButton" destination="T4I-h9-h4o" id="Lcr-OQ-hwg"/>
+                        <outlet property="graphView" destination="m2S-Jp-Qdl" id="8YV-LN-e8Q"/>
+                        <outlet property="infoButton" destination="T4I-h9-h4o" id="wW6-8V-2M0"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -148,30 +149,20 @@
             </objects>
             <point key="canvasLocation" x="-60" y="2146"/>
         </scene>
-        <!--Console View Controller-->
+        <!--Console View Controller Mac-->
         <scene sceneID="Sxp-zJ-XzM">
             <objects>
-                <viewController storyboardIdentifier="consoleViewController" showSeguePresentationStyle="single" id="T60-QH-jDa" customClass="ConsoleViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="consoleViewController" showSeguePresentationStyle="single" id="T60-QH-jDa" customClass="ConsoleViewControllerMac" sceneMemberID="viewController">
                     <view key="view" id="HfJ-ow-XKU">
                         <rect key="frame" x="0.0" y="0.0" width="720" height="500"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="wGR-eE-KSh">
-                                <rect key="frame" x="142" y="452" width="192" height="32"/>
+                                <rect key="frame" x="264" y="452" width="192" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="bfi-kZ-3x3"/>
                                 </constraints>
-                                <buttonCell key="cell" type="push" title="Start P2P Discovery" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="c4S-eq-i1Y">
-                                    <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-EG-5BQ">
-                                <rect key="frame" x="387" y="452" width="192" height="32"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="180" id="w8G-vO-2nQ"/>
-                                </constraints>
-                                <buttonCell key="cell" type="push" title="Start GEO Discovery" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ebc-K5-5LR">
+                                <buttonCell key="cell" type="push" title="Start Discovery" bezelStyle="rounded" alignment="center" refusesFirstResponder="YES" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="c4S-eq-i1Y" userLabel="Start Discovery">
                                     <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -182,15 +173,13 @@
                                     <rect key="frame" x="0.0" y="0.0" width="680" height="378"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <textView importsGraphics="NO" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" usesFontPanel="YES" verticallyResizable="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="COh-p6-lGJ">
+                                        <textView importsGraphics="NO" usesFontPanel="YES" findStyle="panel" continuousSpellChecking="YES" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" quoteSubstitution="YES" dashSubstitution="YES" smartInsertDelete="YES" id="COh-p6-lGJ">
                                             <rect key="frame" x="0.0" y="0.0" width="680" height="378"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <size key="minSize" width="680" height="378"/>
                                             <size key="maxSize" width="740" height="10000000"/>
                                             <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                            <size key="minSize" width="680" height="378"/>
-                                            <size key="maxSize" width="740" height="10000000"/>
                                         </textView>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -214,15 +203,6 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
-                            <box hidden="YES" horizontalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="XB7-WC-rVY">
-                                <rect key="frame" x="358" y="447" width="5" height="41"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="41" id="s4G-1E-kh4"/>
-                                </constraints>
-                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <font key="titleFont" metaFont="system"/>
-                            </box>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0Px-Z7-hjh">
                                 <rect key="frame" x="600" y="21" width="100" height="19"/>
                                 <constraints>
@@ -237,29 +217,23 @@
                         </subviews>
                         <constraints>
                             <constraint firstItem="0Px-Z7-hjh" firstAttribute="centerY" secondItem="YwU-gC-gqG" secondAttribute="centerY" id="4Ez-MV-Le1"/>
-                            <constraint firstItem="XB7-WC-rVY" firstAttribute="centerX" secondItem="HfJ-ow-XKU" secondAttribute="centerX" id="4cs-W4-tPX"/>
-                            <constraint firstItem="YWf-EG-5BQ" firstAttribute="leading" secondItem="XB7-WC-rVY" secondAttribute="trailing" constant="32" id="5FD-G9-ap2"/>
                             <constraint firstItem="xpU-D9-RaZ" firstAttribute="centerY" secondItem="HfJ-ow-XKU" secondAttribute="centerY" id="8q3-fa-nUd"/>
-                            <constraint firstItem="XB7-WC-rVY" firstAttribute="top" secondItem="HfJ-ow-XKU" secondAttribute="top" constant="12" id="Jx2-sQ-Lb5"/>
+                            <constraint firstItem="wGR-eE-KSh" firstAttribute="centerX" secondItem="HfJ-ow-XKU" secondAttribute="centerX" id="Mr0-aP-M9k"/>
                             <constraint firstAttribute="trailing" secondItem="xpU-D9-RaZ" secondAttribute="trailing" constant="20" id="PyG-ts-sNF"/>
                             <constraint firstItem="0Px-Z7-hjh" firstAttribute="leading" secondItem="COh-p6-lGJ" secondAttribute="trailing" constant="-100" id="S56-zB-c5X"/>
-                            <constraint firstItem="XB7-WC-rVY" firstAttribute="leading" secondItem="wGR-eE-KSh" secondAttribute="trailing" constant="32" id="YOj-Ek-3x7"/>
-                            <constraint firstItem="YWf-EG-5BQ" firstAttribute="top" secondItem="HfJ-ow-XKU" secondAttribute="top" constant="20" id="cht-zS-7o0"/>
                             <constraint firstItem="YwU-gC-gqG" firstAttribute="top" secondItem="xpU-D9-RaZ" secondAttribute="bottom" constant="20" id="dhS-Fp-pNl"/>
                             <constraint firstItem="xpU-D9-RaZ" firstAttribute="leading" secondItem="HfJ-ow-XKU" secondAttribute="leading" constant="20" id="hTS-jz-qaK"/>
                             <constraint firstItem="wGR-eE-KSh" firstAttribute="top" secondItem="HfJ-ow-XKU" secondAttribute="top" constant="20" id="jLq-5l-L0T"/>
                             <constraint firstItem="YwU-gC-gqG" firstAttribute="leading" secondItem="HfJ-ow-XKU" secondAttribute="leading" constant="20" id="px7-on-LNk"/>
                             <constraint firstAttribute="bottom" secondItem="YwU-gC-gqG" secondAttribute="bottom" constant="20" id="qYW-T3-Z2X"/>
                             <constraint firstItem="xpU-D9-RaZ" firstAttribute="top" secondItem="wGR-eE-KSh" secondAttribute="bottom" constant="20" id="rIE-yW-hVS"/>
-                            <constraint firstItem="xpU-D9-RaZ" firstAttribute="top" secondItem="YWf-EG-5BQ" secondAttribute="bottom" constant="20" id="vUW-YF-d5L"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="clearButton" destination="0Px-Z7-hjh" id="1oi-OL-8Me"/>
                         <outlet property="closeButton" destination="YwU-gC-gqG" id="pRc-dz-KJQ"/>
-                        <outlet property="geoToggleButton" destination="YWf-EG-5BQ" id="Ifl-7v-dbO"/>
+                        <outlet property="discoveryToggleButton" destination="wGR-eE-KSh" id="5zV-M4-161"/>
                         <outlet property="logTextView" destination="COh-p6-lGJ" id="YOl-KY-Dqc"/>
-                        <outlet property="p2pToggleButton" destination="wGR-eE-KSh" id="iw6-p1-sIl"/>
                     </connections>
                 </viewController>
                 <customObject id="iE5-VB-H4E" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
