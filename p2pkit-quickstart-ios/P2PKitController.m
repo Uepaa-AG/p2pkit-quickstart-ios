@@ -65,9 +65,6 @@ static P2PKitController *sharedInstance = nil;
         case PPKErrorIncompatibleClientVersion:
             description = @"Incompatible p2pkit (SDK) version, please update";
             break;
-        case PPKErrorServerConnectionUnavailable:
-            description = @"Server connection not available.";
-            break;
         default:
             description = @"Unknown error";
             break;
